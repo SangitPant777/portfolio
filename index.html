@@ -1060,11 +1060,11 @@
     </figure>
   </section>
 
- <section class="contact-form">
+  <section class="contact-form">
     <h3 class="h3 form-title">Contact Form</h3>
 
-    <!-- Updated form action with Cloudflare Worker -->
-    <form action="https://formspree-6mw.pages.dev/" method="POST" class="form" data-form target="_blank">
+    <!-- Replace action="#" with your Formspree endpoint -->
+    <form action="https://formspree.io/f/xvgorkpe" method="POST" class="form" data-form target = "_blank">
 
       <div class="input-wrapper">
         <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input pattern="[A-Za-z\s]+" title="Only letters and spaces are allowed">
@@ -1073,7 +1073,7 @@
 
       <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
-      <!-- Enable the submit button -->
+      <!-- Enable the submit button by removing the "disabled" attribute -->
       <button class="form-btn" type="submit" data-form-btn>
         <ion-icon name="paper-plane"></ion-icon>
         <span>Send Message</span>
