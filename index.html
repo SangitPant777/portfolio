@@ -4,9 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Making Sense of IS Audit and GRC</title>
+<link rel="icon" href="/assets/favicoon.ico">
 
 <script>
-  const base = "   •   Making Sense of IS Audit and GRC   •   ";
+  const base = "Making Sense of IS Audit and GRC";
   const scrollText = base + base; 
 
   const width = 40;
@@ -73,6 +74,8 @@ body {
   cursor: none;
 }
 
+
+
 /* ─────────────────────────────────────────
    CANVAS BACKGROUND
 ───────────────────────────────────────── */
@@ -98,7 +101,7 @@ body {
   position: absolute;
   border-radius: 50%;
   opacity: 0;
-  animation: shapeFloat linear infinite;
+  animation: shapeFloat var(--speed, 6s) linear infinite;
 }
 .shape.active { opacity: 1; }
 .shape-hex {
@@ -220,7 +223,7 @@ body::after {
 }
 .rail-nav { display: flex; flex-direction: column; align-items: center; gap: 22px; }
 .rail-nav a {
-  writing-mode: vertical-rl; font-family: var(--mono); font-size: .52rem;
+  writing-mode: vertical-rl; font-family: var(--mono); font-size: .61rem;
   color: var(--muted); text-decoration: none; letter-spacing: .22em; text-transform: uppercase;
   transition: color .3s, letter-spacing .3s;
 }
@@ -597,34 +600,142 @@ body::after {
 /* ─────────────────────────────────────────
    SKILLS
 ───────────────────────────────────────── */
-#skills { padding: 110px 0; }
-.skills-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 68px; }
-.sk-label { font-family: var(--mono); font-size: .54rem; color: var(--muted); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 26px; }
-.sk-row { margin-bottom: 24px; }
-.sk-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
-.sk-n { font-family: var(--mono); font-size: .67rem; color: var(--text); letter-spacing: .04em; }
-.sk-p { font-family: var(--bebas); font-size: .92rem; color: var(--blue); }
-.sk-track { height: 2px; background: var(--dim); position: relative; overflow: visible; }
-.sk-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0; transition: width 1.5s cubic-bezier(0.22,1,0.36,1); }
-.sk-fill.main { background: linear-gradient(90deg, var(--blue), rgba(107,159,255,.4)); }
-.sk-fill.sub  { background: linear-gradient(90deg, var(--bronze), rgba(196,150,90,.3)); }
-/* dot at end of fill */
-.sk-fill::after { content: ''; position: absolute; right: -3px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: inherit; box-shadow: 0 0 10px rgba(107,159,255,.5); opacity: 0; transition: opacity .3s .8s; }
-.sk-track.anim .sk-fill::after { opacity: 1; }
-
-.certs { display: flex; flex-direction: column; }
-.cert {
-  border-bottom: 1px solid var(--dim); padding: 14px 0;
-  display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: start;
-  transition: padding-left .25s cubic-bezier(0.22,1,0.36,1), background .25s;
+#skills {
+  padding: 110px 0;
 }
-.cert:first-child { border-top: 1px solid var(--dim); }
-.cert:hover { padding-left: 10px; background: rgba(107,159,255,.025); }
-.c-num { font-family: var(--bebas); font-size: .9rem; color: var(--dimb); margin-top: 2px; transition: color .22s; }
-.cert:hover .c-num { color: var(--blue); }
-.c-iss { font-family: var(--mono); font-size: .49rem; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 2px; }
-.c-name { font-size: .79rem; color: var(--text); font-weight: 400; }
-.c-yr { font-family: var(--mono); font-size: .52rem; color: var(--bronze); margin-top: 2px; opacity: .8; }
+
+/* GRID */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 68px;
+  align-items: start;
+}
+
+/* LABEL */
+.sk-label {
+  font-family: var(--mono);
+  font-size: .54rem;
+  color: rgba(200, 215, 235, 0.75);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+
+/* ROW */
+.sk-row {
+  margin-bottom: 24px;
+}
+
+/* META */
+.sk-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sk-n {
+  font-family: var(--mono);
+  font-size: .67rem;
+  color: rgba(235, 245, 255, 0.88);
+  letter-spacing: .04em;
+}
+
+.sk-p {
+  font-family: var(--bebas);
+  font-size: .92rem;
+  color: var(--blue);
+  text-shadow: 0 0 8px rgba(107,159,255,0.25);
+}
+
+/* ================= DOT WRAPPER ================= */
+.sk-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* EMPTY DOT */
+.sk-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.10);
+  transition: all 0.3s ease;
+}
+
+/* FILLED DOT */
+.sk-dot.active {
+  background: var(--blue);
+  box-shadow: 0 0 6px rgba(107,159,255,0.4);
+}
+
+/* ================= CERTIFICATIONS ================= */
+.certs {
+  display: flex;
+  flex-direction: column;
+}
+
+.cert {
+  border-bottom: 1px solid var(--dim);
+  padding: 14px 0;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  align-items: start;
+
+  transition:
+    padding-left .25s cubic-bezier(0.22,1,0.36,1),
+    background .25s ease;
+}
+
+.cert:first-child {
+  border-top: 1px solid var(--dim);
+}
+
+.cert:hover {
+  padding-left: 10px;
+  background: rgba(107,159,255,0.03);
+}
+
+/* ================= CERT NUMBER ================= */
+.c-num {
+  font-family: var(--bebas);
+  font-size: .9rem;
+  color: rgba(180, 190, 210, 0.6);
+  margin-top: 2px;
+  transition: color .2s ease;
+}
+
+.cert:hover .c-num {
+  color: var(--blue);
+}
+
+/* ================= ISSUER ================= */
+.c-iss {
+  font-family: var(--mono);
+  font-size: .49rem;
+  color: rgba(200, 210, 230, 0.7);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* ================= NAME ================= */
+.c-name {
+  font-size: .79rem;
+  color: rgba(240, 245, 255, 0.9);
+  font-weight: 400;
+}
+
+/* ================= YEAR ================= */
+.c-yr {
+  font-family: var(--mono);
+  font-size: .52rem;
+  color: var(--bronze);
+  margin-top: 2px;
+  opacity: .85;
+}
 
 /* ─────────────────────────────────────────
    PROJECTS
@@ -834,7 +945,13 @@ footer span { color: var(--blue); }
 <canvas id="bgCanvas"></canvas>
 
 <!-- FLOATING SHAPES -->
-<div class="shapes-layer" id="shapesLayer"></div>
+<div class="shapes-layer" id="shapesLayer">
+
+  <div class="shape shape-hex" style="--speed: 5s;"></div>
+  <div class="shape shape-ring" style="--speed: 8s;"></div>
+  <div class="shape shape-sq" style="--speed: 6s;"></div>
+
+</div>
 
 <!-- GRID -->
 <div class="grid-bg" id="gridBg"></div>
@@ -919,7 +1036,7 @@ footer span { color: var(--blue); }
           <div class="scan"></div>
           <div class="id-head"><span class="stmp">Security Profile</span></div>
           <div class="id-body">
-            <img src="new.jpg" alt="Profile photo" class="ava">
+            <img src="/assets/new.jpg" alt="Profile photo" class="ava">
             <div class="idn">SANGIT PANT</div>
             <div class="idr">GRC &amp; IT/IS Audit Professional</div>
             <div class="idf"><div class="idf-l">Email</div><div class="idf-v"><a href="mailto:sangitpant12@gmail.com">sangitpant12@gmail.com</a></div></div>
@@ -984,16 +1101,59 @@ footer span { color: var(--blue); }
     <div class="st rv" data-decrypt>SKILLS &amp;<br><em>CERTIFICATIONS.</em></div>
     <div class="skills-grid">
       <div class="rv-l">
-        <div class="sk-label">Core Competencies</div>
-        <div class="sk-row rv" style="--d:.05s"><div class="sk-meta"><span class="sk-n">GRC &amp; Compliance Frameworks</span><span class="sk-p">92</span></div><div class="sk-track"><div class="sk-fill main" data-w="92"></div></div></div>
-        <div class="sk-row rv" style="--d:.1s"><div class="sk-meta"><span class="sk-n">ISMS Documentation &amp; SoA</span><span class="sk-p">90</span></div><div class="sk-track"><div class="sk-fill main" data-w="90"></div></div></div>
-        <div class="sk-row rv" style="--d:.15s"><div class="sk-meta"><span class="sk-n">IS Auditing &amp; Evidence Collection</span><span class="sk-p">88</span></div><div class="sk-track"><div class="sk-fill main" data-w="88"></div></div></div>
-        <div class="sk-row rv" style="--d:.2s"><div class="sk-meta"><span class="sk-n">IT Risk Assessment &amp; Threat Modeling</span><span class="sk-p">85</span></div><div class="sk-track"><div class="sk-fill main" data-w="85"></div></div></div>
-        <div class="sk-row rv" style="--d:.25s"><div class="sk-meta"><span class="sk-n">Audit Reporting &amp; Communication</span><span class="sk-p">87</span></div><div class="sk-track"><div class="sk-fill main" data-w="87"></div></div></div>
-        <div class="sk-row rv" style="--d:.3s"><div class="sk-meta"><span class="sk-n">Vulnerability Assessment (Nessus, Acunetix)</span><span class="sk-p">70</span></div><div class="sk-track"><div class="sk-fill sub" data-w="70"></div></div></div>
+        <div class="sk-label" style="font-weight: 900;">Core Competencies</div>
+      
+        <div class="sk-row rv" style="--d:.05s" data-w="92">
+          <div class="sk-meta">
+            <span class="sk-n">GRC &amp; Compliance Frameworks</span>
+            
+          </div>
+          <div class="sk-dots"></div>
+        </div>
+      
+        <div class="sk-row rv" style="--d:.1s" data-w="90">
+          <div class="sk-meta">
+            <span class="sk-n">ISMS Documentation &amp; SoA</span>
+            
+          </div>
+          <div class="sk-dots"></div>
+        </div>
+      
+        <div class="sk-row rv" style="--d:.15s" data-w="88">
+          <div class="sk-meta">
+            <span class="sk-n">IS Auditing &amp; Evidence Collection</span>
+            
+          </div>
+          <div class="sk-dots"></div>
+        </div>
+      
+        <div class="sk-row rv" style="--d:.2s" data-w="75">
+          <div class="sk-meta">
+            <span class="sk-n">IT Risk Assessment &amp; Threat Modeling</span>
+            
+          </div>
+          <div class="sk-dots"></div>
+        </div>
+      
+        <div class="sk-row rv" style="--d:.25s" data-w="87">
+          <div class="sk-meta">
+            <span class="sk-n">Audit Reporting &amp; Communication</span>
+           
+          </div>
+          <div class="sk-dots"></div>
+        </div>
+      
+        <div class="sk-row rv" style="--d:.3s" data-w="67">
+          <div class="sk-meta">
+            <span class="sk-n">Vulnerability & EDR/AV Response Assessment (Nessus, Acunetix etc )</span>
+            
+          </div>
+          <div class="sk-dots"></div>
+        </div>
+      
       </div>
       <div class="rv-r">
-        <div class="sk-label">Certifications</div>
+        <div class="sk-label" style="font-weight: 900;">Certifications</div>
         <div class="certs">
           <div class="cert rv" style="--d:.05s"><div class="c-num">01</div><div><div class="c-iss">Mastermind Assurance</div><div class="c-name">ISO/IEC 42001:2023 Lead Auditor</div><div class="c-yr">2026</div></div></div>
           <div class="cert rv" style="--d:.1s"><div class="c-num">02</div><div><div class="c-iss">Mastermind Assurance</div><div class="c-name">ISO/IEC 27001:2022 Lead Auditor</div><div class="c-yr">2025</div></div></div>
@@ -1286,23 +1446,35 @@ drawCanvas();
 
 /* ══════════ FLOATING SHAPES ══════════ */
 const shapesLayer = $('#shapesLayer');
+
+const SPEED_MULTIPLIER = 0.1; // aggressive fast mode
+
 const shapeDefs = [
-  {cls:'shape-hex',  w:110,h:110, x:75,  y:15,  dur:22, delay:0  },
-  {cls:'shape-ring', w:180,h:180, x:15,  y:55,  dur:28, delay:3  },
-  {cls:'shape-sq',   w:60, h:60,  x:60,  y:75,  dur:18, delay:6  },
-  {cls:'shape-hex',  w:80, h:80,  x:88,  y:40,  dur:25, delay:4  },
-  {cls:'shape-ring', w:120,h:120, x:5,   y:25,  dur:32, delay:8  },
-  {cls:'shape-sq',   w:40, h:40,  x:45,  y:85,  dur:20, delay:2  },
-  {cls:'shape-hex',  w:90, h:90,  x:35,  y:65,  dur:26, delay:10 },
-  {cls:'shape-ring', w:70, h:70,  x:80,  y:70,  dur:24, delay:5  },
+  {cls:'shape-hex',  w:110,h:110, x:75, y:15, dur:10, delay:0},
+  {cls:'shape-ring', w:180,h:180, x:15, y:55, dur:12, delay:3},
+  {cls:'shape-sq',   w:60, h:60,  x:60, y:75, dur:8,  delay:6},
+  {cls:'shape-hex',  w:80, h:80,  x:88, y:40, dur:11, delay:4},
+  {cls:'shape-ring', w:120,h:120, x:5,  y:25, dur:13, delay:8},
+  {cls:'shape-sq',   w:40, h:40,  x:45, y:85, dur:9,  delay:2},
+  {cls:'shape-hex',  w:90, h:90,  x:35, y:65, dur:10, delay:10},
+  {cls:'shape-ring', w:70, h:70,  x:80, y:70, dur:9,  delay:5},
 ];
-shapeDefs.forEach(d=>{
+
+shapeDefs.forEach(d => {
   const el = document.createElement('div');
   el.className = `shape ${d.cls}`;
-  el.style.cssText = `width:${d.w}px;height:${d.h}px;left:${d.x}%;top:${d.y}%;animation-duration:${d.dur}s;animation-delay:${d.delay}s;`;
-  if(d.cls==='shape-ring'){ el.style.width=d.w+'px'; el.style.height=d.h+'px'; }
+
+  el.style.width = d.w + 'px';
+  el.style.height = d.h + 'px';
+  el.style.left = d.x + '%';
+  el.style.top = d.y + '%';
+
+  el.style.animationDuration = `${d.dur * SPEED_MULTIPLIER}s`;
+  el.style.animationDelay = `${d.delay}s`;
+
   shapesLayer.appendChild(el);
-  setTimeout(()=> el.classList.add('active'), (d.delay*1000)+1800);
+
+  setTimeout(() => el.classList.add('active'), d.delay * 1000 + 800);
 });
 
 /* ══════════ SPLIT NAME ══════════ */
@@ -1417,13 +1589,44 @@ const ctrObs = new IntersectionObserver(entries=>{
 $$('.ctr').forEach(el=>ctrObs.observe(el));
 
 // Skill bars
-const skObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(!e.isIntersecting) return;
-    e.target.querySelectorAll('.sk-fill').forEach(f=>{ f.style.width=f.dataset.w+'%'; f.parentElement.classList.add('anim'); });
-    skObs.unobserve(e.target);
+const skObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const rows = entry.target.querySelectorAll('.sk-row');
+
+    rows.forEach(row => {
+      const value = parseFloat(row.dataset.w || 0);
+      const dotContainer = row.querySelector('.sk-dots');
+
+      if (!dotContainer) return;
+
+      dotContainer.innerHTML = ''; // clear first
+
+      const totalDots = 10;
+      const activeDots = Math.round((value / 100) * totalDots);
+
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('sk-dot');
+
+        if (i < activeDots) {
+          setTimeout(() => {
+            dot.classList.add('active');
+          }, i * 40);
+        }
+
+        dotContainer.appendChild(dot);
+      }
+    });
+
+    skObs.unobserve(entry.target);
   });
-},{ threshold:.15 });
-$$('.skills-grid').forEach(el=>skObs.observe(el));
+}, {
+  threshold: 0.15
+});
+
+document.querySelectorAll('.skills-grid').forEach(el => skObs.observe(el));
 
 // Chips wave
 const chipObs = new IntersectionObserver(entries=>{
