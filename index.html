@@ -430,6 +430,8 @@ body::after {
   animation: floatAvatar 5s ease-in-out infinite;
   transition: transform .35s ease;
   box-shadow: 0 0 18px rgba(107,159,255,.18), 0 0 40px rgba(107,159,255,.08);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .ava-wrap:hover { transform: scale(1.04); }
 
@@ -441,6 +443,7 @@ body::after {
   display: block;
   transition: transform .45s ease;
   background: linear-gradient(135deg, var(--blue), var(--blueg));
+  transform: translateZ(0);
 }
 .ava-wrap:hover .ava { transform: scale(1.06); }
 
