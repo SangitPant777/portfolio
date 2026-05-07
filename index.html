@@ -403,7 +403,7 @@ body::after {
 .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 68px; align-items: start; }
 
 .id-card {
-  background: var(--card); border: 1px solid var(--dim); overflow: hidden;
+  background: var(--card); border: 1px solid var(--dim); overflow: hidden; isolation: isolate; transform: translateZ(0);
   position: relative; transition: border-color .35s;
 }
 .id-card:hover { border-color: rgba(107,159,255,.2); }
@@ -444,6 +444,12 @@ body::after {
   transition: transform .45s ease;
   background: linear-gradient(135deg, var(--blue), var(--blueg));
   transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;  /* Chrome/Safari sharpening */
+  image-rendering: crisp-edges;                /* Firefox */
+  filter: blur(0px);                           /* forces its own composite layer */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .ava-wrap:hover .ava { transform: scale(1.06); }
 
