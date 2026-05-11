@@ -835,8 +835,7 @@ footer:hover #foot-msg { max-width:300px }
 
   nav{
     padding:16px 20px;
-    flex-direction:column;
-    gap:14px;
+    margin:0;
   }
 
   .n-links{
@@ -890,11 +889,18 @@ footer:hover #foot-msg { max-width:300px }
     grid-template-columns:1fr;
     gap:38px;
   }
-
+  main, section{
+    margin-top:0;
+  }
   .stat{
     border-right:none!important;
     border-top:1px solid rgba(255,248,240,.07);
   }
+  
+  .hero, #home{
+    padding-top:20px;
+  }
+
 
   .stat:first-child{
     border-top:none;
