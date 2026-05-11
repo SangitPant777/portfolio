@@ -886,8 +886,6 @@ footer:hover #foot-msg { max-width:300px }
     line-height:.95;
     word-break:break-word;
   }
-  .h-scroll{
-  display:flex;}
 
   .h-kicker{
     font-size:.38rem;
@@ -1046,7 +1044,20 @@ footer:hover #foot-msg { max-width:300px }
     align-items:flex-start;
     gap:6px;
   }
-
+  #hero::after{
+    content:'↓';
+    position:absolute;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:1.4rem;
+    color:var(--gold);
+    animation:bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(10px)}
+  }
   body{
     cursor:auto;
   }
