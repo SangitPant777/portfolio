@@ -827,60 +827,48 @@ footer:hover #foot-msg { max-width:300px }
 
 @media(max-width:880px){
   :root{--gut:20px}
-
   html,
   body{
     margin:0;
     padding:0;
   }
-
   nav{
     padding:16px 20px;
     margin:0;
   }
-
   .n-links{
     width:100%;
     justify-content:center;
     flex-wrap:wrap;
     gap:16px;
   }
-
   .n-links a{
     font-size:.42rem;
     letter-spacing:.16em;
   }
-
   .h-name{
     font-size:clamp(3.2rem,18vw,5rem);
     line-height:.95;
     word-break:break-word;
   }
-
   .sh{
     font-size:clamp(2.3rem,12vw,4rem);
     line-height:.95;
   }
-
   .pj-name,
   .edu-yr{
     font-size:clamp(2.4rem,14vw,4rem);
   }
-
-  /* keep animation but scale for mobile */
   .orb-sys{
     transform:translate(-50%,-54%) scale(.55)!important;
     opacity:.45;
     max-width:100vw;
   }
-
-  /* prevent oversized ghost text overflow */
   .pj-ghost{
     font-size:5rem;
     right:-2px;
     bottom:-8px;
   }
-
   .ab-grid,
   .sk-layout,
   .ct-grid,
@@ -901,12 +889,9 @@ footer:hover #foot-msg { max-width:300px }
   .hero, #home{
     padding-top:20px;
   }
-
-
   .stat:first-child{
     border-top:none;
   }
-
   .tl::before,
   .tl-row::before,
   #cr,
@@ -914,33 +899,41 @@ footer:hover #foot-msg { max-width:300px }
   #sun-arc{
     display:none;
   }
-
   .tl-row{
     grid-template-columns:1fr;
     gap:12px;
   }
-
   .tl-right{
     padding-left:0;
   }
-
   .pj,
   .art-l,
   .art-r,
   .edu{
     padding:32px 24px;
   }
-
   .id-card-inner{
     padding:28px 22px;
   }
-
   .edu{
     gap:20px;
   }
-
   body{
     cursor:auto;
+  }
+
+  /* ── GAP FIX ── */
+  nav{
+    position:relative;
+    margin-bottom:0;
+    padding-bottom:0;
+  }
+  main{
+    margin-top:0 !important;
+    padding-top:0 !important;
+  }
+  .hero, #home{
+    margin-top:0 !important;
   }
 }
 @media(prefers-reduced-motion:reduce) {
