@@ -1046,15 +1046,18 @@ footer:hover #foot-msg { max-width:300px }
     align-items:flex-start;
     gap:6px;
   }
-  #hero .w::after{
+#hero::after{
   content:'↓';
-  display:flex;
-  justify-content:center;
-  width:100%;
+  position:fixed;
+  bottom:24px;
+  left:0;
+  right:0;
+  text-align:center;
   font-size:1.4rem;
   color:var(--gold);
-  margin-top:24px;
   animation:bounce 1.6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:50;
 }
   @keyframes bounce{
     0%,100%{transform:translateX(-50%) translateY(0)}
