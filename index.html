@@ -521,8 +521,8 @@ section { padding:132px 0; position:relative }
 }
 .tl-row:hover::before { background:var(--gold); box-shadow:0 0 28px rgba(244,194,69,.75) }
 .tl-left { padding-right:34px; padding-top:2px }
-.tl-date { font-size:.44rem; color:var(--gold); letter-spacing:.1em; line-height:1.72; margin-bottom:8px; transition:color .9s }
-.tl-co { font-size:.5rem; color:var(--ink3); line-height:1.75 }
+.tl-date { font-size:.5rem; color:var(--gold); letter-spacing:.0.05; line-height:1.72; margin-bottom:8px; transition:color .9s }
+.tl-co { font-size:.6rem; color:rgba(255,255,255,.75); line-height:1.75 }
 .tl-badge {
   display:inline-block; margin-top:10px; padding:3px 8px;
   font-size:.35rem; border:1px solid rgba(107,232,122,.35);
@@ -548,7 +548,7 @@ section { padding:132px 0; position:relative }
 
 /* ── SKILLS ── */
 .sk-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px }
-.sk-lbl { font-size:.42rem; letter-spacing:.3em; color:var(--ink3); text-transform:uppercase; margin-bottom:32px }
+.sk-lbl { font-size:.60rem; letter-spacing:.3em; color:rgba(212,175,55,.95); text-transform:uppercase; margin-bottom:32px; font-weight:500;}
 .sk-row { margin-bottom:28px }
 .sk-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px }
 .sk-name { font-size:.66rem; color:var(--ink); letter-spacing:.04em }
@@ -581,11 +581,11 @@ section { padding:132px 0; position:relative }
 .cert-row:hover::before { width:100% }
 .cert-row:first-child { border-top:1px solid rgba(255,248,240,.06) }
 .cert-row:hover { padding-left:10px }
-.cert-n { font-family:'Playfair Display',serif; font-size:.95rem; font-style:italic; color:var(--gold); opacity:.48; transition:opacity .3s,color .9s }
+.cert-n { font-family:'Playfair Display',serif; font-size:.95rem; font-style:italic; color:var(--gold); opacity:.80; transition:opacity .3s,color .9s; font-weight: 500;}
 .cert-row:hover .cert-n { opacity:.9 }
-.cert-iss { font-size:.37rem; color:var(--ink3); letter-spacing:.18em; text-transform:uppercase; margin-bottom:3px }
-.cert-nm { font-size:.74rem; color:var(--ink2); margin-bottom:2px; font-weight:300 }
-.cert-yr { font-size:.4rem; color:var(--gold); letter-spacing:.1em; transition:color .9s }
+.cert-iss { font-size:.5rem; color:var(--ink3); letter-spacing:.18em; text-transform:uppercase; margin-bottom:3px }
+.cert-nm { font-size:.80rem; color:var(--ink2); margin-bottom:2px; font-weight:380 }
+.cert-yr { font-size:.5rem; color:var(--gold); letter-spacing:.1em; transition:color .9s }
 
 /* ── PROJECTS ── */
 .pj-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px }
@@ -765,7 +765,7 @@ footer {
 }
 .foot {
   display:flex; justify-content:space-between; align-items:center;
-  font-size:.4rem; color:var(--ink3); letter-spacing:.12em; flex-wrap:wrap; gap:8px;
+  font-size:.5rem; color:var(--ink3); letter-spacing:.12em; flex-wrap:wrap; gap:8px;
 }
 .foot em { color:var(--gold); font-style:normal; transition:color .9s }
 
@@ -873,7 +873,7 @@ footer:hover #foot-msg { max-width:300px }
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
-    <a href="#blog"">Blogs</a>
+    <a href="#blog">Blogs</a>
     <a href="#contact">Contact</a>
     
   </div>
@@ -983,7 +983,7 @@ footer:hover #foot-msg { max-width:300px }
     <div class="tl">
       <div class="tl-row a fl d2">
         <div class="tl-left">
-          <div class="tl-date">Jan 2025<br>Present</div>
+          <div class="tl-date">Jan 2025 - Present</div>
           <div class="tl-co">Vairav Technology<br>Security Pvt. Ltd.<br>Kathmandu</div>
           <div class="tl-badge">Current</div>
         </div>
@@ -991,7 +991,7 @@ footer:hover #foot-msg { max-width:300px }
           <div class="tl-role">Associate IS Auditor <em>&amp; GRC Analyst</em></div>
           <ul class="tl-pts">
             <li>Supported IT risk assessments and IS audits for technology and regulated clients.</li>
-            <li>Conducted Internal Audits against multiple compliance frameworks including ISO 27001, SOC 2, NIST CSF, CMMC, and IEC 62443.</li>
+            <li>Conducted Internal Audits against multiple compliance frameworks including ISO 27001, SOC 2, NIST CSF, CMMC, IEC 62443 etc.</li>
             <li>Conducted threat modeling (STRIDE) and identified control gaps across people, process, and technology.</li>
             <li>Developed and reviewed GRC documentation — policies, risk registers, and Statements of Applicability.</li>
             <li>Prepared audit evidence, vulnerability assessments, and management-level compliance reports.</li>
@@ -1001,7 +1001,7 @@ footer:hover #foot-msg { max-width:300px }
       </div>
       <div class="tl-row a fl d3">
         <div class="tl-left">
-          <div class="tl-date">Sep 2024<br>Jan 2025</div>
+          <div class="tl-date">Sep 2024 - Jan 2025</div>
           <div class="tl-co">Vairav Technology<br>Security Pvt. Ltd.<br>Kathmandu</div>
         </div>
         <div class="tl-right">
@@ -1015,7 +1015,7 @@ footer:hover #foot-msg { max-width:300px }
       </div>
       <div class="tl-row a fl d4">
         <div class="tl-left">
-          <div class="tl-date">Jan 2023<br>Feb 2024</div>
+          <div class="tl-date">Jan 2023 - Feb 2024</div>
           <div class="tl-co">Hansikar Technologies<br>Kathmandu</div>
         </div>
         <div class="tl-right">
@@ -1170,7 +1170,7 @@ footer:hover #foot-msg { max-width:300px }
     <div class="foot">
       <span>© 2026 <em>Sangit Pant</em></span>
       <span><span id="foot-msg">— hover long enough and secrets surface</span></span>
-      <span>GRC · IS Audit · <em>Signal Clear</em></span>
+      <span> Signal Clear </span>
     </div>
   </div>
 </footer>
@@ -1678,7 +1678,7 @@ document.querySelectorAll('.cert-row').forEach(el=>{
   el.addEventListener('mouseenter',()=>{
     if(certDone) return;
     certHovers++;
-    if(certHovers>=4){ certDone=true; whisper('Eight certifications. Each one earned, not bought.'); }
+    if(certHovers>=4){ certDone=true; whisper('Certified in overthinking things properly.'); }
   });
 });
 
@@ -1756,7 +1756,7 @@ addEventListener('scroll',()=>{
   if(tgt>.82) hadScrolled=true;
   if(hadScrolled&&scrollY<40){
     hadScrolled=false;
-    setTimeout(()=>whisper('A new day. The audit continues.'),700);
+    setTimeout(()=>whisper('Another day. Still asking for screenshots.'),700);
   }
 });
 
