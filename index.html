@@ -877,7 +877,8 @@ footer:hover #foot-msg { max-width:300px }
     justify-content:flex-start;
     padding-top:110px;
     padding-bottom:60px;
-    min-height:100vh;
+    min-height:auto;
+    height:100vh;
     box-sizing:border-box;
     overflow:visible;
   }
@@ -1046,15 +1047,14 @@ footer:hover #foot-msg { max-width:300px }
     gap:6px;
   }
   #hero::after{
-    content:'↓';
-    position:absolute;
-    bottom:24px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:1.4rem;
-    color:var(--gold);
-    animation:bounce 1.6s ease-in-out infinite;
-  }
+  content:'↓';
+  display:block;
+  text-align:center;
+  font-size:1.4rem;
+  color:var(--gold);
+  margin-top:24px;
+  animation:bounce 1.6s ease-in-out infinite;
+}
   @keyframes bounce{
     0%,100%{transform:translateX(-50%) translateY(0)}
     50%{transform:translateX(-50%) translateY(10px)}
