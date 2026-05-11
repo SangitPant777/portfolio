@@ -824,7 +824,7 @@ footer {
 /* Typewriter secret on footer hover */
 #foot-msg { display:inline-block; overflow:hidden; max-width:0; transition:max-width 1.4s ease; white-space:nowrap; color:var(--gold) }
 footer:hover #foot-msg { max-width:300px }
-
+.mob-arrow{ display:none }
 @media(max-width:880px){
   :root{--gut:20px}
 
@@ -872,7 +872,14 @@ footer:hover #foot-msg { max-width:300px }
     font-size:.38rem;
     letter-spacing:.12em;
   }
-
+  .mob-arrow{
+    display:block;
+    text-align:center;
+    font-size:1.4rem;
+    color:var(--gold);
+    margin-top:24px;
+    animation:bounce 1.6s ease-in-out infinite;
+  }
   #hero{
     justify-content:flex-start;
     padding-top:110px;
@@ -1046,23 +1053,11 @@ footer:hover #foot-msg { max-width:300px }
     align-items:flex-start;
     gap:6px;
   }
-#hero::after{
-  content:'↓';
-  position:fixed;
-  bottom:24px;
-  left:0;
-  right:0;
-  text-align:center;
-  font-size:1.4rem;
-  color:var(--gold);
-  animation:bounce 1.6s ease-in-out infinite;
-  pointer-events:none;
-  z-index:50;
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(10px)}
 }
-  @keyframes bounce{
-    0%,100%{transform:translateX(-50%) translateY(0)}
-    50%{transform:translateX(-50%) translateY(10px)}
-  }
   body{
     cursor:auto;
   }
@@ -1121,7 +1116,7 @@ footer:hover #foot-msg { max-width:300px }
   </div>
 
   <span class="sig" style="bottom:66px;right:70px" title="— S.P.">Sangit</span>
-
+<div class="mob-arrow">↓</div>
   <div class="w">
     <div class="h-avail"><span class="h-avail-dot"></span>Open to Opportunities</div>
     <div class="h-kicker">GRC &amp; IS Audit Professional · Lalitpur, Nepal</div>
