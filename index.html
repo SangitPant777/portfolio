@@ -1115,7 +1115,7 @@ footer:hover #foot-msg { max-width:300px }
     <div class="orb" style="width:690px;height:690px;margin:-345px 0 0 -345px;animation-duration:78s"><div class="orb-dot" style="top:50%;right:0"></div></div>
   </div>
 
-  <span class="sig" style="bottom:66px;right:70px" title="— S.P.">Sangit</span>
+  <span class="sig" style="bottom:66px;right:70px" title="— S.P.">Can you see me?</span>
 
   <div class="w">
     <div class="h-avail"><span class="h-avail-dot"></span>Open to Opportunities</div>
@@ -1825,9 +1825,9 @@ function toast(id,dur=4400){
 
 /* EGG 1 — Konami Code
    The classic. Message is dry and auditor-specific. */
-const K=[i', 's', 'o']; let kp=0;
+const K=['i','s','o']; let kp=0;
 document.addEventListener('keydown',e=>{
-  kp=e.keyCode===K[kp]?kp+1:0;
+  kp=e.key.toLowerCase()===K[kp]?kp+1:0;
   if(kp===K.length){ kp=0; toast('t-konami'); sparks(innerWidth/2,innerHeight/2,24); }
 });
 
