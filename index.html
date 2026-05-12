@@ -1090,7 +1090,7 @@ footer:hover #foot-msg { max-width:300px }
 </div>
 
 <!-- Easter egg toasts -->
-<div class="toast" id="t-konami">☀ Konami confirmed · Audit instincts: excellent ☀</div>
+<div class="toast" id="t-konami">☀ You are officially an ISO Head ☀</div>
 <div class="toast" id="t-whisper"></div>
 
 <nav id="nav">
@@ -1115,7 +1115,7 @@ footer:hover #foot-msg { max-width:300px }
     <div class="orb" style="width:690px;height:690px;margin:-345px 0 0 -345px;animation-duration:78s"><div class="orb-dot" style="top:50%;right:0"></div></div>
   </div>
 
-  <span class="sig" style="bottom:66px;right:70px" title="— S.P.">Sangit</span>
+  <span class="sig" style="bottom:66px;right:70px" title="— S.P.">I Am Here</span>
 
   <div class="w">
     <div class="h-avail"><span class="h-avail-dot"></span>Open to Opportunities</div>
@@ -1825,7 +1825,7 @@ function toast(id,dur=4400){
 
 /* EGG 1 — Konami Code
    The classic. Message is dry and auditor-specific. */
-const K=[38,38,40,40,37,39,37,39,66,65]; let kp=0;
+const K=[i', 's', 'o']; let kp=0;
 document.addEventListener('keydown',e=>{
   kp=e.keyCode===K[kp]?kp+1:0;
   if(kp===K.length){ kp=0; toast('t-konami'); sparks(innerWidth/2,innerHeight/2,24); }
@@ -1903,7 +1903,7 @@ document.querySelectorAll('.cert-row').forEach(el=>{
    Clicking it triggers sparks + whisper. It's a signature. */
 document.querySelector('.sig')?.addEventListener('click',e=>{
   sparks(e.clientX,e.clientY,15);
-  whisper('S.P. — built this himself.');
+  whisper('Now you see me:D.');
 });
 
 /* EGG 7 — Night completion
