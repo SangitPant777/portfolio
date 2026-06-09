@@ -9,13 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&family=Alumni+Sans:wght@300;400;500;600;700&family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════════════════════════════════════════════
-   SANGIT PANT · CLASSIFIED AUDIT FILE
-   A scroll-driven, page-turning dossier
-   Neo Kinpaku × Emil Kowalski Motion
-   ═══════════════════════════════════════════════════ */
-
-/* ─ TOKENS ─ */
 :root {
   --lacquer:      oklch(7% 0.006 95);
   --lacquer-deep: oklch(4% 0.004 95);
@@ -56,7 +49,6 @@
   --ease-page:   cubic-bezier(0.16,1,0.3,1);
 }
 
-/* ─ RESET ─ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{
@@ -73,7 +65,6 @@ button{font-family:inherit;cursor:pointer}
 ::-webkit-scrollbar-track{background:var(--lacquer-deep)}
 ::-webkit-scrollbar-thumb{background:var(--gold-deep);border-radius:2px}
 
-/* ─ CURSOR ─ */
 #cur{position:fixed;z-index:8999;pointer-events:none;top:0;left:0;mix-blend-mode:normal}
 #cur-ring{
   position:absolute;width:28px;height:28px;border-radius:50%;
@@ -91,7 +82,6 @@ body.c-hover #cur-ring{width:52px;height:52px;background:oklch(84% 0.19 80.46/0.
 body.c-click #cur-ring{width:22px;height:22px}
 body.c-text  #cur-ring{opacity:0}
 
-/* ─ PROGRESS BAR ─ */
 #prog{
   position:fixed;top:0;left:0;height:2px;z-index:700;
   background:linear-gradient(90deg,var(--gold),var(--patina));
@@ -100,7 +90,6 @@ body.c-text  #cur-ring{opacity:0}
   transition:width 0.08s linear;
 }
 
-/* ─ LOADER ─ */
 #loader{
   position:fixed;inset:0;z-index:9000;
   background:var(--lacquer-deep);
@@ -113,7 +102,6 @@ body.c-text  #cur-ring{opacity:0}
   opacity:0;transform:translateY(20px);
   transition:opacity 0.5s var(--ease-out),transform 0.5s var(--ease-out);
 }
-#loader.mark-in .loader-file{opacity:1;transform:none}
 .loader-file-body{
   background:var(--paper-aged);
   border:1px solid oklch(70% 0.015 80 / 0.6);
@@ -154,28 +142,7 @@ body.c-text  #cur-ring{opacity:0}
   box-shadow:0 0 8px oklch(84% 0.19 80.46/0.5);
 }
 
-/* ═══════════════════════════════════════
-   THE AUDIT FILE — CORE LAYOUT
-   ═══════════════════════════════════════ */
-
-/* The "desk" — dark surface the file sits on */
-.desk{
-  min-height:40vh;
-  background:var(--lacquer-deep);
-  position:relative;
-  overflow:hidden;
-}
-
-/* Desk texture pattern */
-.desk::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    radial-gradient(oklch(84% 0.19 80.46 / 0.015) 1px, transparent 1px);
-  background-size:28px 28px;
-  pointer-events:none;
-}
-
-/* ═══ NAV SPINE (left side tab) ═══ */
+/* ═══ NAV SPINE ═══ */
 #nav-spine{
   position:fixed;left:0;top:0;bottom:0;width:54px;
   background:var(--lacquer-deep);
@@ -227,19 +194,15 @@ body.c-text  #cur-ring{opacity:0}
 /* ═══ MAIN FILE AREA ═══ */
 #file-area{
   margin-left:52px;
-  min-height:100vh;
   position:relative;
-  perspective:1200px;
-  perspective-origin:50% 40%;
 }
 
-/* ═══ PAGE COMPONENT ═══ */
+/* ═══ PAGE COMPONENT — FIX: no min-height, just padding for breathing room ═══ */
 .audit-page{
   position:relative;
-  min-height:100vh;
+  /* FIXED: removed min-height:100vh — was causing the black gaps */
   display:flex;align-items:center;justify-content:center;
-  padding:80px 0 60px;
-  overflow:hidden;
+  padding:48px 24px 0 24px;
 }
 
 /* The paper sheet */
@@ -257,10 +220,8 @@ body.c-text  #cur-ring{opacity:0}
   transform-origin:top center;
   will-change:transform,opacity;
   overflow:hidden;
-  /* Paper aging — subtle yellow tint handled per page */
 }
 
-/* Hole punch marks */
 .page-sheet::before{
   content:'';
   position:absolute;left:-1px;top:0;bottom:0;
@@ -269,7 +230,6 @@ body.c-text  #cur-ring{opacity:0}
   border-right:1px solid oklch(70% 0.015 80 / 0.35);
   pointer-events:none;z-index:1;
 }
-/* Punch holes */
 .punch-holes{
   position:absolute;left:0;top:0;bottom:0;width:36px;
   display:flex;flex-direction:column;justify-content:space-around;
@@ -282,14 +242,12 @@ body.c-text  #cur-ring{opacity:0}
   margin:auto;
 }
 
-/* Page content area */
 .page-content{
   padding:52px 52px 52px 68px;
   position:relative;z-index:2;
   color:var(--ink);
 }
 
-/* ─ PAGE HEADER BAR ─ */
 .page-header{
   display:flex;justify-content:space-between;align-items:flex-start;
   margin-bottom:36px;
@@ -320,7 +278,6 @@ body.c-text  #cur-ring{opacity:0}
   text-align:right;
 }
 
-/* ─ PAGE FOOTER BAR ─ */
 .page-footer{
   margin-top:32px;padding-top:14px;
   border-top:1px solid oklch(40% 0.005 95 / 0.3);
@@ -336,7 +293,6 @@ body.c-text  #cur-ring{opacity:0}
   letter-spacing:0.2em;color:oklch(55% 0.005 95);
 }
 
-/* ─ SECTION HEADING (on paper) ─ */
 .paper-eyebrow{
   font-family:var(--f-mono);font-size:0.52rem;letter-spacing:0.2em;
   text-transform:uppercase;color:oklch(45% 0.006 95);
@@ -351,9 +307,7 @@ body.c-text  #cur-ring{opacity:0}
   color:var(--ink);
   margin-bottom:8px;
 }
-.paper-h1 .accent{
-  color:var(--stamp-red);font-weight:600;
-}
+.paper-h1 .accent{color:var(--stamp-red);font-weight:600}
 .paper-h2{
   font-family:var(--f-disp);
   font-size:clamp(2rem,4.5vw,3.4rem);
@@ -369,7 +323,6 @@ body.c-text  #cur-ring{opacity:0}
 .paper-body strong{color:var(--ink);font-weight:600}
 .paper-body em{font-style:italic;color:oklch(42% 0.09 78)}
 
-/* ─ FIELD FORM ROWS (like audit forms) ─ */
 .form-row{
   display:grid;grid-template-columns:160px 1fr;
   border-bottom:1px solid oklch(70% 0.005 95 / 0.5);
@@ -389,7 +342,6 @@ body.c-text  #cur-ring{opacity:0}
 }
 .form-value a{color:oklch(42% 0.09 78);text-decoration:underline}
 
-/* ─ TAGS ─ */
 .paper-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
 .paper-tag{
   font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.08em;
@@ -405,7 +357,6 @@ body.c-text  #cur-ring{opacity:0}
   background:oklch(88% 0.04 78 / 0.3);
 }
 
-/* ─ COVER PAGE ─ */
 .cover-stamp-wrap{
   position:absolute;top:30px;right:30px;
   transform:rotate(8deg);
@@ -426,10 +377,7 @@ body.c-text  #cur-ring{opacity:0}
   display:flex;gap:2px;align-items:flex-end;height:36px;
   opacity:0.25;
 }
-.cover-barcode span{
-  display:block;background:var(--ink);
-  width:2px;
-}
+.cover-barcode span{display:block;background:var(--ink);width:2px}
 .cover-seal{
   position:absolute;bottom:20px;left:70px;
   width:80px;height:80px;
@@ -445,7 +393,6 @@ body.c-text  #cur-ring{opacity:0}
   border-radius:50%;border:1px solid oklch(50% 0.09 78 / 0.25);
 }
 
-/* ─ DIVIDERS ─ */
 .paper-rule{height:1px;background:oklch(70% 0.005 95 / 0.5);margin:20px 0}
 .paper-rule-double{
   height:3px;margin:24px 0;position:relative;
@@ -459,7 +406,6 @@ body.c-text  #cur-ring{opacity:0}
 .paper-rule-double::before{top:0}
 .paper-rule-double::after{bottom:0}
 
-/* ─ PHOTO ID ─ */
 .photo-id-frame{
   width:140px;height:160px;border:2px solid oklch(50% 0.005 95 / 0.5);
   position:relative;overflow:hidden;
@@ -476,7 +422,6 @@ body.c-text  #cur-ring{opacity:0}
   text-align:center;margin-top:4px;
 }
 
-/* ─ TIMELINE ROWS ─ */
 .timeline-entry{
   display:grid;grid-template-columns:120px 20px 1fr;
   gap:0 16px;margin-bottom:0;
@@ -503,7 +448,6 @@ body.c-text  #cur-ring{opacity:0}
   box-shadow:0 0 0 3px oklch(42% 0.09 78 / 0.2);
 }
 .timeline-line{flex:1;width:1px;background:oklch(70% 0.005 95 / 0.5);margin-top:4px}
-.timeline-body{}
 .timeline-role{
   font-family:var(--f-body);font-size:0.92rem;font-weight:600;
   color:var(--ink);margin-bottom:2px;
@@ -522,7 +466,6 @@ body.c-text  #cur-ring{opacity:0}
   font-family:var(--f-mono);color:oklch(45% 0.006 95);
 }
 
-/* ─ CERT ROWS ─ */
 .cert-row{
   display:grid;grid-template-columns:32px 1fr auto;
   gap:12px;align-items:start;
@@ -550,7 +493,6 @@ body.c-text  #cur-ring{opacity:0}
 }
 .cert-year-badge:hover{background:oklch(42% 0.09 78);color:var(--paper)}
 
-/* ─ PROJECT CARDS (on paper) ─ */
 .proj-paper-card{
   border:1px solid oklch(60% 0.005 95 / 0.4);
   border-radius:1px;padding:20px;
@@ -570,9 +512,7 @@ body.c-text  #cur-ring{opacity:0}
   transition:transform 0.35s var(--ease-out),opacity 0.35s;
   opacity:0.5;
 }
-.proj-paper-card:hover .proj-paper-corner{
-  transform:translate(3px,-3px);opacity:1;
-}
+.proj-paper-card:hover .proj-paper-corner{transform:translate(3px,-3px);opacity:1}
 .proj-status{
   display:inline-block;
   font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.12em;text-transform:uppercase;
@@ -595,11 +535,7 @@ body.c-text  #cur-ring{opacity:0}
   padding:2px 6px;border-radius:1px;
 }
 
-/* ─ INTEL / ARTICLE ─ */
-.intel-paper{
-  border:1px solid oklch(60% 0.005 95 / 0.5);
-  border-radius:1px;overflow:hidden;
-}
+.intel-paper{border:1px solid oklch(60% 0.005 95 / 0.5);border-radius:1px;overflow:hidden}
 .intel-paper-top{
   background:oklch(88% 0.01 85 / 0.5);
   padding:20px 20px 16px;
@@ -627,7 +563,6 @@ body.c-text  #cur-ring{opacity:0}
 .intel-paper-cta:hover{background:oklch(25% 0.005 95)}
 .intel-paper-cta:active{transform:scale(0.97)}
 
-/* ─ CONTACT FORM (paper-styled) ─ */
 .paper-fgroup{margin-bottom:12px}
 .paper-fgroup label{
   font-family:var(--f-mono);font-size:0.48rem;letter-spacing:0.16em;
@@ -652,7 +587,6 @@ body.c-text  #cur-ring{opacity:0}
   color:oklch(60% 0.005 95);font-style:italic;
 }
 
-/* ─ BUTTONS (paper version) ─ */
 .btn-paper{
   display:inline-flex;align-items:center;gap:8px;
   height:48px;padding:0 28px;
@@ -662,9 +596,7 @@ body.c-text  #cur-ring{opacity:0}
   position:relative;overflow:hidden;will-change:transform;
 }
 .btn-paper:active{transform:scale(0.97)}
-.btn-paper-primary{
-  background:var(--ink);color:var(--paper);
-}
+.btn-paper-primary{background:var(--ink);color:var(--paper)}
 .btn-paper-primary:hover{background:oklch(20% 0.006 95)}
 .btn-paper-secondary{
   background:transparent;color:var(--ink);
@@ -672,7 +604,6 @@ body.c-text  #cur-ring{opacity:0}
 }
 .btn-paper-secondary:hover{background:oklch(88% 0.01 85 / 0.6)}
 
-/* ─ EDU ENTRY ─ */
 .edu-paper{
   display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;
   padding:24px;border:1px solid oklch(60% 0.005 95 / 0.4);border-radius:1px;
@@ -693,7 +624,6 @@ body.c-text  #cur-ring{opacity:0}
 }
 .edu-paper:hover .edu-paper-year{color:oklch(55% 0.007 78 / 0.5)}
 
-/* ─ STATS ─ */
 .paper-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:oklch(70% 0.005 95 / 0.4);margin-top:24px}
 .paper-stat{
   background:var(--paper);padding:18px 12px;text-align:center;
@@ -708,25 +638,15 @@ body.c-text  #cur-ring{opacity:0}
 .paper-stat-sup{font-family:var(--f-mono);font-size:0.7rem;color:oklch(42% 0.09 78);margin-top:4px;font-weight:600}
 .paper-stat-label{font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50% 0.006 95)}
 
-/* ═══ SCROLL ANIMATION SYSTEM ═══ */
-
-/* Pages animate in from below + slight rotate */
-.audit-page{
-  opacity:1;
-}
+/* ═══ SCROLL ANIMATION ═══ */
 .page-sheet{
   opacity:0;
   transform:translateY(60px) rotateX(3deg);
-  transition:
-    opacity 0.9s var(--ease-page),
-    transform 0.9s var(--ease-page);
+  transition:opacity 0.9s var(--ease-page),transform 0.9s var(--ease-page);
   will-change:transform,opacity;
 }
-.audit-page.page-in .page-sheet{
-  opacity:1;transform:none;
-}
+.audit-page.page-in .page-sheet{opacity:1;transform:none}
 
-/* Within-page elements reveal */
 .rv{
   opacity:0;transform:translateY(28px);
   transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out);
@@ -741,14 +661,18 @@ body.c-text  #cur-ring{opacity:0}
 .s7{transition-delay:.35s}.s8{transition-delay:.4s}.s9{transition-delay:.45s}
 .s10{transition-delay:.5s}
 
-/* ═══ BETWEEN-PAGES AREA ═══ */
+/* ═══ BETWEEN-PAGES — FIX: proper separator with no extra empty space ═══ */
 .page-separator{
-  height:60px;
-  display:flex;align-items:center;justify-content:center;
+  /* FIXED: reduced from 60px with absolute tab to a clean relative layout */
+  height:48px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  padding-right:24px;
   position:relative;
 }
 .page-tab{
-  position:absolute;right:0;bottom:0;
+  /* FIXED: positioned inline via flex, no absolute/transform quirks */
   background:var(--paper-aged);
   border:1px solid oklch(70% 0.015 80 / 0.5);
   border-bottom:none;
@@ -757,13 +681,10 @@ body.c-text  #cur-ring{opacity:0}
   font-family:var(--f-mono);font-size:0.44rem;
   letter-spacing:0.14em;text-transform:uppercase;
   color:oklch(55% 0.007 78);
-  transform:translateX(-60px);
+  /* no transform needed now */
 }
 
-/* ═══ PAPER TEXTURE VARIATIONS ═══ */
-.page-sheet.aged{
-  background:oklch(91% 0.012 82);
-}
+.page-sheet.aged{background:oklch(91% 0.012 82)}
 .page-sheet.grid-bg{
   background-image:
     linear-gradient(oklch(60% 0.005 95 / 0.07) 1px, transparent 1px),
@@ -772,7 +693,6 @@ body.c-text  #cur-ring{opacity:0}
   background-color:var(--paper);
 }
 
-/* ═══ ANNOTATED MARGIN ═══ */
 .margin-note{
   position:absolute;
   left:-140px;
@@ -792,17 +712,9 @@ body.c-text  #cur-ring{opacity:0}
   border-bottom:1px solid oklch(42% 0.09 78 / 0.4);
 }
 
-/* ═══ HIGHLIGHTER EFFECT ═══ */
-.hl-yellow{
-  background:oklch(95% 0.15 95 / 0.35);
-  padding:1px 3px;margin:0 -3px;
-}
-.hl-green{
-  background:oklch(90% 0.12 150 / 0.3);
-  padding:1px 3px;margin:0 -3px;
-}
+.hl-yellow{background:oklch(95% 0.15 95 / 0.35);padding:1px 3px;margin:0 -3px}
+.hl-green{background:oklch(90% 0.12 150 / 0.3);padding:1px 3px;margin:0 -3px}
 
-/* ═══ REDACTION ═══ */
 .redacted{
   background:var(--ink);color:transparent;
   border-radius:1px;cursor:pointer;
@@ -810,11 +722,8 @@ body.c-text  #cur-ring{opacity:0}
   display:inline-block;
 }
 .redacted:hover{background:oklch(25% 0.005 95);color:oklch(25% 0.005 95)}
-.redacted.revealed{
-  background:oklch(95% 0.15 95 / 0.4);color:var(--ink);
-}
+.redacted.revealed{background:oklch(95% 0.15 95 / 0.4);color:var(--ink)}
 
-/* ═══ TOASTS ═══ */
 #toast-wrap{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
   z-index:9500;pointer-events:none;
@@ -841,7 +750,6 @@ body.c-text  #cur-ring{opacity:0}
   font-style:italic;
 }
 
-/* ═══ BREACH OVERLAY ═══ */
 #breach{
   position:fixed;inset:0;z-index:9000;
   background:oklch(58% 0.15 35 / 0.06);
@@ -857,7 +765,6 @@ body.c-text  #cur-ring{opacity:0}
   100%{opacity:0}
 }
 
-/* ═══ CONTEXT MENU ═══ */
 #ctxmenu{
   position:fixed;z-index:9500;
   background:oklch(92% 0.008 88);
@@ -876,7 +783,6 @@ body.c-text  #cur-ring{opacity:0}
 .ctx-item:hover{background:oklch(88% 0.01 85);color:var(--ink)}
 .ctx-hr{height:1px;background:oklch(70% 0.005 95 / 0.5);margin:3px 0}
 
-/* ═══ PAGE TURN INDICATOR ═══ */
 .scroll-hint{
   position:fixed;bottom:28px;right:72px;
   display:flex;align-items:center;gap:10px;
@@ -894,7 +800,6 @@ body.c-text  #cur-ring{opacity:0}
 }
 @keyframes scrollDown{0%{top:-50%}100%{top:100%}}
 
-/* ═══ FIXED CLASSIFICATION BANNER ═══ */
 .class-banner{
   position:fixed;bottom:0;left:52px;right:0;height:20px;
   background:oklch(52% 0.18 22 / 0.85);
@@ -904,7 +809,6 @@ body.c-text  #cur-ring{opacity:0}
   backdrop-filter:blur(8px);
 }
 
-/* ═══ COVER SPECIFIC ═══ */
 .cover-content{
   display:flex;flex-direction:column;
   min-height:540px;justify-content:space-between;
@@ -927,32 +831,27 @@ body.c-text  #cur-ring{opacity:0}
   gap:1px;background:oklch(70% 0.005 95 / 0.4);
   border:1px solid oklch(70% 0.005 95 / 0.4);
 }
-.cover-field{
-  background:var(--paper);padding:12px 14px;
-}
+.cover-field{background:var(--paper);padding:12px 14px}
 .cover-field-key{
   font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.14em;
   text-transform:uppercase;color:oklch(50% 0.006 95);margin-bottom:3px;
 }
 .cover-field-val{font-size:0.82rem;color:var(--ink);font-weight:500}
 
-/* ═══ ACCESSIBILITY ═══ */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.001ms!important;transition-duration:0.001ms!important}
   .page-sheet,.rv{opacity:1!important;transform:none!important}
   #loader{display:none}
 }
 
-/* ═══ MOBILE ═══ */
 @media(max-width:880px){
   body{cursor:auto}
   #cur,#cur-ring,#cur-dot{display:none}
   #nav-spine{width:0;overflow:hidden;border:none}
   #file-area{margin-left:0}
-  .page-content{padding:32px 24px 32px 40px}
-  .page-sheet::before{width:28px}
   .page-content{padding:32px 20px 32px 34px}
-  .audit-page{padding:40px 12px 30px}
+  .page-sheet::before{width:28px}
+  .audit-page{padding:32px 12px 0 12px}
   .paper-stats{grid-template-columns:1fr 1fr}
   .form-row{grid-template-columns:1fr}
   .form-label{border-right:none;border-bottom:1px solid oklch(70% 0.005 95/0.5)}
@@ -971,7 +870,6 @@ body.c-text  #cur-ring{opacity:0}
 </head>
 <body>
 
-<!-- ═ LOADER ═ -->
 <div id="loader">
   <div class="loader-file" id="loaderFile">
     <div class="loader-file-body">
@@ -990,19 +888,11 @@ body.c-text  #cur-ring{opacity:0}
   </div>
 </div>
 
-<!-- ═ CURSOR ═ -->
 <div id="cur"><div id="cur-ring"></div><div id="cur-dot"></div></div>
-
-<!-- ═ PROGRESS ═ -->
 <div id="prog"></div>
-
-<!-- ═ BREACH OVERLAY ═ -->
 <div id="breach"></div>
-
-<!-- ═ TOAST CONTAINER ═ -->
 <div id="toast-wrap"><div class="toast" id="t0"></div></div>
 
-<!-- ═ CONTEXT MENU ═ -->
 <div id="ctxmenu">
   <div class="ctx-item" data-a="cover">→ Cover Sheet</div>
   <div class="ctx-item" data-a="about">→ Dossier</div>
@@ -1015,55 +905,33 @@ body.c-text  #cur-ring{opacity:0}
   <div class="ctx-item" data-a="reload">↺ Reboot</div>
 </div>
 
-<!-- ═ SCROLL HINT ═ -->
 <div class="scroll-hint" id="scrollHint">
   <span>Scroll to turn page</span>
   <div class="scroll-track"><div class="scroll-thumb"></div></div>
 </div>
 
+<div class="class-banner">
+  ◆ SANGIT PANT · GRC &amp; IS AUDIT DOSSIER · REF: SP-2026-GRC-001 · CLASSIFICATION: PROFESSIONAL ◆
+</div>
 
-
-
-<!-- ═════════════════════════════════
-     NAV SPINE
-     ═════════════════════════════════ -->
 <div id="nav-spine">
   <div class="spine-logo" id="spineLogo" title="Home"></div>
   <div class="spine-tabs">
-    <div class="spine-tab active" data-target="cover" title="Cover Sheet">
-      <span class="spine-tab-label">Cover</span>
-    </div>
-    <div class="spine-tab" data-target="about" title="Dossier">
-      <span class="spine-tab-label">Dossier</span>
-    </div>
-    <div class="spine-tab" data-target="experience" title="Ops Log">
-      <span class="spine-tab-label">Ops Log</span>
-    </div>
-    <div class="spine-tab" data-target="arsenal" title="Arsenal">
-      <span class="spine-tab-label">Arsenal</span>
-    </div>
-    <div class="spine-tab" data-target="projects" title="Projects">
-      <span class="spine-tab-label">Projects</span>
-    </div>
-    <div class="spine-tab" data-target="intel" title="Intel">
-      <span class="spine-tab-label">Intel</span>
-    </div>
-    <div class="spine-tab" data-target="education" title="Training">
-      <span class="spine-tab-label">Training</span>
-    </div>
-    <div class="spine-tab" data-target="contact" title="Contact">
-      <span class="spine-tab-label">Contact</span>
-    </div>
+    <div class="spine-tab active" data-target="cover" title="Cover Sheet"><span class="spine-tab-label">Cover</span></div>
+    <div class="spine-tab" data-target="about" title="Dossier"><span class="spine-tab-label">Dossier</span></div>
+    <div class="spine-tab" data-target="experience" title="Ops Log"><span class="spine-tab-label">Ops Log</span></div>
+    <div class="spine-tab" data-target="arsenal" title="Arsenal"><span class="spine-tab-label">Arsenal</span></div>
+    <div class="spine-tab" data-target="projects" title="Projects"><span class="spine-tab-label">Projects</span></div>
+    <div class="spine-tab" data-target="intel" title="Intel"><span class="spine-tab-label">Intel</span></div>
+    <div class="spine-tab" data-target="education" title="Training"><span class="spine-tab-label">Training</span></div>
+    <div class="spine-tab" data-target="contact" title="Contact"><span class="spine-tab-label">Contact</span></div>
   </div>
   <div class="spine-page-counter" id="spineCounter">PG 01 / 08</div>
 </div>
 
-<!-- ═════════════════════════════════
-     FILE AREA — THE PAGES
-     ═════════════════════════════════ -->
 <div id="file-area">
 
-  <!-- ══════════ PAGE 1: COVER SHEET ══════════ -->
+  <!-- PAGE 1: COVER -->
   <div class="audit-page" id="cover" data-page="1">
     <div class="page-sheet aged">
       <div class="punch-holes">
@@ -1074,21 +942,16 @@ body.c-text  #cur-ring{opacity:0}
       <div class="page-content">
         <div class="page-header rv">
           <div>
-            <div class="page-doc-id">
-              Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Type: <strong>Professional Dossier</strong>
-            </div>
+            <div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Type: <strong>Professional Dossier</strong></div>
             <div class="page-doc-id" style="margin-top:3px">Issuer: <strong>Sangit Pant</strong> &nbsp;·&nbsp; Jurisdiction: Nepal &amp; International</div>
           </div>
-          
           <div class="page-num">Page 01 of 08</div>
         </div>
 
         <div class="cover-content">
           <div class="cover-top rv s2">
             <div class="cover-title-block">
-              <h1 class="paper-h1" id="coverName">
-                Sangit<br><span class="accent">Pant.</span>
-              </h1>
+              <h1 class="paper-h1" id="coverName">Sangit<br><span class="accent">Pant.</span></h1>
               <div style="font-family:var(--f-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:oklch(45% 0.006 95);margin-top:10px;margin-bottom:18px">
                 GRC Analyst &nbsp;·&nbsp; IS Auditor &nbsp;·&nbsp; ISO 27001 Lead Auditor
               </div>
@@ -1098,11 +961,9 @@ body.c-text  #cur-ring{opacity:0}
                 <strong>actual controls;</strong> because compliance that only lives on paper protects no one.
               </p>
             </div>
-            
           </div>
 
           <div>
-            <!-- Watermark stamp -->
             <div class="cover-stamp-wrap" id="coverStamp">
               <div class="cover-stamp">CLEARED<br>&amp;<br>VERIFIED</div>
             </div>
@@ -1152,13 +1013,8 @@ body.c-text  #cur-ring{opacity:0}
           </div>
         </div>
 
-        <!-- Barcode decoration -->
         <div class="cover-barcode" id="covBarcode" aria-hidden="true"></div>
-
-        <!-- Seal decoration -->
-        <div class="cover-seal" aria-hidden="true">
-          Sangit<br>Pant<br>GRC<br>LALITPUR<br>NEPAL
-        </div>
+        <div class="cover-seal" aria-hidden="true">Sangit<br>Pant<br>GRC<br>LALITPUR<br>NEPAL</div>
 
         <div class="page-footer rv s8">
           <div class="page-footer-text">Classification: Professional · Distribution: Public</div>
@@ -1172,7 +1028,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 02 — Personnel Dossier</div>
   </div>
 
-  <!-- ══════════ PAGE 2: ABOUT / DOSSIER ══════════ -->
+  <!-- PAGE 2: ABOUT -->
   <div class="audit-page" id="about" data-page="2">
     <div class="page-sheet">
       <div class="punch-holes">
@@ -1182,17 +1038,13 @@ body.c-text  #cur-ring{opacity:0}
       </div>
       <div class="page-content">
         <div class="page-header rv">
-          <div>
-            <div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> </div>
-          </div>
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong></div></div>
           <div class="page-classification">Dossier</div>
           <div class="page-num">Page 02 of 08</div>
         </div>
 
-        
         <h2 class="paper-h2 rv s1">Access<br><em>Granted.</em></h2>
 
-        <!-- ID Card style row -->
         <div style="display:grid;grid-template-columns:130px 1fr;gap:24px;margin-bottom:28px;position:relative" class="rv s2">
           <div>
             <div class="photo-id-frame">
@@ -1213,9 +1065,9 @@ body.c-text  #cur-ring{opacity:0}
               <div class="form-label">Location</div>
               <div class="form-value">Lalitpur, Nepal · LAT 27°40′N</div>
             </div>
-             <div class="form-row"> 
+            <div class="form-row">
               <div class="form-label">LinkedIn</div>
-              <div class="form-value"> <a href="https://linkedin.com/in/sangit-pant">/sangit-pant</a></div>
+              <div class="form-value"><a href="https://linkedin.com/in/sangit-pant">/sangit-pant</a></div>
             </div>
           </div>
         </div>
@@ -1231,7 +1083,6 @@ body.c-text  #cur-ring{opacity:0}
           </p>
           <p class="paper-body" style="margin-bottom:14px;position:relative">
             <span class="margin-bracket" style="top:0;bottom:0"></span>
-            
             I have experience in IT risk assessments, control gap analysis, ISMS documentation, and audit evidence preparation.
             As a <strong>Virtual Information Security Officer (vISO)</strong>, I've bridged governance requirements
             with real technical controls for a financial institution not as a checkbox exercise,
@@ -1241,7 +1092,6 @@ body.c-text  #cur-ring{opacity:0}
             Beyond client delivery, I build. <em>BrahmaGrid</em> and <em>Khatra GRC</em> are my experiments
             in using technology to make compliance less painful and more continuous.
           </p>
-           
         </div>
 
         <div class="paper-rule rv s4"></div>
@@ -1269,7 +1119,6 @@ body.c-text  #cur-ring{opacity:0}
 
         <div class="paper-rule rv s5"></div>
 
-        <!-- Service grid (4-up) -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" class="rv s5">
           <div class="proj-paper-card">
             <div class="proj-paper-corner"></div>
@@ -1291,7 +1140,6 @@ body.c-text  #cur-ring{opacity:0}
           </div>
           <div class="proj-paper-card">
             <div class="proj-paper-corner"></div>
-            <div class="proj-paper-corner"></div>
             <div style="font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50%,0.006,95);margin-bottom:4px">04</div>
             <div class="proj-paper-title" style="font-size:1.1rem">Security Assessments</div>
             <div style="font-size:0.8rem;color:oklch(28% 0.005 95);line-height:1.65;margin-top:6px">EDR &amp; AV evaluation, vulnerability assessments, control gap analysis.</div>
@@ -1299,7 +1147,6 @@ body.c-text  #cur-ring{opacity:0}
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
@@ -1310,7 +1157,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 03 — Operations Log</div>
   </div>
 
-  <!-- ══════════ PAGE 3: EXPERIENCE ══════════ -->
+  <!-- PAGE 3: EXPERIENCE -->
   <div class="audit-page" id="experience" data-page="3">
     <div class="page-sheet grid-bg">
       <div class="punch-holes">
@@ -1325,11 +1172,9 @@ body.c-text  #cur-ring{opacity:0}
           <div class="page-num">Page 03 of 08</div>
         </div>
 
-        
         <h2 class="paper-h2 rv s1">Mission<br><em>History.</em></h2>
 
         <div style="margin-top:8px">
-          <!-- Entry 1 -->
           <div class="timeline-entry rv s2" id="expEntry1">
             <div class="timeline-date">Jan 2025<br>— Present</div>
             <div class="timeline-dot-col">
@@ -1350,7 +1195,6 @@ body.c-text  #cur-ring{opacity:0}
             </div>
           </div>
 
-          <!-- Entry 2 -->
           <div class="timeline-entry rv s3" id="expEntry2">
             <div class="timeline-date">Sep 2024<br>— Jan 2025</div>
             <div class="timeline-dot-col">
@@ -1368,7 +1212,6 @@ body.c-text  #cur-ring{opacity:0}
             </div>
           </div>
 
-          <!-- Entry 3 -->
           <div class="timeline-entry rv s4" id="expEntry3">
             <div class="timeline-date">Jan 2023<br>— Feb 2024</div>
             <div class="timeline-dot-col">
@@ -1384,7 +1227,6 @@ body.c-text  #cur-ring{opacity:0}
           </div>
         </div>
 
-        <!-- Redacted entry easter egg -->
         <div class="paper-rule rv s5"></div>
         <div class="rv s6" style="font-family:var(--f-mono);font-size:0.55rem;color:oklch(45% 0.006 95);margin-top:8px">
           <span style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.44rem">Additional entry — clearance required:</span><br><br>
@@ -1394,7 +1236,6 @@ body.c-text  #cur-ring{opacity:0}
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
@@ -1405,7 +1246,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 04 — Arsenal / Certifications</div>
   </div>
 
-  <!-- ══════════ PAGE 4: CERTIFICATIONS ══════════ -->
+  <!-- PAGE 4: CERTIFICATIONS -->
   <div class="audit-page" id="arsenal" data-page="4">
     <div class="page-sheet">
       <div class="punch-holes">
@@ -1420,7 +1261,6 @@ body.c-text  #cur-ring{opacity:0}
           <div class="page-num">Page 04 of 08</div>
         </div>
 
-   
         <h2 class="paper-h2 rv s1">Clearance<br><em>Credentials.</em></h2>
 
         <div class="rv s2">
@@ -1490,7 +1330,6 @@ body.c-text  #cur-ring{opacity:0}
           </div>
         </div>
 
-        <!-- Annotation at the bottom -->
         <div class="paper-rule rv s3"></div>
         <div class="rv s4" style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(45% 0.006 95);line-height:1.8">
           <strong style="color:var(--ink)">Auditor's Note:</strong> 8 certifications documented. Credential fatigue: <span class="redacted" data-secret="Real, but worth it">██████████████</span>.
@@ -1498,7 +1337,6 @@ body.c-text  #cur-ring{opacity:0}
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
@@ -1509,7 +1347,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 05 — Active Projects</div>
   </div>
 
-  <!-- ══════════ PAGE 5: PROJECTS ══════════ -->
+  <!-- PAGE 5: PROJECTS -->
   <div class="audit-page" id="projects" data-page="5">
     <div class="page-sheet aged">
       <div class="punch-holes">
@@ -1519,11 +1357,10 @@ body.c-text  #cur-ring{opacity:0}
       </div>
       <div class="page-content">
         <div class="page-header rv">
-          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> </div></div>
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong></div></div>
           <div class="page-classification">Classified Operations</div>
           <div class="page-num">Page 05 of 08</div>
         </div>
-
 
         <h2 class="paper-h2 rv s1">Active<br><em>Builds.</em></h2>
 
@@ -1574,7 +1411,6 @@ body.c-text  #cur-ring{opacity:0}
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
@@ -1585,7 +1421,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 06 — Intel Reports</div>
   </div>
 
-  <!-- ══════════ PAGE 6: INTEL ══════════ -->
+  <!-- PAGE 6: INTEL -->
   <div class="audit-page" id="intel" data-page="6">
     <div class="page-sheet">
       <div class="punch-holes">
@@ -1600,7 +1436,6 @@ body.c-text  #cur-ring{opacity:0}
           <div class="page-num">Page 06 of 08</div>
         </div>
 
-        
         <h2 class="paper-h2 rv s1">Field<br><em>Dispatches.</em></h2>
 
         <div class="rv s2">
@@ -1608,28 +1443,19 @@ body.c-text  #cur-ring{opacity:0}
              target="_blank" rel="noopener" class="intel-paper" style="display:block;text-decoration:none;color:inherit">
             <div class="intel-paper-top">
               <div class="intel-paper-issue">Dispatch No. 001 · LinkedIn Article · GRC Strategy</div>
-              <div class="intel-paper-title">
-                <em>SOC 2 and ISO 27001</em> are useless. But are they really?
-              </div>
+              <div class="intel-paper-title"><em>SOC 2 and ISO 27001</em> are useless. But are they really?</div>
               <div style="font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.1em;text-transform:uppercase;color:oklch(50% 0.006 95);margin-top:8px">By Sangit Pant</div>
             </div>
             <div class="intel-paper-body">
-              <p>
-                <strong>SOC 2 and ISO 27001 don't stop attacks</strong>, but the absence of their basic controls makes incidents far more likely. A simple guest-Wi-Fi scan exposed a CCTV admin interface. No exploitation, no advanced tools, just missing security hygiene.
-              </p>
-              <p>
-                This article maps that real scenario to specific control failures and explains where compliance genuinely reduces risk — and where it doesn't.
-              </p>
-              <div style="margin-top:16px">
-                <span class="intel-paper-cta">Read Full Report ↗</span>
-              </div>
+              <p><strong>SOC 2 and ISO 27001 don't stop attacks</strong>, but the absence of their basic controls makes incidents far more likely. A simple guest-Wi-Fi scan exposed a CCTV admin interface. No exploitation, no advanced tools, just missing security hygiene.</p>
+              <p>This article maps that real scenario to specific control failures and explains where compliance genuinely reduces risk — and where it doesn't.</p>
+              <div style="margin-top:16px"><span class="intel-paper-cta">Read Full Report ↗</span></div>
             </div>
           </a>
         </div>
 
         <div class="paper-rule rv s3"></div>
 
-        <!-- Forthcoming section -->
         <div class="rv s3" style="margin-top:8px">
           <div class="paper-eyebrow" style="margin-bottom:10px">Forthcoming Dispatches</div>
           <div style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(45% 0.006 95);line-height:2.2">
@@ -1649,7 +1475,6 @@ body.c-text  #cur-ring{opacity:0}
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
@@ -1660,7 +1485,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 07 — Training Records</div>
   </div>
 
- <!-- ══════════ PAGE 7: EDUCATION ══════════ -->
+  <!-- PAGE 7: EDUCATION -->
   <div class="audit-page" id="education" data-page="7">
     <div class="page-sheet grid-bg">
       <div class="punch-holes">
@@ -1675,22 +1500,10 @@ body.c-text  #cur-ring{opacity:0}
           <div class="page-num">Page 07 of 08</div>
         </div>
 
-        
         <h2 class="paper-h2 rv s1">Academic<br><em>Foundation.</em></h2>
-
-        <div class="edu-paper rv s2" style="display:none;">
-          <div>
-            <div class="edu-paper-degree">Bachelor of Science In Information Technology (BSIT)</div>
-            <div class="edu-paper-sub gold">Concentration: CyberSecurity</div>
-            <div class="edu-paper-sub patina">GPA: 4.0 — <span class="redacted" data-secret="The GPA that cost a social life">████████████████████</span></div>
-            <div class="edu-paper-school">Presidential Graduate School (Westcliff University)</div>
-          </div>
-          <div class="edu-paper-year">2021–2025</div>
-        </div>
 
         <div class="paper-rule rv s3"></div>
 
-        <!-- Transcript-style annotation -->
         <div class="rv s3">
           <div class="form-row">
             <div class="form-label">Degree Status</div>
@@ -1726,13 +1539,12 @@ body.c-text  #cur-ring{opacity:0}
 
         <div class="paper-rule rv s4"></div>
 
-        <div class="rv s5" style="font-size:0.82rem;color:oklch(35% 0.005 95);line-height:1.8;font-style:italic;font-family:var(--f-mono);font-size:0.52rem">
+        <div class="rv s5" style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(35% 0.005 95)">
           * Academic performance is officially documented. Any claims of a social life during this period are
           <span class="redacted" data-secret="unsubstantiated">████████████████</span>.
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
@@ -1743,8 +1555,7 @@ body.c-text  #cur-ring{opacity:0}
     <div class="page-tab">§ 08 — Secure Channel</div>
   </div>
 
-
-  <!-- ══════════ PAGE 8: CONTACT ══════════ -->
+  <!-- PAGE 8: CONTACT -->
   <div class="audit-page" id="contact" data-page="8">
     <div class="page-sheet aged">
       <div class="punch-holes">
@@ -1761,7 +1572,6 @@ body.c-text  #cur-ring{opacity:0}
 
         <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:44px">
           <div>
-            
             <h2 class="paper-h2 rv s1">Let's<br><em>Connect.</em></h2>
             <p class="paper-body rv s2" style="margin-bottom:24px">
               Open to GRC, IS Audit, and compliance roles.
@@ -1769,7 +1579,7 @@ body.c-text  #cur-ring{opacity:0}
             </p>
 
             <div class="rv s3">
-              <a href="mailto:sangitpant12@gmail.com" class="form-row" style="display:grid;text-decoration:none;color:inherit;transition:background 0.15s;border-top:1px solid oklch(70% 0.005 95/0.5)">
+              <a href="mailto:sangitpant12@gmail.com" class="form-row" style="display:grid;text-decoration:none;color:inherit;border-top:1px solid oklch(70% 0.005 95/0.5)">
                 <div style="display:contents">
                   <div class="form-label">Email</div>
                   <div class="form-value">sangitpant12@gmail.com</div>
@@ -1781,15 +1591,12 @@ body.c-text  #cur-ring{opacity:0}
                   <div class="form-value">+977 9864729477</div>
                 </div>
               </a>
-
-              </a>
               <div class="form-row">
                 <div class="form-label">Location</div>
                 <div class="form-value">Lalitpur, Nepal</div>
               </div>
             </div>
 
-            <!-- Final stamp -->
             <div style="margin-top:28px;display:inline-block;transform:rotate(-4deg)" class="rv s5">
               <div style="font-family:var(--f-mono);font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 14px;border:3px solid oklch(42% 0.09 78);color:oklch(42% 0.09 78);border-radius:1px;line-height:1.3;text-align:center">
                 OPEN TO<br>OPPORTUNITIES
@@ -1819,7 +1626,6 @@ body.c-text  #cur-ring{opacity:0}
           </div>
         </div>
 
-        <!-- End of file notation -->
         <div class="paper-rule rv s6" style="margin-top:32px"></div>
         <div class="paper-rule rv s6" style="margin-top:4px"></div>
         <div class="rv s7" style="text-align:center;margin-top:12px;font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.2em;text-transform:uppercase;color:oklch(50% 0.006 95)">
@@ -1831,26 +1637,20 @@ body.c-text  #cur-ring{opacity:0}
         </div>
 
         <div class="page-footer rv s8">
-          
           <div class="page-footer-logo">SANGIT.PANT</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bottom padding -->
-  <div style="height:80px"></div>
+  <div style="height:60px"></div>
 
-</div><!-- /file-area -->
+</div>
 
-<!-- ═════════════════════════════════
-     JAVASCRIPT ENGINE
-     ═════════════════════════════════ -->
 <script>
 (function(){
 'use strict';
 
-/* ─────── LOADER ─────── */
 const loader   = document.getElementById('loader');
 const lbar     = document.getElementById('lbar');
 const llabel   = document.getElementById('llabel');
@@ -1866,7 +1666,6 @@ const steps = [
 ];
 let lStep = 0;
 function runLoader(){
-  loaderFile.classList.add = loaderFile.classList.add;
   loaderFile.style.opacity='1'; loaderFile.style.transform='none'; loaderFile.style.transition='opacity 0.5s,transform 0.5s';
   function tick(){
     if(lStep>=steps.length){
@@ -1886,20 +1685,15 @@ function runLoader(){
 }
 setTimeout(runLoader,100);
 
-/* ─────── HERO START ─────── */
 function startHero(){
-  // Reveal all rv elements in viewport
   observeAll();
-  // Show cover stamp after short delay
   setTimeout(()=>{
     const stamp=document.getElementById('coverStamp');
     if(stamp) stamp.classList.add('visible');
   },800);
-  // Generate barcode
   generateBarcode();
 }
 
-/* ─────── BARCODE GENERATOR ─────── */
 function generateBarcode(){
   const bc=document.getElementById('covBarcode');
   if(!bc)return;
@@ -1912,7 +1706,6 @@ function generateBarcode(){
   });
 }
 
-/* ─────── CURSOR ─────── */
 const curEl=document.getElementById('cur');
 const curRing=document.getElementById('cur-ring');
 const curDot=document.getElementById('cur-dot');
@@ -1939,7 +1732,6 @@ if(curEl && window.matchMedia('(hover:hover)').matches){
   document.addEventListener('mouseup',()=>document.body.classList.remove('c-click'));
 }
 
-/* ─────── SCROLL ENGINE ─────── */
 const prog=document.getElementById('prog');
 const spineTabs=document.querySelectorAll('.spine-tab');
 const spineCounter=document.getElementById('spineCounter');
@@ -1950,8 +1742,7 @@ const pages=['cover','about','experience','arsenal','projects','intel','educatio
 
 let ticking=false;
 function onScroll(){
-  if(!ticking){requestAnimationFrame(doScroll);ticking=false}
-  ticking=true; requestAnimationFrame(doScroll);
+  if(!ticking){ ticking=true; requestAnimationFrame(doScroll); }
 }
 function doScroll(){
   ticking=false;
@@ -1959,25 +1750,17 @@ function doScroll(){
   const maxSt=document.documentElement.scrollHeight-window.innerHeight;
   const pct=maxSt>0?st/maxSt:0;
   if(prog) prog.style.width=(pct*100)+'%';
-
-  // Hide scroll hint
   if(scrollHint) scrollHint.classList.toggle('hidden',st>200);
 
-  // Active page
   let curPage=0;
   pages.forEach((p,i)=>{
     const rect=p.el.getBoundingClientRect();
     if(rect.top <= window.innerHeight*0.4) curPage=i;
   });
-  spineTabs.forEach((t,i)=>{
-    t.classList.toggle('active',i===curPage);
-  });
+  spineTabs.forEach((t,i)=>t.classList.toggle('active',i===curPage));
   if(spineCounter) spineCounter.textContent=`PG ${String(curPage+1).padStart(2,'0')} / 08`;
-
-  // Footer hover reveal
   if(footSecret && pct>0.97) footSecret.style.maxWidth='400px';
 
-  // Page-in trigger — sheet appears on scroll
   pages.forEach(p=>{
     const rect=p.el.getBoundingClientRect();
     if(rect.top < window.innerHeight*0.85 && !p.el.classList.contains('page-in')){
@@ -1986,23 +1769,19 @@ function doScroll(){
   });
 }
 window.addEventListener('scroll',onScroll,{passive:true});
-// Trigger once
 setTimeout(doScroll,50);
 
-/* ─────── REVEAL SYSTEM ─────── */
 function observeAll(){
   const io=new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
   },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-  // Pages
   const po=new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('page-in')});
   },{threshold:0.1});
   document.querySelectorAll('.audit-page').forEach(p=>po.observe(p));
 
-  // Counters
   const co=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
       if(e.isIntersecting && !e.target.dataset.done){
@@ -2019,7 +1798,6 @@ function observeAll(){
   document.querySelectorAll('.ctr').forEach(el=>co.observe(el));
 }
 
-/* ─────── SPINE NAV ─────── */
 spineTabs.forEach(tab=>{
   tab.addEventListener('click',()=>{
     const target=document.getElementById(tab.dataset.target);
@@ -2030,7 +1808,6 @@ document.getElementById('spineLogo')?.addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:'smooth'});
 });
 
-/* ─────── MAGNETIC BUTTONS ─────── */
 document.querySelectorAll('.btn-paper').forEach(btn=>{
   btn.addEventListener('mousemove',e=>{
     const r=btn.getBoundingClientRect();
@@ -2045,7 +1822,6 @@ document.querySelectorAll('.btn-paper').forEach(btn=>{
   });
 });
 
-/* ─────── TOAST ─────── */
 let toastTimer=null;
 function toast(msg,type='',dur=3800){
   const el=document.getElementById('t0');
@@ -2056,12 +1832,13 @@ function toast(msg,type='',dur=3800){
   toastTimer=setTimeout(()=>el.classList.remove('show'),dur);
 }
 
-/* ─────── REDACTION EASTER EGGS ─────── */
 document.querySelectorAll('.redacted').forEach(el=>{
   el.addEventListener('click',()=>{
     if(el.classList.contains('revealed')){
       el.classList.remove('revealed');
+      el.textContent=el.dataset.original||'████████████████';
     } else {
+      if(!el.dataset.original) el.dataset.original=el.textContent;
       el.classList.add('revealed');
       el.textContent=el.dataset.secret;
       toast('Classified information accessed. This will be noted in the audit log.','paper',3200);
@@ -2069,7 +1846,6 @@ document.querySelectorAll('.redacted').forEach(el=>{
   });
 });
 
-/* ─────── CONTEXT MENU ─────── */
 const ctxEl=document.getElementById('ctxmenu');
 document.addEventListener('contextmenu',e=>{
   e.preventDefault();
@@ -2094,9 +1870,6 @@ document.querySelectorAll('.ctx-item').forEach(item=>{
   });
 });
 
-/* ═══════════════ EASTER EGGS ═══════════════ */
-
-/* 1. KONAMI */
 let ks=[];
 const KC=[38,38,40,40,37,39,37,39,66,65];
 document.addEventListener('keydown',e=>{
@@ -2113,15 +1886,8 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-/* 2. TYPE "audit" */
 let abuf='';
-const auditQuips=[
-  'Scope creep detected. Adding 47 new controls to Statement of Applicability.',
-  'Evidence request sent. ETA: 3 business weeks. Or never.',
-  'Risk register updated. New entry: "auditor arrived early." Severity: HIGH.',
-  '"Just a few questions" — the 6 most expensive words in GRC.',
-  'Management review meeting scheduled. Attendance: mandatory. Actual decisions: zero.',
-];
+const auditQuips=['Scope creep detected. Adding 47 new controls to Statement of Applicability.','Evidence request sent. ETA: 3 business weeks. Or never.','Risk register updated. New entry: "auditor arrived early." Severity: HIGH.','"Just a few questions" — the 6 most expensive words in GRC.','Management review meeting scheduled. Attendance: mandatory. Actual decisions: zero.'];
 let aqIdx=0;
 document.addEventListener('keypress',e=>{
   if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
@@ -2129,14 +1895,8 @@ document.addEventListener('keypress',e=>{
   if(abuf==='audit'){toast(auditQuips[aqIdx++%auditQuips.length],'paper',3800);abuf=''}
 });
 
-/* 3. TYPE "iso" */
 let ibuf='';
-const isoLines=[
-  'ISO 27001:2013 deprecated. Please update your ISMS. Again.',
-  'Clause 4.1 context of organization — did you really include "global pandemics" in scope?',
-  'ISO 42001: the AI management standard. Yes, we audit the AI now.',
-  'Statement of Applicability: 114 controls. Applicable: most. Documented: some. Implemented: working on it.',
-];
+const isoLines=['ISO 27001:2013 deprecated. Please update your ISMS. Again.','Clause 4.1 context of organization — did you really include "global pandemics" in scope?','ISO 42001: the AI management standard. Yes, we audit the AI now.','Statement of Applicability: 114 controls. Applicable: most. Documented: some. Implemented: working on it.'];
 let iIdx=0;
 document.addEventListener('keypress',e=>{
   if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
@@ -2144,14 +1904,8 @@ document.addEventListener('keypress',e=>{
   if(ibuf==='iso'){toast(isoLines[iIdx++%isoLines.length],'paper',3800);ibuf=''}
 });
 
-/* 4. TYPE "risk" */
 let rbuf='';
-const riskLines=[
-  'Risk identified: "reading the entire dossier." Likelihood: HIGH. Impact: Impressive.',
-  'STRIDE analysis complete. Threat: Scope creep. Mitigation: documented but likely insufficient.',
-  'Risk treatment: Accept. Because sometimes you just have to ship the ISMS.',
-  'Risk register entry #404: control not found.',
-];
+const riskLines=['Risk identified: "reading the entire dossier." Likelihood: HIGH. Impact: Impressive.','STRIDE analysis complete. Threat: Scope creep. Mitigation: documented but likely insufficient.','Risk treatment: Accept. Because sometimes you just have to ship the ISMS.','Risk register entry #404: control not found.'];
 let rIdx=0;
 document.addEventListener('keypress',e=>{
   if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
@@ -2159,57 +1913,23 @@ document.addEventListener('keypress',e=>{
   if(rbuf==='risk'){toast(riskLines[rIdx++%riskLines.length],'paper',3800);rbuf=''}
 });
 
-/* 5. TYPE "grc" */
 let gbuf='';
 document.addEventListener('keypress',e=>{
   if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
   gbuf+=e.key.toLowerCase();gbuf=gbuf.slice(-3);
-  if(gbuf==='grc'){
-    toast('Governance. Risk. Compliance. In that order. Not just Compliance, Risk, then wonder where Governance went.','paper',4000);
-    gbuf='';
-  }
+  if(gbuf==='grc'){toast('Governance. Risk. Compliance. In that order. Not just Compliance, Risk, then wonder where Governance went.','paper',4000);gbuf=''}
 });
 
-/* 6. CERT YEAR CLICK */
-const yearLines={
-  '2026':'ISO 42001:2023 — auditing the AI that will eventually audit us.',
-  '2025':'Peak credential year. The risk register now has a category called "certification fatigue."',
-  '2024':'The year the CC exam asked about governance and I said "finally, a home turf."',
-  '2023':'Google cert. The one that started it all.',
-};
+const yearLines={'2026':'ISO 42001:2023 — auditing the AI that will eventually audit us.','2025':'Peak credential year. The risk register now has a category called "certification fatigue."','2024':'The year the CC exam asked about governance and I said "finally, a home turf."','2023':'Google cert. The one that started it all.'};
 document.querySelectorAll('.cert-year-badge').forEach(el=>{
-  el.addEventListener('click',()=>{
-    const y=el.dataset.y;
-    toast(yearLines[y]||'Another cert. The spreadsheet grows.','paper',3500);
-  });
+  el.addEventListener('click',()=>toast(yearLines[el.dataset.y]||'Another cert. The spreadsheet grows.','paper',3500));
 });
 
-/* 7. FRAMEWORK TAG CLICK */
-const fwFacts={
-  'ISO 27001':'ISO 27001: 93 controls in Annex A. You will map them all. Multiple times.',
-  'SOC 2':'SOC 2: Trust Services Criteria. Not a certification, a report. Auditors will correct you on this.',
-  'NIST CSF':'NIST CSF: Identify, Protect, Detect, Respond, Recover. Also: document, document, document.',
-  'CMMC':'CMMC: 110 practices. Now with added bureaucracy. Great.',
-  'GDPR':'GDPR: 99 articles. Article 83 is the one everyone actually reads first.',
-  'IEC 62443':'IEC 62443: OT security. Where GRC meets industrial controls meets "please don\'t take down the grid."',
-  'ISO 42001':'ISO 42001: AI management. The standard that lets you audit ChatGPT. Theoretically.',
-  'ISO 9001':'ISO 9001: Quality management. "Are you sure you documented that process?"',
-  'ISO 14001':'ISO 14001: Environmental management. Compliance goes green.',
-  'ISO 20000-1':'ISO 20000-1: IT service management. ITIL in a suit.',
-  'NRB IT':'NRB IT Guidelines: Because Nepali financial institutions need security too.',
-  'NRB CRG':'NRB Cyber Security Guidelines: Nepal banking sector baseline. vISO knows.',
-  'Cyber Essentials':'Cyber Essentials: Patch your systems. Use MFA. Not revolutionary, but necessary.',
-  'Cyber Essentials Plus':'Cyber Essentials Plus: Same thing but someone actually checked.',
-  'Nepal Insurance IT':'Nepal Insurance IT Guidelines: The one that really tests your local regulatory knowledge.',
-};
+const fwFacts={'ISO 27001':'ISO 27001: 93 controls in Annex A. You will map them all. Multiple times.','SOC 2':'SOC 2: Trust Services Criteria. Not a certification, a report. Auditors will correct you on this.','NIST CSF':'NIST CSF: Identify, Protect, Detect, Respond, Recover. Also: document, document, document.','CMMC':'CMMC: 110 practices. Now with added bureaucracy. Great.','GDPR':'GDPR: 99 articles. Article 83 is the one everyone actually reads first.','IEC 62443':'IEC 62443: OT security. Where GRC meets industrial controls meets "please don\'t take down the grid."','ISO 42001':'ISO 42001: AI management. The standard that lets you audit ChatGPT. Theoretically.','ISO 9001':'ISO 9001: Quality management. "Are you sure you documented that process?"','ISO 14001':'ISO 14001: Environmental management. Compliance goes green.','ISO 20000-1':'ISO 20000-1: IT service management. ITIL in a suit.','NRB IT':'NRB IT Guidelines: Because Nepali financial institutions need security too.','NRB CRG':'NRB Cyber Security Guidelines: Nepal banking sector baseline. vISO knows.','Cyber Essentials':'Cyber Essentials: Patch your systems. Use MFA. Not revolutionary, but necessary.','Cyber Essentials Plus':'Cyber Essentials Plus: Same thing but someone actually checked.','Nepal Insurance IT Guidelines':'Nepal Insurance IT Guidelines: The one that really tests your local regulatory knowledge.'};
 document.querySelectorAll('.paper-tag[data-fw]').forEach(tag=>{
-  tag.addEventListener('click',()=>{
-    const fact=fwFacts[tag.dataset.fw];
-    if(fact) toast(fact,'paper',4000);
-  });
+  tag.addEventListener('click',()=>{const fact=fwFacts[tag.dataset.fw];if(fact)toast(fact,'paper',4000)});
 });
 
-/* 8. TRIPLE CLICK ON SPINE LOGO → incident simulation */
 let lc=0,lt=null;
 document.getElementById('spineLogo')?.addEventListener('click',e=>{
   lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,520);
@@ -2222,13 +1942,8 @@ document.getElementById('spineLogo')?.addEventListener('click',e=>{
   }
 });
 
-/* 9. IDLE 45s */
 let idleT=null;
-const idleLines=[
-  'Still here? This dossier has better retention than most CAPs.',
-  'Idle detected. Logging finding: "reviewer not engaged." Severity: Medium.',
-  'You have reviewed more pages than most management review meetings cover.',
-];
+const idleLines=['Still here? This dossier has better retention than most CAPs.','Idle detected. Logging finding: "reviewer not engaged." Severity: Medium.','You have reviewed more pages than most management review meetings cover.'];
 let idleIdx=0;
 function resetIdle(){
   clearTimeout(idleT);
@@ -2237,27 +1952,17 @@ function resetIdle(){
 ['mousemove','keypress','scroll','click'].forEach(ev=>document.addEventListener(ev,resetIdle,{passive:true}));
 resetIdle();
 
-/* 10. STAT CLICK */
-const statFacts=[
-  '8 certs, 0 found redundant. Though the certification budget respectfully disagrees.',
-  '12 frameworks is 12 ways of saying "have you documented your risk treatment?"',
-  '2 platforms built. 0 GRC tools have ever been described as "fun." Fixing that.',
-  '2 years in the field. Equivalent to approximately 400 years in Excel pivot tables.',
-];
+const statFacts=['8 certs, 0 found redundant. Though the certification budget respectfully disagrees.','12 frameworks is 12 ways of saying "have you documented your risk treatment?"','2 platforms built. 0 GRC tools have ever been described as "fun." Fixing that.','2 years in the field. Equivalent to approximately 400 years in Excel pivot tables.'];
 document.querySelectorAll('.paper-stat').forEach((s,i)=>{
   s.addEventListener('click',()=>toast(statFacts[i]||'','paper',3500));
 });
 
-/* 11. PHOTO HOVER 3s */
 let phTimer=null;
 document.querySelector('.photo-id-frame')?.addEventListener('mouseenter',()=>{
-  phTimer=setTimeout(()=>{
-    toast('BIOMETRIC SCAN — Subject: Sangit Pant. Clearance: confirmed. Coffee intake: flagged as risk.','paper',3500);
-  },3000);
+  phTimer=setTimeout(()=>toast('BIOMETRIC SCAN — Subject: Sangit Pant. Clearance: confirmed. Coffee intake: flagged as risk.','paper',3500),3000);
 });
 document.querySelector('.photo-id-frame')?.addEventListener('mouseleave',()=>clearTimeout(phTimer));
 
-/* 12. SCROLL TO BOTTOM */
 let endToastShown=false;
 window.addEventListener('scroll',()=>{
   if(!endToastShown && (window.innerHeight+window.scrollY)>=document.documentElement.scrollHeight-8){
@@ -2266,29 +1971,18 @@ window.addEventListener('scroll',()=>{
   }
 },{passive:true});
 
-/* 13. PAGE CLICK COUNT (click a page 5 times → annotate it) */
 const pageTaps={};
 document.querySelectorAll('.page-sheet').forEach((sheet,i)=>{
   sheet.addEventListener('click',()=>{
     const page=pages[i]?.id||'unknown';
     pageTaps[page]=(pageTaps[page]||0)+1;
-    if(pageTaps[page]===5){
-      toast(`Annotation: Page ${i+1} reviewed 5 times. Either very thorough or very confused.`,'paper',4000);
-    }
+    if(pageTaps[page]===5) toast(`Annotation: Page ${i+1} reviewed 5 times. Either very thorough or very confused.`,'paper',4000);
   });
 });
 
-/* 14. GPA click */
-document.getElementById('gpaEl')?.addEventListener('click',()=>{
-  toast('4.0 GPA. My social life sends its regards.','paper',3200);
-});
+document.getElementById('gpaEl')?.addEventListener('click',()=>toast('4.0 GPA. My social life sends its regards.','paper',3200));
+document.querySelector('.cover-stamp')?.addEventListener('mouseenter',()=>toast('Clearance verified. This stamp is more official-looking than 60% of actual compliance dashboards.','paper',3000));
 
-/* 15. Cover stamp hover */
-document.querySelector('.cover-stamp')?.addEventListener('mouseenter',()=>{
-  toast('Clearance verified. This stamp is more official-looking than 60% of actual compliance dashboards.','paper',3000);
-});
-
-/* LOADER cleanup */
 loader.addEventListener('transitionend',()=>{
   if(loader.classList.contains('out')) loader.style.display='none';
 },{once:true});
