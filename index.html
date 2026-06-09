@@ -191,16 +191,54 @@ body.c-text  #cur-ring{opacity:0}
   writing-mode:vertical-rl;
 }
 
+/* ═══ MOBILE BOTTOM NAV ═══ */
+#mobile-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  height:52px;
+  background:var(--lacquer-deep);
+  border-top:1px solid var(--rule-gold);
+  z-index:600;
+  align-items:stretch;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+#mobile-nav::-webkit-scrollbar{display:none}
+.mnav-tab{
+  flex:0 0 auto;
+  min-width:52px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:4px;padding:0 10px;
+  cursor:pointer;
+  border-right:1px solid oklch(78% 0 0 / 0.07);
+  transition:background 0.2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.mnav-tab.active{background:var(--gold-dim)}
+.mnav-tab-label{
+  font-family:var(--f-mono);font-size:0.36rem;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--disabled);white-space:nowrap;
+  transition:color 0.2s;
+}
+.mnav-tab.active .mnav-tab-label{color:var(--gold)}
+.mnav-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--disabled);
+  transition:background 0.2s,transform 0.2s;
+}
+.mnav-tab.active .mnav-dot{background:var(--gold);transform:scale(1.5)}
+
 /* ═══ MAIN FILE AREA ═══ */
 #file-area{
   margin-left:52px;
   position:relative;
 }
 
-
 .audit-page{
   position:relative;
-
   display:flex;align-items:center;justify-content:center;
   padding:10px 5px 0 5px;
 }
@@ -661,9 +699,7 @@ body.c-text  #cur-ring{opacity:0}
 .s7{transition-delay:.35s}.s8{transition-delay:.4s}.s9{transition-delay:.45s}
 .s10{transition-delay:.5s}
 
-/* ═══ BETWEEN-PAGES — FIX: proper separator with no extra empty space ═══ */
 .page-separator{
-  /* FIXED: reduced from 60px with absolute tab to a clean relative layout */
   height:48px;
   display:flex;
   align-items:flex-end;
@@ -672,7 +708,6 @@ body.c-text  #cur-ring{opacity:0}
   position:relative;
 }
 .page-tab{
-  /* FIXED: positioned inline via flex, no absolute/transform quirks */
   background:var(--paper-aged);
   border:1px solid oklch(70% 0.015 80 / 0.5);
   border-bottom:none;
@@ -681,7 +716,6 @@ body.c-text  #cur-ring{opacity:0}
   font-family:var(--f-mono);font-size:0.44rem;
   letter-spacing:0.14em;text-transform:uppercase;
   color:oklch(55% 0.007 78);
-  /* no transform needed now */
 }
 
 .page-sheet.aged{background:oklch(91% 0.012 82)}
@@ -739,7 +773,7 @@ body.c-text  #cur-ring{opacity:0}
   backdrop-filter:blur(20px);
   opacity:0;transform:translateY(20px) scale(0.96);
   transition:opacity 0.35s var(--ease-out),transform 0.35s var(--ease-out);
-  max-width:480px;text-align:center;
+  max-width:min(480px, calc(100vw - 32px));text-align:center;
 }
 .toast.show{opacity:1;transform:none}
 .toast.patina{color:var(--patina);border-color:var(--rule-patina)}
@@ -844,27 +878,157 @@ body.c-text  #cur-ring{opacity:0}
   #loader{display:none}
 }
 
+/* ═══════════════════════════════════
+   MOBILE STYLES
+   ═══════════════════════════════════ */
 @media(max-width:880px){
-  body{cursor:auto}
+  body{cursor:auto;overflow-x:hidden}
   #cur,#cur-ring,#cur-dot{display:none}
-  #nav-spine{width:0;overflow:hidden;border:none}
+
+  /* Spine: hide on mobile */
+  #nav-spine{display:none}
   #file-area{margin-left:0}
-  .page-content{padding:32px 20px 32px 34px}
-  .page-sheet::before{width:28px}
-  .audit-page{padding:32px 12px 0 12px}
-  .paper-stats{grid-template-columns:1fr 1fr}
-  .form-row{grid-template-columns:1fr}
-  .form-label{border-right:none;border-bottom:1px solid oklch(70% 0.005 95/0.5)}
-  .timeline-entry{grid-template-columns:90px 16px 1fr;gap:0 10px}
-  .edu-paper{grid-template-columns:1fr}
-  .edu-paper-year{display:none}
-  .cover-top{flex-direction:column;gap:16px}
-  .cover-bottom{grid-template-columns:1fr}
-  .paper-h1{font-size:clamp(2.2rem,10vw,4rem)}
-  .class-banner{left:0}
+
+  /* Show bottom nav */
+  #mobile-nav{display:flex}
+
+  /* Class banner above bottom nav */
+  .class-banner{left:0;bottom:52px}
+
+  /* Scroll hint: hide */
   .scroll-hint{display:none}
-  .margin-note{display:none}
-  .margin-bracket{display:none}
+
+  /* Pages */
+  .audit-page{padding:16px 8px 0 8px}
+  #contact{padding-bottom:80px}
+
+  /* Sheet */
+  .page-sheet{width:100%;max-width:100%}
+  .page-sheet::before{width:22px}
+  .punch-holes{width:22px;padding:24px 0}
+  .punch-hole{width:11px;height:11px}
+
+  /* Content padding — left accounts for punch-hole margin */
+  .page-content{padding:22px 16px 22px 34px}
+
+  /* Page header */
+  .page-header{flex-wrap:wrap;gap:6px;margin-bottom:16px;align-items:center}
+  .page-doc-id{font-size:0.42rem}
+  .page-num{font-size:0.42rem}
+  .page-classification{font-size:0.44rem;padding:2px 6px}
+
+  /* Typography */
+  .paper-h1{font-size:clamp(2.2rem,10vw,3.4rem);margin-bottom:6px}
+  .paper-h2{font-size:clamp(1.7rem,7.5vw,2.6rem);margin-bottom:14px}
+  .paper-body{font-size:0.85rem;line-height:1.75}
+
+  /* Eyebrow */
+  .paper-eyebrow{font-size:0.46rem;margin-bottom:8px}
+
+  /* Stats: 2×2 */
+  .paper-stats{grid-template-columns:1fr 1fr;margin-top:14px}
+  .paper-stat{padding:12px 8px}
+  .paper-stat-num{font-size:1.7rem}
+  .paper-stat-label{font-size:0.38rem;letter-spacing:0.12em}
+
+  /* Rules */
+  .paper-rule{margin:14px 0}
+  .paper-rule-double{margin:16px 0}
+
+  /* Cover */
+  .cover-content{min-height:unset;gap:20px}
+  .cover-top{flex-direction:column;gap:12px}
+  .cover-ref-block{text-align:left}
+  .cover-bottom{grid-template-columns:1fr}
+  .cover-stamp-wrap{top:14px;right:14px}
+  .cover-stamp{font-size:0.7rem;padding:4px 8px;border-width:2px}
+  .cover-seal{width:52px;height:52px;font-size:0.24rem;bottom:8px;left:30px}
+  .cover-barcode{bottom:8px;right:14px;height:22px}
+
+  /* Cover CTA buttons */
+  .cover-cta-row{flex-direction:column!important}
+  .btn-paper{width:100%;justify-content:center;height:44px;font-size:0.82rem}
+
+  /* About: photo+form grid */
+  .about-id-grid{grid-template-columns:1fr!important;gap:16px!important}
+  .photo-id-frame{width:90px;height:104px}
+  .photo-id-label{font-size:0.3rem}
+
+  /* form-row: single column */
+  .form-row{grid-template-columns:1fr}
+  .form-label{
+    border-right:none;
+    border-bottom:1px solid oklch(70% 0.005 95/0.5);
+    font-size:0.42rem;padding:6px 8px;
+  }
+  .form-value{font-size:0.8rem;padding:7px 10px}
+
+  /* About competency 2-col → 1-col */
+  .about-competency-grid{grid-template-columns:1fr!important}
+
+  /* Tags */
+  .paper-tags{gap:4px;margin-top:10px}
+  .paper-tag{font-size:0.36rem;padding:2px 6px}
+
+  /* Timeline */
+  .timeline-entry{grid-template-columns:68px 12px 1fr;gap:0 8px;padding:12px 0}
+  .timeline-date{font-size:0.44rem}
+  .timeline-dot{width:8px;height:8px;margin-top:2px}
+  .timeline-role{font-size:0.82rem}
+  .timeline-org{font-size:0.4rem;margin-bottom:6px}
+  .timeline-points li{font-size:0.74rem;padding-left:11px;line-height:1.65}
+
+  /* Cert rows */
+  .cert-row{grid-template-columns:22px 1fr auto;gap:8px;padding:11px 0}
+  .cert-row:hover{margin:0 -8px;padding:11px 8px}
+  .cert-idx{font-size:0.5rem}
+  .cert-name-block .cert-title{font-size:0.76rem}
+  .cert-name-block .cert-issuer-label{font-size:0.36rem}
+  .cert-year-badge{font-size:0.4rem;padding:2px 5px}
+
+  /* Projects */
+  .proj-paper-card{padding:16px;margin-bottom:10px}
+  .proj-paper-title{font-size:1.3rem}
+  .proj-paper-desc{font-size:0.76rem;margin-bottom:10px}
+  .proj-paper-tag{font-size:0.34rem}
+
+  /* Intel */
+  .intel-paper-title{font-size:1.15rem;line-height:1.1}
+  .intel-paper-body p{font-size:0.8rem}
+  .intel-paper-cta{font-size:0.46rem;padding:8px 12px}
+
+  /* Education */
+  .edu-paper{grid-template-columns:1fr;padding:16px}
+  .edu-paper-degree{font-size:1.2rem}
+  .edu-paper-year{display:none}
+
+  /* Contact */
+  .contact-two-col{grid-template-columns:1fr!important;gap:24px!important}
+
+  /* Margin notes */
+  .margin-note,.margin-bracket{display:none}
+
+  /* Footer */
+  .page-footer{flex-wrap:wrap;gap:6px;margin-top:20px}
+  .page-footer-text{font-size:0.36rem}
+  .page-footer-logo{font-size:0.5rem}
+
+  /* Separator */
+  .page-separator{height:30px;padding-right:10px}
+  .page-tab{font-size:0.36rem;padding:3px 10px}
+
+  /* Bottom spacer for mobile nav */
+  .bottom-spacer{height:72px!important}
+}
+
+/* Extra-small phones */
+@media(max-width:380px){
+  .page-content{padding:18px 12px 18px 30px}
+  .paper-h1{font-size:2rem}
+  .paper-h2{font-size:1.5rem}
+  .timeline-entry{grid-template-columns:56px 10px 1fr;gap:0 5px}
+  .timeline-date{font-size:0.38rem}
+  .cert-row{grid-template-columns:18px 1fr auto}
 }
 </style>
 </head>
@@ -910,8 +1074,7 @@ body.c-text  #cur-ring{opacity:0}
   <div class="scroll-track"><div class="scroll-thumb"></div></div>
 </div>
 
-
-
+<!-- DESKTOP SPINE NAV -->
 <div id="nav-spine">
   <div class="spine-logo" id="spineLogo" title="Home"></div>
   <div class="spine-tabs">
@@ -926,6 +1089,18 @@ body.c-text  #cur-ring{opacity:0}
   </div>
   <div class="spine-page-counter" id="spineCounter">PG 01 / 08</div>
 </div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav id="mobile-nav" aria-label="Page navigation">
+  <div class="mnav-tab active" data-target="cover"><div class="mnav-dot"></div><span class="mnav-tab-label">Cover</span></div>
+  <div class="mnav-tab" data-target="about"><div class="mnav-dot"></div><span class="mnav-tab-label">Dossier</span></div>
+  <div class="mnav-tab" data-target="experience"><div class="mnav-dot"></div><span class="mnav-tab-label">Ops</span></div>
+  <div class="mnav-tab" data-target="arsenal"><div class="mnav-dot"></div><span class="mnav-tab-label">Arsenal</span></div>
+  <div class="mnav-tab" data-target="projects"><div class="mnav-dot"></div><span class="mnav-tab-label">Builds</span></div>
+  <div class="mnav-tab" data-target="intel"><div class="mnav-dot"></div><span class="mnav-tab-label">Intel</span></div>
+  <div class="mnav-tab" data-target="education"><div class="mnav-dot"></div><span class="mnav-tab-label">Training</span></div>
+  <div class="mnav-tab" data-target="contact"><div class="mnav-dot"></div><span class="mnav-tab-label">Contact</span></div>
+</nav>
 
 <div id="file-area">
 
@@ -1004,7 +1179,7 @@ body.c-text  #cur-ring{opacity:0}
               </div>
             </div>
 
-            <div style="display:flex;gap:12px;margin-top:28px" class="rv s7">
+            <div class="cover-cta-row rv s7" style="display:flex;gap:12px;margin-top:28px">
               <a href="#contact" class="btn-paper btn-paper-primary">Open Channel</a>
               <a href="#about" class="btn-paper btn-paper-secondary">View Full Dossier</a>
             </div>
@@ -1040,7 +1215,7 @@ body.c-text  #cur-ring{opacity:0}
 
         <h2 class="paper-h2 rv s1">Access<br><em>Granted.</em></h2>
 
-        <div style="display:grid;grid-template-columns:130px 1fr;gap:24px;margin-bottom:28px;position:relative" class="rv s2">
+        <div class="about-id-grid rv s2" style="display:grid;grid-template-columns:130px 1fr;gap:24px;margin-bottom:28px;position:relative">
           <div>
             <div class="photo-id-frame">
               <img src="assets/new.jpg" alt="Sangit Pant" loading="lazy"/>
@@ -1114,7 +1289,7 @@ body.c-text  #cur-ring{opacity:0}
 
         <div class="paper-rule rv s5"></div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" class="rv s5">
+        <div class="about-competency-grid rv s5" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div class="proj-paper-card">
             <div class="proj-paper-corner"></div>
             <div style="font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50%,0.006,95);margin-bottom:4px">01</div>
@@ -1147,7 +1322,6 @@ body.c-text  #cur-ring{opacity:0}
       </div>
     </div>
   </div>
-
 
 
   <!-- PAGE 3: EXPERIENCE -->
@@ -1334,7 +1508,6 @@ body.c-text  #cur-ring{opacity:0}
   </div>
 
 
-
   <!-- PAGE 5: PROJECTS -->
   <div class="audit-page" id="projects" data-page="5">
     <div class="page-sheet aged">
@@ -1406,7 +1579,6 @@ body.c-text  #cur-ring{opacity:0}
   </div>
 
 
-
   <!-- PAGE 6: INTEL -->
   <div class="audit-page" id="intel" data-page="6">
     <div class="page-sheet">
@@ -1445,15 +1617,15 @@ body.c-text  #cur-ring{opacity:0}
         <div class="rv s3" style="margin-top:8px">
           <div class="paper-eyebrow" style="margin-bottom:10px">Forthcoming Dispatches</div>
           <div style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(45% 0.006 95);line-height:2.2">
-            <div style="border-bottom:1px solid oklch(70% 0.005 95/0.4);padding:8px 0;display:flex;justify-content:space-between">
+            <div style="border-bottom:1px solid oklch(70% 0.005 95/0.4);padding:8px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
               <span>Dispatch No. 002 · <span class="redacted" data-secret="STRIDE in Practice: How I threat-modeled a payment gateway">████████████████████████████████████████████</span></span>
               <span style="color:oklch(45% 0.14 35)">Pending</span>
             </div>
-            <div style="border-bottom:1px solid oklch(70% 0.005 95/0.4);padding:8px 0;display:flex;justify-content:space-between">
+            <div style="border-bottom:1px solid oklch(70% 0.005 95/0.4);padding:8px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
               <span>Dispatch No. 003 · <span class="redacted" data-secret="Why your ISMS SoA is a work of fiction">█████████████████████████████</span></span>
               <span style="color:oklch(45% 0.14 35)">Pending</span>
             </div>
-            <div style="padding:8px 0;display:flex;justify-content:space-between">
+            <div style="padding:8px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">
               <span>Dispatch No. 004 · <span class="redacted" data-secret="How to limit your daily coffee intake?">████████████████████████████████████████████████</span></span>
               <span style="color:oklch(45% 0.14 35)">Pending</span>
             </div>
@@ -1466,7 +1638,6 @@ body.c-text  #cur-ring{opacity:0}
       </div>
     </div>
   </div>
-
 
 
   <!-- PAGE 7: EDUCATION -->
@@ -1536,7 +1707,6 @@ body.c-text  #cur-ring{opacity:0}
   </div>
 
 
-
   <!-- PAGE 8: CONTACT -->
   <div class="audit-page" id="contact" data-page="8">
     <div class="page-sheet aged">
@@ -1552,10 +1722,10 @@ body.c-text  #cur-ring{opacity:0}
           <div class="page-num">Page 08 of 08</div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:44px">
+        <div class="contact-two-col rv s1" style="display:grid;grid-template-columns:1fr 1.1fr;gap:44px">
           <div>
-            <h2 class="paper-h2 rv s1">Let's<br><em>Connect.</em></h2>
-            <p class="paper-body rv s2" style="margin-bottom:24px">
+            <h2 class="paper-h2" style="margin-bottom:16px">Let's<br><em>Connect.</em></h2>
+            <p class="paper-body" style="margin-bottom:24px">
               Open to GRC, IS Audit, and compliance roles.
               Need an Internal Auditor, GRC Analyst, or someone to build your security program from first principles — the channel is open.
             </p>
@@ -1625,7 +1795,7 @@ body.c-text  #cur-ring{opacity:0}
     </div>
   </div>
 
-  <div style="height:60px"></div>
+  <div class="bottom-spacer" style="height:60px"></div>
 
 </div>
 
@@ -1716,6 +1886,7 @@ if(curEl && window.matchMedia('(hover:hover)').matches){
 
 const prog=document.getElementById('prog');
 const spineTabs=document.querySelectorAll('.spine-tab');
+const mnavTabs=document.querySelectorAll('.mnav-tab');
 const spineCounter=document.getElementById('spineCounter');
 const scrollHint=document.getElementById('scrollHint');
 const footSecret=document.getElementById('footSecret');
@@ -1740,8 +1911,15 @@ function doScroll(){
     if(rect.top <= window.innerHeight*0.4) curPage=i;
   });
   spineTabs.forEach((t,i)=>t.classList.toggle('active',i===curPage));
+  mnavTabs.forEach((t,i)=>t.classList.toggle('active',i===curPage));
   if(spineCounter) spineCounter.textContent=`PG ${String(curPage+1).padStart(2,'0')} / 08`;
   if(footSecret && pct>0.97) footSecret.style.maxWidth='400px';
+
+  // Scroll active mobile nav tab into view
+  const activeTab=document.querySelector('.mnav-tab.active');
+  if(activeTab && window.innerWidth<=880){
+    activeTab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  }
 
   pages.forEach(p=>{
     const rect=p.el.getBoundingClientRect();
@@ -1780,6 +1958,7 @@ function observeAll(){
   document.querySelectorAll('.ctr').forEach(el=>co.observe(el));
 }
 
+// Desktop spine tabs
 spineTabs.forEach(tab=>{
   tab.addEventListener('click',()=>{
     const target=document.getElementById(tab.dataset.target);
@@ -1788,6 +1967,14 @@ spineTabs.forEach(tab=>{
 });
 document.getElementById('spineLogo')?.addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// Mobile bottom nav tabs
+mnavTabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const target=document.getElementById(tab.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
 });
 
 document.querySelectorAll('.btn-paper').forEach(btn=>{
@@ -1931,7 +2118,7 @@ function resetIdle(){
   clearTimeout(idleT);
   idleT=setTimeout(()=>toast(idleLines[idleIdx++%idleLines.length],'paper',4000),45000);
 }
-['mousemove','keypress','scroll','click'].forEach(ev=>document.addEventListener(ev,resetIdle,{passive:true}));
+['mousemove','keypress','scroll','click','touchstart'].forEach(ev=>document.addEventListener(ev,resetIdle,{passive:true}));
 resetIdle();
 
 const statFacts=['8 certs, 0 found redundant. Though the certification budget respectfully disagrees.','12 frameworks is 12 ways of saying "have you documented your risk treatment?"','2 platforms built. 0 GRC tools have ever been described as "fun." Fixing that.','2 years in the field. Equivalent to approximately 400 years in Excel pivot tables.'];
