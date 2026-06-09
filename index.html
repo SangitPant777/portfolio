@@ -3,1093 +3,818 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title> IS Audit. GRC. Simplified</title>
-<meta name="description" content="Sangit Pant — GRC Analyst, IS Auditor &amp; vISO. ISO 27001 Lead Auditor, SOC 2, NIST CSF, CMMC. Lalitpur, Nepal."/>
+<title>Sangit Pant · IS Audit. GRC. Simplified.</title>
+<meta name="description" content="Sangit Pant — GRC Analyst, IS Auditor & vISO. ISO 27001 Lead Auditor, SOC 2, NIST CSF, CMMC. Lalitpur, Nepal."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&family=Alumni+Sans:wght@300;400;500;600;700&family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════════
-   SANGIT PANT · NEO KINPAKU PORTFOLIO
-   Impeccable Design System × Emil Kowalski Motion
+   SANGIT PANT · CLASSIFIED AUDIT FILE
+   A scroll-driven, page-turning dossier
+   Neo Kinpaku × Emil Kowalski Motion
    ═══════════════════════════════════════════════════ */
 
-/* ─ TOKENS ─────────────────────────────────────── */
-:root{
+/* ─ TOKENS ─ */
+:root {
   --lacquer:      oklch(7% 0.006 95);
   --lacquer-deep: oklch(4% 0.004 95);
   --raised:       oklch(11% 0.006 95);
   --graphite:     oklch(15% 0.008 95);
   --graphite-2:   oklch(19% 0.008 95);
-
   --gold:         oklch(84% 0.19 80.46);
   --gold-rich:    oklch(77% 0.13 82);
   --gold-deep:    oklch(61% 0.085 78);
   --gold-pale:    oklch(86% 0.07 84);
   --gold-dim:     oklch(84% 0.19 80.46 / 0.08);
-
   --patina:       oklch(70% 0.12 188);
   --patina-pale:  oklch(82% 0.07 188);
   --patina-deep:  oklch(49% 0.08 188);
   --patina-dim:   oklch(70% 0.12 188 / 0.12);
-
   --champagne:    oklch(91% 0 0);
   --text:         oklch(88% 0 0);
   --muted:        oklch(72% 0 0);
   --faint:        oklch(62% 0 0);
   --disabled:     oklch(48% 0 0);
-
   --rule:         oklch(78% 0 0 / 0.13);
   --rule-gold:    oklch(74% 0.09 82 / 0.55);
   --rule-patina:  oklch(70% 0.12 188 / 0.3);
-
   --vermilion:    oklch(58% 0.15 35);
-
+  --paper:        oklch(94% 0.008 90);
+  --paper-aged:   oklch(90% 0.012 85);
+  --paper-shadow: oklch(70% 0.015 80);
+  --ink:          oklch(12% 0.006 95);
+  --ink-faint:    oklch(35% 0.005 95);
+  --stamp-red:    oklch(52% 0.18 22);
   --f-disp:  'Alumni Sans Pinstripe','Albert Sans',Arial,sans-serif;
   --f-word:  'Alumni Sans','Albert Sans',Arial,sans-serif;
   --f-body:  'Albert Sans','Avenir Next','Helvetica Neue',Arial,system-ui,sans-serif;
   --f-mono:  SFMono-Regular,'Roboto Mono',Consolas,monospace;
-
-  /* Emil Kowalski easing */
   --ease-out:    cubic-bezier(0.23,1,0.32,1);
   --ease-inout:  cubic-bezier(0.77,0,0.175,1);
   --ease-drawer: cubic-bezier(0.32,0.72,0,1);
-
-  --gut: clamp(20px,5vw,88px);
-  --max: 1180px;
+  --ease-page:   cubic-bezier(0.16,1,0.3,1);
 }
 
-/* ─ RESET ──────────────────────────────────────── */
+/* ─ RESET ─ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{
-  font-family:var(--f-body);
-  font-size:1rem;line-height:1.8;
-  color:var(--text);
-  background:var(--lacquer);
-  overflow-x:hidden;
-  cursor:none;
+  font-family:var(--f-body);font-size:1rem;line-height:1.8;
+  color:var(--text);background:var(--lacquer-deep);
+  overflow-x:hidden;cursor:none;
 }
-/* Only disable cursor on desktop */
 @media(hover:none){body{cursor:auto}}
 ::selection{background:var(--gold);color:var(--lacquer-deep)}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
-
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--lacquer-deep)}
 ::-webkit-scrollbar-thumb{background:var(--gold-deep);border-radius:2px}
 
-/* ─ LOADER ─────────────────────────────────────── */
-#loader{
-  position:fixed;inset:0;z-index:9000;
-  background:var(--lacquer-deep);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  transition:opacity 0.7s var(--ease-out), visibility 0.7s;
-}
-#loader.out{opacity:0;visibility:hidden;pointer-events:none}
-
-.loader-mark{
-  width:48px;height:48px;
-  background:var(--gold);
-  clip-path:polygon(0 0,100% 0,100% 38%,62% 38%,62% 100%,0 100%);
-  margin-bottom:32px;
-  opacity:0;transform:scale(0.88);
-  transition:opacity 0.5s var(--ease-out),transform 0.5s var(--ease-out);
-}
-#loader.mark-in .loader-mark{opacity:1;transform:scale(1)}
-
-.loader-bar-wrap{
-  width:200px;height:1px;
-  background:oklch(78% 0 0 / 0.12);
-  position:relative;overflow:hidden;
-}
-.loader-bar-fill{
-  position:absolute;top:0;left:0;height:100%;
-  background:linear-gradient(90deg,var(--gold-deep),var(--gold));
-  width:0%;
-  transition:width 0.05s linear;
-  box-shadow:0 0 8px oklch(84% 0.19 80.46 / 0.5);
-}
-.loader-label{
-  font-family:var(--f-mono);
-  font-size:0.56rem;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--disabled);
-  margin-top:16px;
-  height:16px;
-  overflow:hidden;
-}
-.loader-label-inner{
-  transition:transform 0.3s var(--ease-out),opacity 0.3s;
-}
-
-/* ─ CURSOR ─────────────────────────────────────── */
-#cur{
-  position:fixed;z-index:8999;pointer-events:none;
-  top:0;left:0;
-  mix-blend-mode:screen;
-}
+/* ─ CURSOR ─ */
+#cur{position:fixed;z-index:8999;pointer-events:none;top:0;left:0;mix-blend-mode:normal}
 #cur-ring{
-  position:absolute;
-  width:32px;height:32px;
-  border-radius:50%;
+  position:absolute;width:28px;height:28px;border-radius:50%;
   border:1px solid oklch(84% 0.19 80.46 / 0.5);
   transform:translate(-50%,-50%);
-  transition:width 0.28s var(--ease-out),
-             height 0.28s var(--ease-out),
-             border-color 0.28s,
-             background 0.28s;
+  transition:width 0.28s var(--ease-out),height 0.28s var(--ease-out),border-color 0.28s,background 0.28s;
   will-change:transform,width,height;
 }
 #cur-dot{
-  position:absolute;
-  width:4px;height:4px;border-radius:50%;
-  background:var(--gold);
-  transform:translate(-50%,-50%);
-  box-shadow:0 0 6px var(--gold);
-  will-change:transform;
+  position:absolute;width:4px;height:4px;border-radius:50%;
+  background:var(--gold);transform:translate(-50%,-50%);
+  box-shadow:0 0 6px var(--gold);will-change:transform;
 }
-body.c-hover #cur-ring{
-  width:56px;height:56px;
-  background:oklch(84% 0.19 80.46 / 0.04);
-  border-color:var(--gold);
-}
-body.c-click #cur-ring{
-  width:24px;height:24px;
-  border-color:var(--gold-pale);
-}
-body.c-text #cur-ring{opacity:0}
+body.c-hover #cur-ring{width:52px;height:52px;background:oklch(84% 0.19 80.46/0.05);border-color:var(--gold)}
+body.c-click #cur-ring{width:22px;height:22px}
+body.c-text  #cur-ring{opacity:0}
 
-/* ─ PROGRESS ────────────────────────────────────── */
+/* ─ PROGRESS BAR ─ */
 #prog{
-  position:fixed;top:0;left:0;height:1px;z-index:700;
+  position:fixed;top:0;left:0;height:2px;z-index:700;
   background:linear-gradient(90deg,var(--gold),var(--patina));
-  width:0%;
-  transform-origin:left;
-  box-shadow:0 0 6px oklch(84% 0.19 80.46 / 0.4);
+  width:0%;transform-origin:left;
+  box-shadow:0 0 8px oklch(84% 0.19 80.46/0.5);
   transition:width 0.08s linear;
 }
 
-/* ─ NAV ─────────────────────────────────────────── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:600;
-  padding:22px var(--gut);
-  display:flex;justify-content:space-between;align-items:center;
-  transition:background 0.5s,border-color 0.5s,padding 0.4s var(--ease-out);
-  border-bottom:1px solid transparent;
-  will-change:background,padding;
+/* ─ LOADER ─ */
+#loader{
+  position:fixed;inset:0;z-index:9000;
+  background:var(--lacquer-deep);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  transition:opacity 0.8s var(--ease-out),visibility 0.8s;
 }
-nav.solid{
-  background:oklch(4% 0.004 95 / 0.92);
-  backdrop-filter:blur(20px) saturate(160%);
-  border-bottom-color:var(--rule);
-  padding-top:15px;padding-bottom:15px;
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+.loader-file{
+  width:180px;position:relative;
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.5s var(--ease-out),transform 0.5s var(--ease-out);
 }
-.nav-logo{
-  font-family:var(--f-word);
-  font-size:0.92rem;font-weight:400;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--champagne);
-  display:flex;align-items:center;gap:10px;
-  transition:color 0.2s;
+#loader.mark-in .loader-file{opacity:1;transform:none}
+.loader-file-body{
+  background:var(--paper-aged);
+  border:1px solid oklch(70% 0.015 80 / 0.6);
+  border-radius:2px 12px 2px 2px;
+  padding:20px 16px;
   position:relative;
+  box-shadow:4px 4px 12px oklch(0% 0 0 / 0.5);
 }
-.nav-logo-glyph{
-  width:22px;height:22px;
+.loader-file-tab{
+  position:absolute;top:-1px;right:-1px;
+  width:38px;height:14px;
+  background:var(--paper-aged);
+  border:1px solid oklch(70% 0.015 80 / 0.6);
+  border-bottom:none;border-radius:0 12px 0 0;
+}
+.loader-file-lines{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.loader-file-line{height:4px;background:var(--ink-faint);border-radius:1px;opacity:0.3}
+.loader-file-line:nth-child(1){width:90%}
+.loader-file-line:nth-child(2){width:75%}
+.loader-file-line:nth-child(3){width:60%}
+.loader-stamp{
+  font-family:var(--f-mono);font-size:0.68rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--stamp-red);border:2px solid var(--stamp-red);
+  padding:3px 7px;display:inline-block;
+  transform:rotate(-12deg);opacity:0.85;border-radius:1px;
+}
+.loader-label{
+  font-family:var(--f-mono);font-size:0.52rem;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--disabled);margin-top:20px;
+  transition:opacity 0.3s,transform 0.3s var(--ease-out);
+}
+.loader-bar-wrap{width:180px;height:1px;background:oklch(78% 0 0 / 0.1);position:relative;overflow:hidden;margin-top:14px}
+.loader-bar-fill{
+  position:absolute;top:0;left:0;height:100%;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold));
+  width:0%;transition:width 0.05s linear;
+  box-shadow:0 0 8px oklch(84% 0.19 80.46/0.5);
+}
+
+/* ═══════════════════════════════════════
+   THE AUDIT FILE — CORE LAYOUT
+   ═══════════════════════════════════════ */
+
+/* The "desk" — dark surface the file sits on */
+.desk{
+  min-height:100vh;
+  background:var(--lacquer-deep);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Desk texture pattern */
+.desk::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(oklch(84% 0.19 80.46 / 0.015) 1px, transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+
+/* ═══ NAV SPINE (left side tab) ═══ */
+#nav-spine{
+  position:fixed;left:0;top:0;bottom:0;width:52px;
+  background:var(--lacquer-deep);
+  border-right:1px solid var(--rule-gold);
+  z-index:600;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:0;
+  padding:80px 0;
+}
+.spine-logo{
+  position:absolute;top:22px;left:50%;transform:translateX(-50%);
+  width:28px;height:28px;
   background:var(--gold);
   clip-path:polygon(0 0,100% 0,100% 38%,62% 38%,62% 100%,0 100%);
   transition:transform 0.4s var(--ease-out),background 0.25s;
-  flex-shrink:0;
+  cursor:pointer;
 }
-.nav-logo:hover .nav-logo-glyph{transform:rotate(90deg)}
-.nav-logo:hover{color:var(--gold)}
-
-.nav-links{display:flex;gap:36px;align-items:center}
-.nav-links a{
-  font-family:var(--f-mono);
-  font-size:0.6rem;font-weight:500;
-  letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--muted);
-  position:relative;
-  transition:color 0.2s;
-  padding-bottom:2px;
-}
-.nav-links a::after{
-  content:'';
-  position:absolute;bottom:-2px;left:0;
-  width:0;height:1px;
-  background:var(--gold);
-  transition:width 0.25s var(--ease-out);
-}
-.nav-links a:hover{color:var(--champagne)}
-.nav-links a:hover::after,
-.nav-links a.active::after{width:100%}
-.nav-links a.active{color:var(--champagne)}
-
-/* ─ SECTION WRAPPER ─────────────────────────────── */
-.w{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
-section{padding:128px 0;position:relative}
-
-.s-eye{
-  font-family:var(--f-mono);
-  font-size:0.62rem;font-weight:500;
-  letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--patina);
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:14px;
-}
-.s-eye::before{
-  content:'';
-  display:block;width:24px;height:1px;
-  background:var(--patina);flex-shrink:0;
-}
-h2.s-title{
-  font-family:var(--f-disp);
-  font-size:clamp(2.8rem,5vw,4.2rem);
-  font-weight:600;line-height:1.02;
-  color:var(--champagne);
-  margin-bottom:72px;
-  letter-spacing:-0.01em;
-}
-h2.s-title em{
-  font-weight:300;font-style:italic;
-  color:var(--gold);
-}
-
-/* ─ REVEAL SYSTEM ────────────────────────────────── */
-/* Core principle: only animate transform + opacity */
-.rv{
-  opacity:0;
-  transform:translateY(44px);
-  filter:blur(2px);
-  transition:
-    opacity 0.9s var(--ease-out),
-    transform 0.9s var(--ease-out),
-    filter 0.9s;
-  will-change:opacity,transform,filter;
-}
-.rv.clip{
-  transform:none;
-  clip-path:inset(0 0 100% 0);
-  filter:none;
-  transition:
-    opacity 0.01s,
-    clip-path 0.9s var(--ease-out);
-}
-.rv.from-left{ transform:translateX(-52px) translateY(0)}
-.rv.from-right{transform:translateX(52px) translateY(0)}
-.rv.from-scale{transform:scale(0.92);filter:blur(3px)}
-.rv.visible{
-  opacity:1;transform:none;filter:none;
-  clip-path:inset(0 0 0% 0);
-}
-/* Stagger — 40ms increments (Emil: 30–80ms) */
-.s1{transition-delay:.04s} .s2{transition-delay:.08s}
-.s3{transition-delay:.12s} .s4{transition-delay:.16s}
-.s5{transition-delay:.20s} .s6{transition-delay:.24s}
-.s7{transition-delay:.28s} .s8{transition-delay:.32s}
-.s9{transition-delay:.36s} .s10{transition-delay:.40s}
-
-/* ─ KINPAKU SEAM DIVIDER ─────────────────────────── */
-.seam{
-  height:1px;
-  background:linear-gradient(90deg,
-    transparent,
-    var(--rule-gold) 15%,
-    var(--gold) 50%,
-    var(--rule-gold) 85%,
-    transparent
-  );
-  position:relative;
-  box-shadow:0 0 10px oklch(84% 0.19 80.46 / 0.18);
-}
-.seam-node{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:5px;height:5px;
-  background:var(--gold);
-  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
-}
-
-/* ═══════════════════ HERO ═══════════════════ */
-#hero{
-  min-height:100svh;
-  display:grid;
-  grid-template-rows:1fr auto;
-  padding-top:80px;
+.spine-logo:hover{transform:translateX(-50%) rotate(90deg)}
+.spine-tabs{display:flex;flex-direction:column;gap:2px;width:100%}
+.spine-tab{
+  width:100%;height:52px;display:flex;align-items:center;justify-content:center;
+  position:relative;cursor:pointer;
+  transition:background 0.2s;
   overflow:hidden;
-  position:relative;
 }
-
-/* Parallax calibration grid — pure CSS, no canvas */
-.hero-grid{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(oklch(84% 0.19 80.46 / 0.032) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(84% 0.19 80.46 / 0.032) 1px, transparent 1px);
-  background-size:64px 64px;
-  /* JS will apply parallax via transform */
-  will-change:transform;
+.spine-tab::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;
+  width:2px;background:var(--gold);
+  transform:scaleY(0);transform-origin:center;
+  transition:transform 0.25s var(--ease-out);
 }
-.hero-grid-fine{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(oklch(84% 0.19 80.46 / 0.016) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(84% 0.19 80.46 / 0.016) 1px, transparent 1px);
-  background-size:16px 16px;
-  will-change:transform;
-}
-/* Radial vignette over grid */
-.hero-grid::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 30%,var(--lacquer) 100%);
-  pointer-events:none;
-}
-/* Calibration arcs top-left */
-.hero-arcs{
-  position:absolute;left:clamp(16px,6vw,80px);top:100px;
-  width:320px;height:320px;
-  pointer-events:none;opacity:0.06;
-  will-change:transform;
-}
-
-/* Vertical measurement rail */
-.hero-rail{
-  position:absolute;right:var(--gut);top:80px;bottom:0;
-  width:1px;
-  background:linear-gradient(to bottom,transparent,var(--rule) 15%,var(--rule) 85%,transparent);
-  display:flex;flex-direction:column;align-items:center;
-  gap:0;
-}
-.hero-rail-coord{
-  font-family:var(--f-mono);font-size:0.46rem;
-  letter-spacing:0.18em;color:var(--disabled);
+.spine-tab:hover{background:var(--gold-dim)}
+.spine-tab.active{background:oklch(84% 0.19 80.46/0.07)}
+.spine-tab.active::after{transform:scaleY(1)}
+.spine-tab-label{
+  font-family:var(--f-mono);font-size:0.36rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--disabled);
   writing-mode:vertical-rl;transform:rotate(180deg);
-  position:absolute;top:50%;margin-top:-40px;
+  white-space:nowrap;transition:color 0.2s;
 }
-.hero-rail-tick{
-  position:absolute;
-  width:6px;height:1px;
-  background:var(--rule-gold);
-  right:0;
+.spine-tab:hover .spine-tab-label,
+.spine-tab.active .spine-tab-label{color:var(--gold)}
+.spine-page-counter{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;
+  color:var(--disabled);text-align:center;white-space:nowrap;
+  writing-mode:vertical-rl;
 }
 
-/* Hero content */
-.hero-inner{
-  display:flex;flex-direction:column;
-  justify-content:center;
-  padding:0 var(--gut);
-  max-width:var(--max);margin:0 auto;width:100%;
-  padding-bottom:60px;
-  position:relative;z-index:2;
+/* ═══ MAIN FILE AREA ═══ */
+#file-area{
+  margin-left:52px;
+  min-height:100vh;
+  position:relative;
+  perspective:1200px;
+  perspective-origin:50% 40%;
 }
-.hero-tag{
-  font-family:var(--f-mono);
-  font-size:0.62rem;font-weight:500;
-  letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--patina);
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:28px;
-  opacity:0;/* animated in */
-}
-.hero-tag-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--patina);
-  box-shadow:0 0 8px var(--patina);
-  animation:pulse 2.6s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.75)}}
 
-/* Name — clip-path char reveal */
-.hero-name{
-  font-family:var(--f-disp);
-  font-size:clamp(4.5rem,11.5vw,10.5rem);
-  font-weight:300;line-height:0.95;
-  letter-spacing:-0.02em;
-  color:var(--champagne);
-  margin-bottom:6px;
+/* ═══ PAGE COMPONENT ═══ */
+.audit-page{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:80px 0 60px;
   overflow:hidden;
 }
-.hero-name-line{overflow:hidden;display:block}
-.hero-name-word{
-  display:inline-block;
-  transform:translateY(110%);
-  transition:transform 1.1s var(--ease-out);
-  will-change:transform;
-}
-.hero-name-word.gold{color:var(--gold)}
 
-/* Subtitle roles */
-.hero-roles{
-  font-family:var(--f-mono);
-  font-size:0.7rem;font-weight:500;
-  letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--muted);
-  display:flex;gap:14px;flex-wrap:wrap;align-items:center;
-  margin-bottom:44px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 0.8s var(--ease-out) 0.6s,transform 0.8s var(--ease-out) 0.6s;
-}
-.hero-roles.in{opacity:1;transform:none}
-.hero-sep{color:var(--gold-deep);opacity:0.7}
-
-/* Hero desc */
-.hero-desc{
-  font-size:1.02rem;line-height:1.85;
-  color:var(--muted);max-width:520px;
-  margin-bottom:48px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 0.8s var(--ease-out) 0.78s,transform 0.8s var(--ease-out) 0.78s;
-}
-.hero-desc.in{opacity:1;transform:none}
-.hero-desc strong{color:var(--champagne);font-weight:500}
-
-/* CTAs */
-.hero-ctas{
-  display:flex;gap:12px;flex-wrap:wrap;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 0.8s var(--ease-out) 0.94s,transform 0.8s var(--ease-out) 0.94s;
-}
-.hero-ctas.in{opacity:1;transform:none}
-
-/* Buttons — Emil: scale(0.97) on active, no ease-in */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  height:52px;padding:0 32px;
-  font-family:var(--f-body);font-size:0.9rem;font-weight:600;
-  border-radius:2px;border:none;
-  transition:
-    background 0.22s,
-    transform 0.14s var(--ease-out),
-    box-shadow 0.22s,
-    border-color 0.22s;
-  position:relative;overflow:hidden;
-  will-change:transform;
-}
-.btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(110deg,transparent 35%,oklch(100% 0 0 / 0.13) 50%,transparent 65%);
-  transform:translateX(-100%);
-  transition:transform 0.5s;
-}
-.btn:hover::before{transform:translateX(100%)}
-.btn:active{transform:scale(0.97)}
-
-.btn-primary{
-  background:var(--gold);color:var(--lacquer-deep);
-}
-.btn-primary:hover{
-  background:var(--gold-pale);
-  box-shadow:0 18px 48px oklch(2% 0.004 95 / 0.5);
-}
-.btn-secondary{
-  background:transparent;color:var(--gold);
-  border:1px solid var(--rule-gold);
-}
-.btn-secondary:hover{
-  background:var(--gold-dim);
-  border-color:var(--gold);
+/* The paper sheet */
+.page-sheet{
+  width:min(860px, calc(100vw - 52px - 48px));
+  max-width:860px;
+  background:var(--paper);
+  border-radius:2px;
+  box-shadow:
+    0 2px 4px oklch(0% 0 0 / 0.3),
+    0 8px 24px oklch(0% 0 0 / 0.4),
+    0 32px 80px oklch(0% 0 0 / 0.5),
+    inset 0 1px 0 oklch(100% 0 0 / 0.6);
+  position:relative;
+  transform-origin:top center;
+  will-change:transform,opacity;
+  overflow:hidden;
+  /* Paper aging — subtle yellow tint handled per page */
 }
 
-/* Scroll cue */
-.hero-scroll-cue{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  opacity:0;
-  transition:opacity 0.8s var(--ease-out) 1.4s;
-}
-.hero-scroll-cue.in{opacity:1}
-.scroll-track{
-  width:1px;height:48px;background:var(--rule);
-  position:relative;overflow:hidden;
-}
-.scroll-thumb{
-  position:absolute;top:-100%;left:0;
-  width:100%;height:50%;
-  background:linear-gradient(to bottom,transparent,var(--gold));
-  animation:scrollDown 1.8s ease-in-out infinite;
-}
-@keyframes scrollDown{
-  0%{top:-50%}
-  100%{top:100%}
-}
-.scroll-word{
-  font-family:var(--f-mono);font-size:0.44rem;
-  letter-spacing:0.24em;color:var(--disabled);text-transform:uppercase;
-}
-
-/* Stats band */
-.stats-band{
-  border-top:1px solid var(--rule);
-  display:grid;grid-template-columns:repeat(4,1fr);
-  position:relative;z-index:2;
-}
-.stat-cell{
-  padding:30px 18px;text-align:center;
-  border-right:1px solid var(--rule);
-  position:relative;overflow:hidden;
-  transition:background 0.3s;
-}
-.stat-cell:last-child{border-right:none}
-.stat-cell::after{
+/* Hole punch marks */
+.page-sheet::before{
   content:'';
-  position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:var(--gold);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.4s var(--ease-out);
+  position:absolute;left:-1px;top:0;bottom:0;
+  width:36px;
+  background:var(--paper-aged);
+  border-right:1px solid oklch(70% 0.015 80 / 0.35);
+  pointer-events:none;z-index:1;
 }
-.stat-cell:hover{background:var(--gold-dim)}
-.stat-cell:hover::after{transform:scaleX(1)}
-.stat-num{
-  font-family:var(--f-disp);font-size:2.8rem;
-  font-weight:300;color:var(--champagne);
-  line-height:1;margin-bottom:5px;
-  display:flex;align-items:flex-start;justify-content:center;
+/* Punch holes */
+.punch-holes{
+  position:absolute;left:0;top:0;bottom:0;width:36px;
+  display:flex;flex-direction:column;justify-content:space-around;
+  padding:40px 0;z-index:2;pointer-events:none;
 }
-.stat-sup{
-  font-family:var(--f-mono);font-size:0.85rem;
-  color:var(--gold);margin-top:5px;font-weight:500;
-}
-.stat-label{
-  font-family:var(--f-mono);font-size:0.52rem;
-  letter-spacing:0.2em;text-transform:uppercase;color:var(--disabled);
-}
-
-/* ═══════════════════ ABOUT ═══════════════════ */
-#about{background:var(--lacquer)}
-
-.about-grid{
-  display:grid;grid-template-columns:300px 1fr;
-  gap:80px;align-items:start;
-}
-
-/* ID Card */
-.id-card{
-  background:var(--raised);
-  border:1px solid var(--rule);border-radius:3px;
-  overflow:hidden;position:relative;
-  transition:border-color 0.35s;
-}
-.id-card:hover{border-color:var(--rule-gold)}
-.id-card-top{
-  background:linear-gradient(135deg,oklch(84% 0.19 80.46 / 0.10),oklch(84% 0.19 80.46 / 0.03));
-  padding:10px 16px;border-bottom:1px solid var(--rule);
-  display:flex;justify-content:space-between;align-items:center;
-}
-.id-card-label{
-  font-family:var(--f-mono);font-size:0.52rem;
-  letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);
-}
-.id-card-status{
-  font-family:var(--f-mono);font-size:0.46rem;
-  color:var(--patina);letter-spacing:0.1em;
-  display:flex;align-items:center;gap:5px;
-}
-.id-card-status::before{
-  content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--patina);
-  box-shadow:0 0 6px oklch(70% 0.12 188 / 0.6);
-  animation:pulse 2s ease-in-out infinite;
-}
-.id-body{padding:28px}
-
-/* Photo */
-.photo-wrap{
-  width:116px;height:116px;
-  margin:0 auto 22px;
-  position:relative;
-}
-.photo-wrap img{
-  width:100%;height:100%;border-radius:50%;
-  object-fit:cover;object-position:center top;
-  border:2px solid var(--rule);
-  transition:border-color 0.3s;
-}
-.ring-1,.ring-2{
-  position:absolute;border-radius:50%;
-  border:1px solid transparent;
-}
-.ring-1{
-  inset:-6px;
-  border-top-color:var(--gold);
-  animation:spin 5s linear infinite;
-}
-.ring-2{
-  inset:-12px;
-  border-bottom-color:oklch(84% 0.19 80.46 / 0.3);
-  animation:spin 8s linear infinite reverse;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.photo-wrap:hover .ring-1{
-  border-top-color:var(--patina);
-  animation-duration:1.5s;
-}
-.photo-wrap:hover img{border-color:oklch(84% 0.19 80.46 / 0.5)}
-
-.id-name{
-  font-family:var(--f-word);font-size:1.15rem;font-weight:500;
-  color:var(--champagne);text-align:center;margin-bottom:2px;
-}
-.id-role{
-  font-family:var(--f-mono);font-size:0.5rem;
-  letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--gold);text-align:center;margin-bottom:22px;
-}
-.id-field{margin-bottom:11px}
-.id-key{
-  font-family:var(--f-mono);font-size:0.44rem;
-  letter-spacing:0.16em;text-transform:uppercase;color:var(--disabled);margin-bottom:2px;
-}
-.id-val{font-size:0.8rem;color:var(--text)}
-.id-val a{color:var(--gold);transition:color 0.2s}
-.id-val a:hover{color:var(--gold-pale)}
-
-/* Tags */
-.fw-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:18px}
-.fw-tag{
-  font-family:var(--f-mono);font-size:0.42rem;
-  padding:3px 7px;letter-spacing:0.06em;
-  border:1px solid var(--rule);color:var(--faint);
-  text-transform:uppercase;border-radius:2px;
-  transition:border-color 0.2s,color 0.2s,background 0.2s;
-  cursor:default;
-}
-.fw-tag:hover{border-color:var(--rule-gold);color:var(--gold);background:var(--gold-dim)}
-
-/* About text */
-.about-prose p{
-  font-size:1.02rem;color:var(--text);line-height:1.85;margin-bottom:22px;
-}
-.about-prose strong{color:var(--champagne);font-weight:500}
-.about-prose em{color:var(--gold);font-style:italic}
-
-/* Service tiles — bento */
-.svc-bento{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1px;margin-top:44px;
-  background:var(--rule);
-  border:1px solid var(--rule);border-radius:3px;overflow:hidden;
-}
-.svc-tile{
-  background:var(--raised);padding:24px 20px;
-  position:relative;overflow:hidden;
-  transition:background 0.25s;
-}
-.svc-tile-bar{
-  position:absolute;top:0;left:0;
-  width:0;height:2px;
-  background:var(--gold);
-  transition:width 0.45s var(--ease-out);
-}
-.svc-tile:hover .svc-tile-bar{width:100%}
-.svc-tile:hover{background:oklch(84% 0.19 80.46 / 0.03)}
-.svc-n{
-  font-family:var(--f-mono);font-size:0.42rem;
-  letter-spacing:0.16em;color:var(--disabled);margin-bottom:6px;text-transform:uppercase;
-}
-.svc-title{
-  font-family:var(--f-body);font-size:0.88rem;font-weight:600;
-  color:var(--champagne);margin-bottom:6px;
-}
-.svc-desc{font-size:0.8rem;color:var(--muted);line-height:1.65}
-
-/* ═══════════════════ EXPERIENCE ═══════════════════ */
-#experience{background:var(--lacquer-deep)}
-
-/* SVG timeline line — drawn on scroll */
-.timeline-wrap{position:relative}
-.timeline-svg{
-  position:absolute;left:145px;top:0;bottom:0;
-  width:2px;overflow:visible;pointer-events:none;
-}
-.timeline-path{
-  stroke:var(--rule-gold);stroke-width:1;fill:none;
-  stroke-dasharray:1000;stroke-dashoffset:1000;
-  transition:stroke-dashoffset 1.2s var(--ease-out);
-}
-.timeline-path.drawn{stroke-dashoffset:0}
-
-.ops-entry{
-  display:grid;grid-template-columns:145px 1fr;
-  padding:52px 0;
-  border-bottom:1px solid var(--rule);
-  position:relative;
-}
-.ops-entry:first-child{border-top:1px solid var(--rule)}
-
-/* Node */
-.ops-node{
-  position:absolute;left:138px;top:60px;
-  width:15px;height:15px;border-radius:50%;
+.punch-hole{
+  width:16px;height:16px;border-radius:50%;
   background:var(--lacquer-deep);
-  border:1.5px solid var(--gold-deep);
-  z-index:1;
-  transition:background 0.25s var(--ease-out),
-             border-color 0.25s,
-             box-shadow 0.25s,
-             transform 0.3s var(--ease-out);
-}
-.ops-entry:hover .ops-node{
-  background:var(--gold);border-color:var(--gold);
-  box-shadow:0 0 20px oklch(84% 0.19 80.46 / 0.6);
-  transform:scale(1.15);
+  box-shadow:inset 0 1px 3px oklch(0% 0 0 / 0.7);
+  margin:auto;
 }
 
-.ops-meta{padding-right:30px;padding-top:2px}
-.ops-date{
-  font-family:var(--f-mono);font-size:0.55rem;
-  color:var(--gold);letter-spacing:0.06em;line-height:1.7;margin-bottom:6px;
-}
-.ops-org{font-size:0.75rem;color:var(--muted);line-height:1.65}
-.ops-badge{
-  display:inline-block;margin-top:10px;
-  padding:2px 8px;border-radius:2px;
-  font-family:var(--f-mono);font-size:0.42rem;
-  letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--patina);border:1px solid var(--rule-patina);
+/* Page content area */
+.page-content{
+  padding:52px 52px 52px 68px;
+  position:relative;z-index:2;
+  color:var(--ink);
 }
 
-.ops-content{padding-left:52px}
-.ops-role{
-  font-family:var(--f-disp);font-size:1.9rem;font-weight:600;
-  color:var(--champagne);margin-bottom:20px;line-height:1.05;
+/* ─ PAGE HEADER BAR ─ */
+.page-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:36px;
+  padding-bottom:16px;
+  border-bottom:2px solid var(--ink);
+  position:relative;
 }
-.ops-role em{font-weight:300;font-style:italic;color:var(--gold)}
-.ops-points{list-style:none}
-.ops-points li{
-  font-size:0.88rem;color:var(--text);line-height:1.85;
-  padding-left:18px;position:relative;margin-bottom:4px;
+.page-header::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:oklch(40% 0.005 95 / 0.5);
 }
-.ops-points li::before{
-  content:'›';position:absolute;left:0;
-  font-family:var(--f-mono);color:var(--gold-deep);
-  transition:color 0.2s,transform 0.2s var(--ease-out);
-}
-.ops-entry:hover .ops-points li::before{
-  color:var(--gold);transform:translateX(4px);
-}
-
-/* ═══════════════════ CERTIFICATIONS ═══════════════════ */
-#arsenal{background:var(--lacquer)}
-
-.cert-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-}
-.cert-card{
-  background:var(--raised);border:1px solid var(--rule);
-  padding:20px 18px;border-radius:2px;
-  display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start;
-  position:relative;overflow:hidden;
-  transition:
-    border-color 0.25s,
-    transform 0.28s var(--ease-out),
-    box-shadow 0.28s;
-  cursor:default;
-  /* Magnetic: JS handles micro-translate */
-  will-change:transform;
-}
-.cert-card-bar{
-  position:absolute;top:0;left:0;
-  width:2px;height:0;
-  background:linear-gradient(to bottom,var(--gold),var(--patina));
-  transition:height 0.38s var(--ease-out);
-}
-.cert-card:hover .cert-card-bar{height:100%}
-.cert-card:hover{
-  border-color:var(--rule-gold);
-  transform:translateY(-2px);
-  box-shadow:0 10px 36px oklch(2% 0.004 95 / 0.45);
-}
-.cert-num{
-  font-family:var(--f-mono);font-size:0.72rem;font-weight:500;
-  color:var(--gold-deep);padding-top:1px;
-}
-.cert-issuer{
-  font-family:var(--f-mono);font-size:0.46rem;
-  letter-spacing:0.15em;color:var(--disabled);text-transform:uppercase;margin-bottom:3px;
-}
-.cert-name{font-size:0.85rem;color:var(--text);font-weight:500;margin-bottom:3px}
-.cert-yr{font-family:var(--f-mono);font-size:0.5rem;color:var(--patina);letter-spacing:0.08em;cursor:pointer}
-
-/* ═══════════════════ PROJECTS ═══════════════════ */
-#projects{background:var(--lacquer-deep)}
-
-.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.proj-card{
-  background:var(--raised);border:1px solid var(--rule);
-  padding:56px 48px;
-  position:relative;overflow:hidden;
-  transition:border-color 0.35s,background 0.35s;
-  cursor:default;
-  /* JS: subtle mouse-tracking tilt */
-  will-change:transform;
-}
-.proj-card:hover{
-  border-color:oklch(84% 0.19 80.46 / 0.28);
-  background:oklch(84% 0.19 80.46 / 0.02);
-}
-/* Top-right calibration corner */
-.proj-corner{
-  position:absolute;top:22px;right:22px;
-  width:20px;height:20px;
-  border-top:1px solid var(--rule-gold);
-  border-right:1px solid var(--rule-gold);
-  opacity:0.5;
-  transition:opacity 0.3s,transform 0.4s var(--ease-out);
-}
-.proj-card:hover .proj-corner{
-  opacity:1;transform:translate(4px,-4px);
-}
-.proj-stamp{
-  position:absolute;top:26px;right:48px;
-  font-family:var(--f-mono);font-size:0.42rem;font-weight:500;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--vermilion);border:1px solid oklch(58% 0.15 35 / 0.28);
-  padding:2px 7px;transform:rotate(1.5deg);border-radius:1px;
-  opacity:0.7;transition:opacity 0.25s;
-}
-.proj-card:hover .proj-stamp{opacity:1}
-.proj-idx{
-  font-family:var(--f-mono);font-size:0.5rem;
-  letter-spacing:0.2em;color:var(--disabled);margin-bottom:20px;
-}
-.proj-title{
-  font-family:var(--f-disp);font-size:3rem;font-weight:600;
-  color:var(--champagne);line-height:0.9;margin-bottom:10px;
-  letter-spacing:-0.01em;
-}
-.proj-sub{
-  font-family:var(--f-mono);font-size:0.54rem;
-  letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--patina);margin-bottom:18px;
-}
-.proj-desc{font-size:0.88rem;color:var(--muted);line-height:1.82;margin-bottom:24px}
-.proj-tags{display:flex;flex-wrap:wrap;gap:5px}
-.proj-tag{
-  font-family:var(--f-mono);font-size:0.44rem;
-  padding:3px 8px;border:1px solid var(--rule);
-  color:var(--disabled);text-transform:uppercase;border-radius:2px;
-  transition:border-color 0.2s,color 0.2s;
-}
-.proj-card:hover .proj-tag{border-color:var(--rule-gold);color:var(--muted)}
-/* Ghost watermark */
-.proj-ghost{
-  position:absolute;bottom:-24px;right:-4px;
-  font-family:var(--f-disp);font-size:9rem;font-weight:300;
-  color:oklch(84% 0.19 80.46 / 0.022);pointer-events:none;line-height:1;
-  transition:transform 0.65s var(--ease-out),color 0.45s;
-}
-.proj-card:hover .proj-ghost{
-  transform:translateY(-10px) scale(1.05);
-  color:oklch(84% 0.19 80.46 / 0.065);
-}
-
-/* ═══════════════════ INTEL / BLOG ═══════════════════ */
-#intel{background:var(--lacquer)}
-
-.intel-card{
-  display:grid;grid-template-columns:1fr 1.45fr;
-  border:1px solid var(--rule);border-radius:3px;
-  overflow:hidden;min-height:290px;
-  transition:
-    border-color 0.35s,
-    transform 0.38s var(--ease-out),
-    box-shadow 0.38s;
-  text-decoration:none;
-  will-change:transform;
-}
-.intel-card:hover{
-  border-color:oklch(84% 0.19 80.46 / 0.3);
-  transform:translateY(-5px);
-  box-shadow:0 28px 72px oklch(2% 0.004 95 / 0.55);
-}
-.intel-left{
-  background:linear-gradient(148deg,oklch(84% 0.19 80.46 / 0.12),oklch(84% 0.19 80.46 / 0.03));
-  padding:48px 44px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  position:relative;overflow:hidden;
-}
-/* Sweep shimmer */
-.intel-left::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(45deg,transparent 35%,oklch(100% 0 0 / 0.04) 50%,transparent 65%);
-  transform:translateX(-100%);
-  transition:transform 0.75s var(--ease-inout);
-}
-.intel-card:hover .intel-left::before{transform:translateX(100%)}
-.intel-issue{
-  font-family:var(--f-mono);font-size:0.5rem;
-  letter-spacing:0.18em;text-transform:uppercase;color:var(--disabled);margin-bottom:14px;
-}
-.intel-title{
-  font-family:var(--f-disp);font-size:1.65rem;font-weight:600;
-  color:var(--champagne);line-height:1.08;
-}
-.intel-title em{font-weight:300;font-style:italic;color:var(--gold)}
-.intel-author{
-  font-family:var(--f-mono);font-size:0.48rem;
-  letter-spacing:0.14em;color:var(--disabled);text-transform:uppercase;
-}
-.intel-right{
-  background:var(--raised);padding:48px 44px;
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.intel-tag{
-  font-family:var(--f-mono);font-size:0.48rem;
-  letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--patina);border:1px solid var(--rule-patina);
-  padding:3px 9px;display:inline-block;margin-bottom:20px;border-radius:2px;
-}
-.intel-excerpt{
-  font-size:0.95rem;color:var(--text);line-height:1.85;flex:1;margin-bottom:26px;
-}
-.intel-excerpt strong{color:var(--champagne);font-weight:500}
-.intel-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--f-mono);font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--lacquer-deep);background:var(--gold);
-  padding:11px 22px;border-radius:2px;align-self:flex-start;
-  transition:background 0.2s,transform 0.14s var(--ease-out);
-}
-.intel-cta:hover{background:var(--gold-pale)}
-.intel-cta:active{transform:scale(0.97)}
-
-/* ═══════════════════ EDUCATION ═══════════════════ */
-#education{background:var(--lacquer-deep)}
-
-.edu-card{
-  border:1px solid var(--rule);border-radius:3px;
-  padding:56px 60px;
-  display:flex;justify-content:space-between;align-items:center;
-  gap:40px;flex-wrap:wrap;
-  background:var(--raised);position:relative;overflow:hidden;
-  transition:border-color 0.35s;
-}
-.edu-card:hover{border-color:oklch(84% 0.19 80.46 / 0.22)}
-.edu-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,oklch(84% 0.19 80.46 / 0.04),transparent 55%);
-  opacity:0;transition:opacity 0.5s;
-}
-.edu-card:hover::before{opacity:1}
-/* Corner bracket */
-.edu-card::after{
-  content:'';position:absolute;bottom:22px;left:22px;
-  width:28px;height:28px;
-  border-left:1px solid var(--rule-gold);border-bottom:1px solid var(--rule-gold);
-  opacity:0.55;
-}
-.edu-degree{
-  font-family:var(--f-disp);font-size:2.1rem;font-weight:600;
-  color:var(--champagne);margin-bottom:6px;
-}
-.edu-sub{
-  font-family:var(--f-mono);font-size:0.56rem;
-  letter-spacing:0.12em;text-transform:uppercase;margin-bottom:3px;
-}
-.edu-sub.gold{color:var(--gold)}
-.edu-sub.patina{color:var(--patina);cursor:pointer}
-.edu-school{font-size:0.9rem;color:var(--muted);margin-top:12px}
-.edu-year{
-  font-family:var(--f-disp);font-size:4.2rem;font-weight:300;
-  color:var(--champagne);opacity:0.22;white-space:nowrap;line-height:1;
-  transition:opacity 0.4s;
-}
-.edu-card:hover .edu-year{opacity:0.48}
-
-/* ═══════════════════ CONTACT ═══════════════════ */
-#contact{background:var(--lacquer)}
-
-.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:88px}
-.contact-head{
-  font-family:var(--f-disp);
-  font-size:clamp(3rem,6.5vw,5.5rem);font-weight:300;
-  color:var(--champagne);line-height:0.92;
-  letter-spacing:-0.01em;margin-bottom:22px;
-}
-.contact-head em{font-weight:600;font-style:italic;color:var(--gold)}
-.contact-sub{font-size:1rem;color:var(--muted);line-height:1.82;margin-bottom:44px}
-.contact-item{
-  display:flex;align-items:center;gap:14px;
-  padding:13px 0;border-bottom:1px solid var(--rule);
-  text-decoration:none;
-  transition:padding-left 0.25s var(--ease-out);
-}
-.contact-item:first-of-type{border-top:1px solid var(--rule)}
-.contact-item:hover{padding-left:8px}
-.c-icon{
-  width:36px;height:36px;flex-shrink:0;
-  border:1px solid var(--rule);border-radius:2px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.7rem;color:var(--gold);
-  transition:border-color 0.2s,background 0.2s;
-}
-.contact-item:hover .c-icon{border-color:var(--rule-gold);background:var(--gold-dim)}
-.c-key{
-  font-family:var(--f-mono);font-size:0.44rem;
-  letter-spacing:0.16em;text-transform:uppercase;color:var(--disabled);margin-bottom:2px;
-}
-.c-val{font-size:0.85rem;color:var(--text)}
-
-/* Form */
-.form-stack{display:flex;flex-direction:column;gap:14px}
-.fgroup label{
+.page-doc-id{
   font-family:var(--f-mono);font-size:0.52rem;
   letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--gold-deep);display:block;margin-bottom:6px;
+  color:var(--ink-faint);
 }
-.fgroup input,.fgroup textarea{
-  width:100%;
-  background:var(--lacquer-deep);border:1px solid var(--rule);
-  padding:13px 15px;color:var(--champagne);
-  font-family:var(--f-mono);font-size:0.78rem;
-  outline:none;resize:none;border-radius:3px;
-  transition:
-    border-color 0.22s,
-    box-shadow 0.22s,
-    background 0.22s;
-}
-.fgroup input:focus,.fgroup textarea:focus{
-  border-color:var(--rule-gold);
-  box-shadow:0 0 0 3px oklch(84% 0.19 80.46 / 0.08);
-  background:oklch(84% 0.19 80.46 / 0.022);
-}
-.fgroup input::placeholder,.fgroup textarea::placeholder{color:var(--disabled)}
-
-/* ═══════════════════ FOOTER ═══════════════════ */
-footer{
-  background:var(--lacquer-deep);border-top:1px solid var(--rule);padding:22px 0;
-}
-.foot-inner{
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
-  font-family:var(--f-mono);font-size:0.5rem;letter-spacing:0.12em;color:var(--disabled);
-}
-.foot-inner .hl{color:var(--gold)}
-.foot-secret{
-  overflow:hidden;max-width:0;display:inline-block;
-  white-space:nowrap;
-  transition:max-width 1.3s var(--ease-out);
-  color:var(--patina);vertical-align:middle;
-}
-footer:hover .foot-secret{max-width:400px}
-
-/* Hidden terminal */
-#hterminal{
-  background:var(--graphite);border-top:1px solid var(--rule);
-  padding:0 var(--gut);
+.page-doc-id strong{color:var(--ink);font-weight:700}
+.page-classification{
   font-family:var(--f-mono);font-size:0.58rem;
-  color:var(--patina);line-height:2;overflow:hidden;
-  max-height:0;
-  transition:max-height 0.5s var(--ease-drawer),padding 0.5s;
+  font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  padding:3px 10px;border:2px solid var(--stamp-red);
+  color:var(--stamp-red);border-radius:1px;
+  transform:rotate(0.5deg);
 }
-#hterminal.show{max-height:110px;padding:18px var(--gut)}
-.t-cmd{color:var(--gold)}
-.t-cmt{color:var(--disabled)}
-.t-err{color:var(--vermilion)}
+.page-num{
+  font-family:var(--f-mono);font-size:0.52rem;
+  letter-spacing:0.12em;color:var(--ink-faint);
+  text-align:right;
+}
 
-/* ═══════════════════ TOASTS ═══════════════════ */
+/* ─ PAGE FOOTER BAR ─ */
+.page-footer{
+  margin-top:32px;padding-top:14px;
+  border-top:1px solid oklch(40% 0.005 95 / 0.3);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.page-footer-text{
+  font-family:var(--f-mono);font-size:0.44rem;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:oklch(55% 0.005 95);
+}
+.page-footer-logo{
+  font-family:var(--f-word);font-size:0.6rem;font-weight:600;
+  letter-spacing:0.2em;color:oklch(55% 0.005 95);
+}
+
+/* ─ SECTION HEADING (on paper) ─ */
+.paper-eyebrow{
+  font-family:var(--f-mono);font-size:0.52rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:oklch(45% 0.006 95);
+  display:flex;align-items:center;gap:8px;margin-bottom:10px;
+}
+.paper-eyebrow::before{content:'';display:block;width:20px;height:1px;background:oklch(45% 0.006 95)}
+.paper-h1{
+  font-family:var(--f-disp);
+  font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:300;line-height:0.95;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.paper-h1 .accent{
+  color:var(--stamp-red);font-weight:600;
+}
+.paper-h2{
+  font-family:var(--f-disp);
+  font-size:clamp(2rem,4.5vw,3.4rem);
+  font-weight:600;line-height:1.02;
+  color:var(--ink);margin-bottom:24px;
+}
+.paper-h2 em{font-weight:300;font-style:italic;color:oklch(42% 0.09 78)}
+.paper-body{
+  font-size:0.92rem;line-height:1.82;
+  color:oklch(25% 0.005 95);
+  max-width:600px;
+}
+.paper-body strong{color:var(--ink);font-weight:600}
+.paper-body em{font-style:italic;color:oklch(42% 0.09 78)}
+
+/* ─ FIELD FORM ROWS (like audit forms) ─ */
+.form-row{
+  display:grid;grid-template-columns:160px 1fr;
+  border-bottom:1px solid oklch(70% 0.005 95 / 0.5);
+  margin-bottom:0;
+}
+.form-row:first-child{border-top:1px solid oklch(70% 0.005 95 / 0.5)}
+.form-label{
+  font-family:var(--f-mono);font-size:0.5rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:oklch(45% 0.006 95);
+  padding:9px 0;background:oklch(88% 0.01 85 / 0.4);
+  padding-left:8px;border-right:1px solid oklch(70% 0.005 95 / 0.5);
+  display:flex;align-items:center;
+}
+.form-value{
+  font-size:0.85rem;color:var(--ink);
+  padding:9px 12px;display:flex;align-items:center;
+}
+.form-value a{color:oklch(42% 0.09 78);text-decoration:underline}
+
+/* ─ TAGS ─ */
+.paper-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.paper-tag{
+  font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.08em;
+  text-transform:uppercase;
+  border:1px solid oklch(50% 0.005 95 / 0.4);
+  color:oklch(35% 0.005 95);
+  padding:3px 8px;border-radius:1px;
+  cursor:default;
+  transition:border-color 0.2s,color 0.2s,background 0.2s;
+}
+.paper-tag:hover{
+  border-color:oklch(42% 0.09 78);color:oklch(32% 0.09 78);
+  background:oklch(88% 0.04 78 / 0.3);
+}
+
+/* ─ COVER PAGE ─ */
+.cover-stamp-wrap{
+  position:absolute;top:30px;right:30px;
+  transform:rotate(8deg);
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.cover-stamp-wrap.visible{opacity:1}
+.cover-stamp{
+  font-family:var(--f-mono);font-size:1.1rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  padding:8px 14px;border:3px solid var(--stamp-red);
+  color:var(--stamp-red);border-radius:1px;
+  text-align:center;line-height:1.2;
+  box-shadow:inset 0 0 0 1px oklch(52% 0.18 22 / 0.2);
+}
+.cover-barcode{
+  position:absolute;bottom:20px;right:30px;
+  display:flex;gap:2px;align-items:flex-end;height:36px;
+  opacity:0.25;
+}
+.cover-barcode span{
+  display:block;background:var(--ink);
+  width:2px;
+}
+.cover-seal{
+  position:absolute;bottom:20px;left:70px;
+  width:80px;height:80px;
+  border-radius:50%;
+  border:2px solid oklch(50% 0.09 78 / 0.4);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:0.32rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:oklch(45% 0.09 78 / 0.5);
+  text-align:center;line-height:1.6;
+}
+.cover-seal::before{
+  content:'';position:absolute;inset:4px;
+  border-radius:50%;border:1px solid oklch(50% 0.09 78 / 0.25);
+}
+
+/* ─ DIVIDERS ─ */
+.paper-rule{height:1px;background:oklch(70% 0.005 95 / 0.5);margin:20px 0}
+.paper-rule-double{
+  height:3px;margin:24px 0;position:relative;
+  background:transparent;
+}
+.paper-rule-double::before,
+.paper-rule-double::after{
+  content:'';position:absolute;left:0;right:0;height:1px;
+  background:oklch(40% 0.005 95 / 0.5);
+}
+.paper-rule-double::before{top:0}
+.paper-rule-double::after{bottom:0}
+
+/* ─ PHOTO ID ─ */
+.photo-id-frame{
+  width:100px;height:120px;border:2px solid oklch(50% 0.005 95 / 0.5);
+  position:relative;overflow:hidden;
+  background:oklch(85% 0.005 95);
+  flex-shrink:0;
+}
+.photo-id-frame img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  filter:sepia(10%) contrast(1.05);
+}
+.photo-id-label{
+  font-family:var(--f-mono);font-size:0.36rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:oklch(45% 0.006 95);
+  text-align:center;margin-top:4px;
+}
+
+/* ─ TIMELINE ROWS ─ */
+.timeline-entry{
+  display:grid;grid-template-columns:120px 20px 1fr;
+  gap:0 16px;margin-bottom:0;
+  border-bottom:1px solid oklch(70% 0.005 95 / 0.35);
+  padding:16px 0;
+  position:relative;
+}
+.timeline-entry:last-child{border-bottom:none}
+.timeline-date{
+  font-family:var(--f-mono);font-size:0.52rem;letter-spacing:0.06em;
+  color:oklch(42% 0.09 78);padding-top:2px;text-align:right;
+  font-weight:600;
+}
+.timeline-dot-col{display:flex;flex-direction:column;align-items:center}
+.timeline-dot{
+  width:10px;height:10px;border-radius:50%;
+  border:2px solid oklch(42% 0.09 78);
+  background:var(--paper);
+  flex-shrink:0;margin-top:3px;
+  transition:background 0.25s,box-shadow 0.25s;
+}
+.timeline-entry:hover .timeline-dot{
+  background:oklch(42% 0.09 78);
+  box-shadow:0 0 0 3px oklch(42% 0.09 78 / 0.2);
+}
+.timeline-line{flex:1;width:1px;background:oklch(70% 0.005 95 / 0.5);margin-top:4px}
+.timeline-body{}
+.timeline-role{
+  font-family:var(--f-body);font-size:0.92rem;font-weight:600;
+  color:var(--ink);margin-bottom:2px;
+}
+.timeline-org{
+  font-family:var(--f-mono);font-size:0.48rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:oklch(45% 0.006 95);margin-bottom:8px;
+}
+.timeline-points{list-style:none}
+.timeline-points li{
+  font-size:0.8rem;color:oklch(28% 0.005 95);line-height:1.72;
+  padding-left:14px;position:relative;margin-bottom:2px;
+}
+.timeline-points li::before{
+  content:'—';position:absolute;left:0;
+  font-family:var(--f-mono);color:oklch(45% 0.006 95);
+}
+
+/* ─ CERT ROWS ─ */
+.cert-row{
+  display:grid;grid-template-columns:32px 1fr auto;
+  gap:12px;align-items:start;
+  padding:14px 0;
+  border-bottom:1px solid oklch(70% 0.005 95 / 0.35);
+  transition:background 0.15s;
+  cursor:default;
+}
+.cert-row:last-child{border-bottom:none}
+.cert-row:hover{background:oklch(88% 0.01 85 / 0.4);margin:0 -12px;padding:14px 12px}
+.cert-idx{font-family:var(--f-mono);font-size:0.6rem;color:oklch(55% 0.007 78);font-weight:600}
+.cert-name-block .cert-issuer-label{
+  font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:oklch(45% 0.006 95);margin-bottom:2px;
+}
+.cert-name-block .cert-title{
+  font-size:0.85rem;font-weight:600;color:var(--ink);line-height:1.3;
+}
+.cert-year-badge{
+  font-family:var(--f-mono);font-size:0.48rem;letter-spacing:0.08em;
+  color:oklch(42% 0.09 78);background:oklch(88% 0.04 78 / 0.25);
+  padding:3px 8px;border-radius:1px;border:1px solid oklch(42% 0.09 78 / 0.3);
+  cursor:pointer;white-space:nowrap;align-self:center;
+  transition:background 0.2s,color 0.2s;
+}
+.cert-year-badge:hover{background:oklch(42% 0.09 78);color:var(--paper)}
+
+/* ─ PROJECT CARDS (on paper) ─ */
+.proj-paper-card{
+  border:1px solid oklch(60% 0.005 95 / 0.4);
+  border-radius:1px;padding:20px;
+  margin-bottom:14px;position:relative;overflow:hidden;
+  transition:border-color 0.25s,background 0.25s;
+  cursor:default;
+}
+.proj-paper-card:hover{
+  border-color:oklch(42% 0.09 78 / 0.5);
+  background:oklch(88% 0.01 85 / 0.35);
+}
+.proj-paper-corner{
+  position:absolute;top:12px;right:12px;
+  width:14px;height:14px;
+  border-top:1px solid oklch(55% 0.007 78 / 0.5);
+  border-right:1px solid oklch(55% 0.007 78 / 0.5);
+  transition:transform 0.35s var(--ease-out),opacity 0.35s;
+  opacity:0.5;
+}
+.proj-paper-card:hover .proj-paper-corner{
+  transform:translate(3px,-3px);opacity:1;
+}
+.proj-status{
+  display:inline-block;
+  font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:oklch(45% 0.14 35);border:1px solid oklch(45% 0.14 35 / 0.4);
+  padding:2px 7px;border-radius:1px;margin-bottom:8px;
+}
+.proj-paper-title{
+  font-family:var(--f-disp);font-size:1.8rem;font-weight:600;
+  color:var(--ink);line-height:1;margin-bottom:4px;
+}
+.proj-paper-sub{
+  font-family:var(--f-mono);font-size:0.48rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:oklch(42% 0.09 78);margin-bottom:10px;
+}
+.proj-paper-desc{font-size:0.82rem;color:oklch(28% 0.005 95);line-height:1.72;margin-bottom:12px}
+.proj-paper-tags{display:flex;flex-wrap:wrap;gap:4px}
+.proj-paper-tag{
+  font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.06em;text-transform:uppercase;
+  border:1px solid oklch(50% 0.005 95 / 0.4);color:oklch(40% 0.005 95);
+  padding:2px 6px;border-radius:1px;
+}
+
+/* ─ INTEL / ARTICLE ─ */
+.intel-paper{
+  border:1px solid oklch(60% 0.005 95 / 0.5);
+  border-radius:1px;overflow:hidden;
+}
+.intel-paper-top{
+  background:oklch(88% 0.01 85 / 0.5);
+  padding:20px 20px 16px;
+  border-bottom:1px solid oklch(60% 0.005 95 / 0.5);
+}
+.intel-paper-issue{
+  font-family:var(--f-mono);font-size:0.46rem;letter-spacing:0.16em;
+  text-transform:uppercase;color:oklch(50% 0.006 95);margin-bottom:8px;
+}
+.intel-paper-title{
+  font-family:var(--f-disp);font-size:1.6rem;font-weight:600;
+  color:var(--ink);line-height:1.05;
+}
+.intel-paper-title em{font-weight:300;font-style:italic;color:oklch(42% 0.09 78)}
+.intel-paper-body{padding:20px}
+.intel-paper-body p{font-size:0.88rem;color:oklch(25% 0.005 95);line-height:1.8;margin-bottom:12px}
+.intel-paper-body strong{color:var(--ink);font-weight:600}
+.intel-paper-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--f-mono);font-size:0.54rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--paper);background:var(--ink);
+  padding:10px 20px;border-radius:1px;
+  transition:background 0.2s,transform 0.14s var(--ease-out);
+}
+.intel-paper-cta:hover{background:oklch(25% 0.005 95)}
+.intel-paper-cta:active{transform:scale(0.97)}
+
+/* ─ CONTACT FORM (paper-styled) ─ */
+.paper-fgroup{margin-bottom:12px}
+.paper-fgroup label{
+  font-family:var(--f-mono);font-size:0.48rem;letter-spacing:0.16em;
+  text-transform:uppercase;color:oklch(42% 0.006 95);
+  display:block;margin-bottom:4px;
+}
+.paper-fgroup input,.paper-fgroup textarea{
+  width:100%;
+  background:oklch(93% 0.005 90);
+  border:1px solid oklch(60% 0.005 95 / 0.5);
+  border-bottom:2px solid var(--ink);
+  padding:10px 12px;
+  color:var(--ink);font-family:var(--f-mono);font-size:0.78rem;
+  outline:none;resize:none;border-radius:0;
+  transition:border-color 0.2s,background 0.2s;
+}
+.paper-fgroup input:focus,.paper-fgroup textarea:focus{
+  border-color:oklch(42% 0.09 78);
+  background:oklch(95% 0.01 82);
+}
+.paper-fgroup input::placeholder,.paper-fgroup textarea::placeholder{
+  color:oklch(60% 0.005 95);font-style:italic;
+}
+
+/* ─ BUTTONS (paper version) ─ */
+.btn-paper{
+  display:inline-flex;align-items:center;gap:8px;
+  height:48px;padding:0 28px;
+  font-family:var(--f-body);font-size:0.88rem;font-weight:600;
+  border-radius:1px;border:none;
+  transition:background 0.2s,transform 0.14s var(--ease-out),box-shadow 0.2s;
+  position:relative;overflow:hidden;will-change:transform;
+}
+.btn-paper:active{transform:scale(0.97)}
+.btn-paper-primary{
+  background:var(--ink);color:var(--paper);
+}
+.btn-paper-primary:hover{background:oklch(20% 0.006 95)}
+.btn-paper-secondary{
+  background:transparent;color:var(--ink);
+  border:1.5px solid oklch(50% 0.005 95 / 0.7);
+}
+.btn-paper-secondary:hover{background:oklch(88% 0.01 85 / 0.6)}
+
+/* ─ EDU ENTRY ─ */
+.edu-paper{
+  display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;
+  padding:24px;border:1px solid oklch(60% 0.005 95 / 0.4);border-radius:1px;
+  background:oklch(92% 0.008 85 / 0.3);
+}
+.edu-paper-degree{
+  font-family:var(--f-disp);font-size:1.6rem;font-weight:600;
+  color:var(--ink);margin-bottom:4px;
+}
+.edu-paper-sub{font-family:var(--f-mono);font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2px}
+.edu-paper-sub.gold{color:oklch(42% 0.09 78)}
+.edu-paper-sub.patina{color:oklch(35% 0.08 188);cursor:pointer}
+.edu-paper-school{font-size:0.88rem;color:oklch(35% 0.005 95);margin-top:8px}
+.edu-paper-year{
+  font-family:var(--f-disp);font-size:3rem;font-weight:300;
+  color:oklch(65% 0.005 95 / 0.3);white-space:nowrap;line-height:1;
+  transition:color 0.4s;
+}
+.edu-paper:hover .edu-paper-year{color:oklch(55% 0.007 78 / 0.5)}
+
+/* ─ STATS ─ */
+.paper-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:oklch(70% 0.005 95 / 0.4);margin-top:24px}
+.paper-stat{
+  background:var(--paper);padding:18px 12px;text-align:center;
+  transition:background 0.2s;cursor:default;
+}
+.paper-stat:hover{background:oklch(90% 0.01 82 / 0.5)}
+.paper-stat-num{
+  font-family:var(--f-disp);font-size:2.2rem;font-weight:300;
+  color:var(--ink);line-height:1;margin-bottom:4px;
+  display:flex;align-items:flex-start;justify-content:center;
+}
+.paper-stat-sup{font-family:var(--f-mono);font-size:0.7rem;color:oklch(42% 0.09 78);margin-top:4px;font-weight:600}
+.paper-stat-label{font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50% 0.006 95)}
+
+/* ═══ SCROLL ANIMATION SYSTEM ═══ */
+
+/* Pages animate in from below + slight rotate */
+.audit-page{
+  opacity:1;
+}
+.page-sheet{
+  opacity:0;
+  transform:translateY(60px) rotateX(3deg);
+  transition:
+    opacity 0.9s var(--ease-page),
+    transform 0.9s var(--ease-page);
+  will-change:transform,opacity;
+}
+.audit-page.page-in .page-sheet{
+  opacity:1;transform:none;
+}
+
+/* Within-page elements reveal */
+.rv{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out);
+  will-change:opacity,transform;
+}
+.rv.visible{opacity:1;transform:none}
+.rv.from-left{transform:translateX(-36px) translateY(0)}
+.rv.from-right{transform:translateX(36px) translateY(0)}
+.rv.from-scale{transform:scale(0.94);opacity:0}
+.s1{transition-delay:.05s}.s2{transition-delay:.1s}.s3{transition-delay:.15s}
+.s4{transition-delay:.2s}.s5{transition-delay:.25s}.s6{transition-delay:.3s}
+.s7{transition-delay:.35s}.s8{transition-delay:.4s}.s9{transition-delay:.45s}
+.s10{transition-delay:.5s}
+
+/* ═══ BETWEEN-PAGES AREA ═══ */
+.page-separator{
+  height:60px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.page-tab{
+  position:absolute;right:0;bottom:0;
+  background:var(--paper-aged);
+  border:1px solid oklch(70% 0.015 80 / 0.5);
+  border-bottom:none;
+  border-radius:6px 6px 0 0;
+  padding:4px 18px;
+  font-family:var(--f-mono);font-size:0.44rem;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:oklch(55% 0.007 78);
+  transform:translateX(-60px);
+}
+
+/* ═══ PAPER TEXTURE VARIATIONS ═══ */
+.page-sheet.aged{
+  background:oklch(91% 0.012 82);
+}
+.page-sheet.grid-bg{
+  background-image:
+    linear-gradient(oklch(60% 0.005 95 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(60% 0.005 95 / 0.07) 1px, transparent 1px);
+  background-size:24px 24px;
+  background-color:var(--paper);
+}
+
+/* ═══ ANNOTATED MARGIN ═══ */
+.margin-note{
+  position:absolute;
+  left:-140px;
+  width:120px;
+  font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.08em;
+  color:oklch(42% 0.09 78 / 0.65);
+  line-height:1.6;text-align:right;
+  font-style:italic;
+  padding-top:2px;
+  transform:rotate(-1deg);
+}
+.margin-bracket{
+  position:absolute;left:-14px;
+  width:8px;
+  border-left:1px solid oklch(42% 0.09 78 / 0.4);
+  border-top:1px solid oklch(42% 0.09 78 / 0.4);
+  border-bottom:1px solid oklch(42% 0.09 78 / 0.4);
+}
+
+/* ═══ HIGHLIGHTER EFFECT ═══ */
+.hl-yellow{
+  background:oklch(95% 0.15 95 / 0.35);
+  padding:1px 3px;margin:0 -3px;
+}
+.hl-green{
+  background:oklch(90% 0.12 150 / 0.3);
+  padding:1px 3px;margin:0 -3px;
+}
+
+/* ═══ REDACTION ═══ */
+.redacted{
+  background:var(--ink);color:transparent;
+  border-radius:1px;cursor:pointer;
+  transition:all 0.2s;user-select:none;
+  display:inline-block;
+}
+.redacted:hover{background:oklch(25% 0.005 95);color:oklch(25% 0.005 95)}
+.redacted.revealed{
+  background:oklch(95% 0.15 95 / 0.4);color:var(--ink);
+}
+
+/* ═══ TOASTS ═══ */
 #toast-wrap{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
   z-index:9500;pointer-events:none;
@@ -1098,44 +823,25 @@ footer:hover .foot-secret{max-width:400px}
 .toast{
   background:oklch(8% 0.006 95 / 0.97);
   border:1px solid var(--rule-gold);
-  padding:13px 28px;border-radius:3px;
+  padding:13px 28px;border-radius:2px;
   font-family:var(--f-mono);font-size:0.6rem;letter-spacing:0.1em;
   color:var(--gold);
-  box-shadow:0 16px 48px oklch(2% 0.004 95 / 0.75),0 0 24px oklch(84% 0.19 80.46 / 0.08);
+  box-shadow:0 16px 48px oklch(2% 0.004 95 / 0.75);
   backdrop-filter:blur(20px);
   opacity:0;transform:translateY(20px) scale(0.96);
-  transition:
-    opacity 0.35s var(--ease-out),
-    transform 0.35s var(--ease-out);
-  max-width:420px;text-align:center;
+  transition:opacity 0.35s var(--ease-out),transform 0.35s var(--ease-out);
+  max-width:480px;text-align:center;
 }
 .toast.show{opacity:1;transform:none}
 .toast.patina{color:var(--patina);border-color:var(--rule-patina)}
 .toast.alert{color:var(--vermilion);border-color:oklch(58% 0.15 35 / 0.35)}
-
-/* Custom right-click menu */
-#ctxmenu{
-  position:fixed;z-index:9500;
-  background:oklch(7% 0.006 95 / 0.97);
-  border:1px solid var(--rule-gold);
-  border-radius:3px;padding:4px 0;min-width:210px;
-  box-shadow:0 20px 56px oklch(2% 0.004 95 / 0.75);
-  backdrop-filter:blur(24px);
-  display:none;
-  transform-origin:top left;
-  animation:ctxopen 0.2s var(--ease-out);
+.toast.paper{
+  background:oklch(93% 0.008 88 / 0.97);color:var(--ink);
+  border-color:oklch(60% 0.005 95 / 0.5);
+  font-style:italic;
 }
-@keyframes ctxopen{from{opacity:0;transform:scale(0.95) translateY(-4px)}}
-.ctx-item{
-  padding:9px 18px;
-  font-family:var(--f-mono);font-size:0.58rem;letter-spacing:0.1em;
-  color:var(--muted);cursor:pointer;
-  transition:background 0.15s,color 0.15s;
-}
-.ctx-item:hover{background:var(--gold-dim);color:var(--gold)}
-.ctx-hr{height:1px;background:var(--rule);margin:3px 0}
 
-/* Breach overlay */
+/* ═══ BREACH OVERLAY ═══ */
 #breach{
   position:fixed;inset:0;z-index:9000;
   background:oklch(58% 0.15 35 / 0.06);
@@ -1151,65 +857,115 @@ footer:hover .foot-secret{max-width:400px}
   100%{opacity:0}
 }
 
-/* Tooltip (hover over timeline nodes) */
-.tip{
-  position:absolute;left:175px;top:56px;
-  background:var(--raised);border:1px solid var(--rule-gold);
-  padding:8px 14px;border-radius:2px;
-  font-family:var(--f-mono);font-size:0.5rem;letter-spacing:0.1em;
-  color:var(--gold);white-space:nowrap;
-  opacity:0;transform:translateX(-6px);
-  transition:opacity 0.18s,transform 0.18s var(--ease-out);
-  pointer-events:none;z-index:10;
+/* ═══ CONTEXT MENU ═══ */
+#ctxmenu{
+  position:fixed;z-index:9500;
+  background:oklch(92% 0.008 88);
+  border:1px solid oklch(55% 0.005 95 / 0.5);
+  border-radius:2px;padding:4px 0;min-width:200px;
+  box-shadow:4px 6px 18px oklch(0% 0 0 / 0.4);
+  display:none;
+  animation:ctxopen 0.2s var(--ease-out);
 }
-.ops-entry:hover .tip{opacity:1;transform:none}
+@keyframes ctxopen{from{opacity:0;transform:scale(0.96) translateY(-4px)}}
+.ctx-item{
+  padding:8px 16px;font-family:var(--f-mono);font-size:0.55rem;
+  letter-spacing:0.08em;color:oklch(30% 0.005 95);cursor:pointer;
+  transition:background 0.15s,color 0.15s;
+}
+.ctx-item:hover{background:oklch(88% 0.01 85);color:var(--ink)}
+.ctx-hr{height:1px;background:oklch(70% 0.005 95 / 0.5);margin:3px 0}
+
+/* ═══ PAGE TURN INDICATOR ═══ */
+.scroll-hint{
+  position:fixed;bottom:28px;right:72px;
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--disabled);
+  opacity:1;transition:opacity 0.5s;
+  pointer-events:none;
+}
+.scroll-hint.hidden{opacity:0}
+.scroll-track{width:1px;height:36px;background:var(--rule);position:relative;overflow:hidden}
+.scroll-thumb{
+  position:absolute;top:-100%;left:0;width:100%;height:50%;
+  background:linear-gradient(to bottom,transparent,var(--gold));
+  animation:scrollDown 1.8s ease-in-out infinite;
+}
+@keyframes scrollDown{0%{top:-50%}100%{top:100%}}
+
+/* ═══ FIXED CLASSIFICATION BANNER ═══ */
+.class-banner{
+  position:fixed;bottom:0;left:52px;right:0;height:20px;
+  background:oklch(52% 0.18 22 / 0.85);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:oklch(95% 0.02 50);z-index:500;
+  backdrop-filter:blur(8px);
+}
+
+/* ═══ COVER SPECIFIC ═══ */
+.cover-content{
+  display:flex;flex-direction:column;
+  min-height:540px;justify-content:space-between;
+}
+.cover-top{
+  display:flex;justify-content:space-between;align-items:flex-start;
+}
+.cover-agency{
+  font-family:var(--f-mono);font-size:0.5rem;letter-spacing:0.22em;
+  text-transform:uppercase;color:oklch(45% 0.006 95);margin-bottom:36px;
+}
+.cover-title-block{flex:1}
+.cover-ref-block{
+  text-align:right;font-family:var(--f-mono);font-size:0.44rem;
+  letter-spacing:0.1em;color:oklch(50% 0.006 95);line-height:2.2;
+}
+.cover-mid{position:relative}
+.cover-bottom{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1px;background:oklch(70% 0.005 95 / 0.4);
+  border:1px solid oklch(70% 0.005 95 / 0.4);
+}
+.cover-field{
+  background:var(--paper);padding:12px 14px;
+}
+.cover-field-key{
+  font-family:var(--f-mono);font-size:0.42rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:oklch(50% 0.006 95);margin-bottom:3px;
+}
+.cover-field-val{font-size:0.82rem;color:var(--ink);font-weight:500}
 
 /* ═══ ACCESSIBILITY ═══ */
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:0.001ms !important;
-    transition-duration:0.001ms !important;
-  }
-  .rv,.hero-name-word,.hero-tag,.hero-roles,.hero-desc,.hero-ctas,.hero-scroll-cue{
-    opacity:1 !important;transform:none !important;filter:none !important;
-    clip-path:none !important;
-  }
+  *,*::before,*::after{animation-duration:0.001ms!important;transition-duration:0.001ms!important}
+  .page-sheet,.rv{opacity:1!important;transform:none!important}
   #loader{display:none}
 }
 
 /* ═══ MOBILE ═══ */
 @media(max-width:880px){
-  :root{--gut:18px}
-  #cur,#cur-ring,#cur-dot{display:none}
   body{cursor:auto}
-  nav{
-    padding:12px 18px;flex-direction:column;gap:8px;
-    background:oklch(4% 0.004 95 / 0.96);
-    backdrop-filter:blur(20px);border-bottom:1px solid var(--rule);
-  }
-  .nav-links{gap:14px;flex-wrap:wrap;justify-content:center}
-  .nav-links a{font-size:0.52rem}
-  #hero{padding-top:110px}
-  .hero-rail{display:none}
-  .hero-name{font-size:clamp(3rem,15vw,5.5rem)}
-  .hero-ctas{flex-direction:column}
-  .btn{width:100%;justify-content:center}
-  .stats-band{grid-template-columns:1fr 1fr}
-  .stat-cell:nth-child(2){border-right:none}
-  .about-grid,.contact-grid{grid-template-columns:1fr}
-  .svc-bento,.cert-grid,.proj-grid{grid-template-columns:1fr}
-  .intel-card{grid-template-columns:1fr;flex-direction:column}
-  .timeline-svg,.ops-node,.tip{display:none}
-  .ops-entry{grid-template-columns:1fr;gap:8px;padding:32px 0}
-  .ops-content{padding-left:0}
-  .edu-card{padding:28px 22px;flex-direction:column;align-items:flex-start}
-  .proj-card{padding:32px 24px}
-  .proj-title{font-size:2.2rem}
-  .intel-left,.intel-right{padding:28px 24px}
-  section{padding:80px 0}
-  h2.s-title{font-size:clamp(2rem,8vw,3rem);margin-bottom:48px}
-  .contact-grid{gap:44px}
-  .hero-scroll-cue{display:none}
+  #cur,#cur-ring,#cur-dot{display:none}
+  #nav-spine{width:0;overflow:hidden;border:none}
+  #file-area{margin-left:0}
+  .page-content{padding:32px 24px 32px 40px}
+  .page-sheet::before{width:28px}
+  .page-content{padding:32px 20px 32px 34px}
+  .audit-page{padding:40px 12px 30px}
+  .paper-stats{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .form-label{border-right:none;border-bottom:1px solid oklch(70% 0.005 95/0.5)}
+  .timeline-entry{grid-template-columns:90px 16px 1fr;gap:0 10px}
+  .edu-paper{grid-template-columns:1fr}
+  .edu-paper-year{display:none}
+  .cover-top{flex-direction:column;gap:16px}
+  .cover-bottom{grid-template-columns:1fr}
+  .paper-h1{font-size:clamp(2.2rem,10vw,4rem)}
+  .class-banner{left:0}
+  .scroll-hint{display:none}
+  .margin-note{display:none}
+  .margin-bracket{display:none}
 }
 </style>
 </head>
@@ -1217,20 +973,25 @@ footer:hover .foot-secret{max-width:400px}
 
 <!-- ═ LOADER ═ -->
 <div id="loader">
-  <div class="loader-mark"></div>
+  <div class="loader-file" id="loaderFile">
+    <div class="loader-file-body">
+      <div class="loader-file-tab"></div>
+      <div class="loader-file-lines">
+        <div class="loader-file-line"></div>
+        <div class="loader-file-line"></div>
+        <div class="loader-file-line"></div>
+      </div>
+      <div class="loader-stamp">CONFIDENTIAL</div>
+    </div>
+  </div>
+  <div class="loader-label" id="llabel">Opening file...</div>
   <div class="loader-bar-wrap">
     <div class="loader-bar-fill" id="lbar"></div>
-  </div>
-  <div class="loader-label">
-    <div class="loader-label-inner" id="llabel">Initializing</div>
   </div>
 </div>
 
 <!-- ═ CURSOR ═ -->
-<div id="cur">
-  <div id="cur-ring"></div>
-  <div id="cur-dot"></div>
-</div>
+<div id="cur"><div id="cur-ring"></div><div id="cur-dot"></div></div>
 
 <!-- ═ PROGRESS ═ -->
 <div id="prog"></div>
@@ -1239,662 +1000,953 @@ footer:hover .foot-secret{max-width:400px}
 <div id="breach"></div>
 
 <!-- ═ TOAST CONTAINER ═ -->
-<div id="toast-wrap">
-  <div class="toast" id="t0"></div>
-</div>
+<div id="toast-wrap"><div class="toast" id="t0"></div></div>
 
 <!-- ═ CONTEXT MENU ═ -->
 <div id="ctxmenu">
+  <div class="ctx-item" data-a="cover">→ Cover Sheet</div>
   <div class="ctx-item" data-a="about">→ Dossier</div>
   <div class="ctx-item" data-a="experience">→ Ops Log</div>
   <div class="ctx-item" data-a="arsenal">→ Arsenal</div>
-  <div class="ctx-item" data-a="projects">→ Projects</div>
+  <div class="ctx-item" data-a="projects">→ Active Builds</div>
   <div class="ctx-item" data-a="contact">→ Open Channel</div>
   <div class="ctx-hr"></div>
   <div class="ctx-item" data-a="source">⌖ Source</div>
   <div class="ctx-item" data-a="reload">↺ Reboot</div>
 </div>
 
-<!-- ═ NAV ═ -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo" id="nlogo">
-    <div class="nav-logo-glyph" id="nglyph"></div>
-    SANGIT.PANT
-  </a>
-  <div class="nav-links">
-    <a href="#about" data-s="about">Dossier</a>
-    <a href="#experience" data-s="experience">Ops Log</a>
-    <a href="#arsenal" data-s="arsenal">Arsenal</a>
-    <a href="#projects" data-s="projects">Projects</a>
-    <a href="#intel" data-s="intel">Intel</a>
-    <a href="#contact" data-s="contact">Contact</a>
-  </div>
-</nav>
-
-<!-- ════════════════ HERO ════════════════ -->
-<section id="hero">
-  <div class="hero-grid" id="hgrid" aria-hidden="true"></div>
-  <div class="hero-grid-fine" id="hgrid2" aria-hidden="true"></div>
-
-  <!-- Calibration SVG arcs -->
-  <div class="hero-arcs" id="harcs" aria-hidden="true">
-    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="160" cy="160" r="100" stroke="oklch(84% 0.19 80.46)" stroke-width="0.6" stroke-dasharray="5 10"/>
-      <circle cx="160" cy="160" r="140" stroke="oklch(84% 0.19 80.46)" stroke-width="0.4" stroke-dasharray="2 14"/>
-      <circle cx="160" cy="160" r="60"  stroke="oklch(84% 0.19 80.46)" stroke-width="0.5" opacity="0.5"/>
-      <line x1="130" y1="160" x2="190" y2="160" stroke="oklch(84% 0.19 80.46)" stroke-width="0.5"/>
-      <line x1="160" y1="130" x2="160" y2="190" stroke="oklch(84% 0.19 80.46)" stroke-width="0.5"/>
-      <circle cx="160" cy="160" r="2" fill="oklch(84% 0.19 80.46)" opacity="0.7"/>
-      <text x="168" y="148" font-family="SFMono-Regular,monospace" font-size="7" fill="oklch(84% 0.19 80.46)" opacity="0.7">LAT 27°40′N</text>
-      <text x="168" y="158" font-family="SFMono-Regular,monospace" font-size="7" fill="oklch(84% 0.19 80.46)" opacity="0.5">LON 85°18′E</text>
-    </svg>
-  </div>
-
-  <!-- Vertical measurement rail -->
-  <div class="hero-rail" aria-hidden="true">
-    <div class="hero-rail-tick" style="top:20%"></div>
-    <div class="hero-rail-tick" style="top:40%"></div>
-    <div class="hero-rail-tick" style="top:60%"></div>
-    <div class="hero-rail-tick" style="top:80%"></div>
-    <span class="hero-rail-coord">GRC · IS AUDIT · vISO · LALITPUR, NEPAL</span>
-  </div>
-
-  <div class="hero-inner">
-    <div class="hero-tag" id="htag">
-      <span class="hero-tag-dot"></span>
-      GRC &amp; IS Audit Professional &nbsp;·&nbsp; Lalitpur, Nepal &nbsp;·&nbsp; Open to Opportunities
-    </div>
-
-    <h1 class="hero-name" aria-label="Sangit Pant">
-      <span class="hero-name-line">
-        <span class="hero-name-word" id="w1">Sangit</span>
-      </span>
-      <span class="hero-name-line">
-        <span class="hero-name-word gold" id="w2">Pant.</span>
-      </span>
-    </h1>
-
-    <div class="hero-roles" id="hroles">
-      <span>IS Auditor</span>
-      <span class="hero-sep">◆</span>
-      <span>GRC Analyst</span>
-      <span class="hero-sep">◆</span>
-      <span>vISO</span>
-      <span class="hero-sep">◆</span>
-      <span>ISO 27001 Lead Auditor</span>
-    </div>
-
-    <p class="hero-desc" id="hdesc">
-      I translate <strong>regulatory complexity</strong> into structured, durable security programs.
-      ISO&nbsp;27001 to SOC&nbsp;2. NIST CSF to CMMC. Governance frameworks to
-      <strong>actual controls</strong> — because compliance that only lives on paper protects no one.
-    </p>
-
-    <div class="hero-ctas" id="hctas">
-      <a href="#contact" class="btn btn-primary">Open Channel</a>
-      <a href="#about" class="btn btn-secondary">View Dossier</a>
-    </div>
-  </div>
-
-  <div class="hero-scroll-cue" id="hscroll">
-    <div class="scroll-track"><div class="scroll-thumb"></div></div>
-    <span class="scroll-word">Scroll</span>
-  </div>
-
-  <!-- Stats band -->
-  <div class="stats-band" id="statsband">
-    <div class="stat-cell rv s1">
-      <div class="stat-num"><span class="ctr" data-t="8">0</span><span class="stat-sup">+</span></div>
-      <div class="stat-label">Certifications</div>
-    </div>
-    <div class="stat-cell rv s2">
-      <div class="stat-num"><span class="ctr" data-t="12">0</span><span class="stat-sup">+</span></div>
-      <div class="stat-label">Frameworks</div>
-    </div>
-    <div class="stat-cell rv s3">
-      <div class="stat-num"><span class="ctr" data-t="2">0</span></div>
-      <div class="stat-label">GRC Platforms Built</div>
-    </div>
-    <div class="stat-cell rv s4">
-      <div class="stat-num"><span class="ctr" data-t="2">0</span><span class="stat-sup">yr</span></div>
-      <div class="stat-label">Field Experience</div>
-    </div>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ ABOUT ════════════════ -->
-<section id="about">
-  <div class="w">
-    <div class="s-eye rv">Personnel Dossier</div>
-    <h2 class="s-title rv s1">Access<br><em>Granted.</em></h2>
-
-    <div class="about-grid">
-      <!-- ID Card -->
-      <div class="rv from-left s2">
-        <div class="id-card">
-          <div class="id-card-top">
-            <span class="id-card-label">Clearance / ID</span>
-            <span class="id-card-status">Verified</span>
-          </div>
-          <div class="id-body">
-            <div class="photo-wrap" id="photowrap">
-              <div class="ring-1"></div>
-              <div class="ring-2"></div>
-              <img src="assets/new.jpg" alt="Sangit Pant" loading="lazy"/>
-            </div>
-            <div class="id-name">Sangit Pant</div>
-            <div class="id-role">GRC &amp; IS Audit Professional</div>
-            <div class="id-field">
-              <div class="id-key">Email</div>
-              <div class="id-val"><a href="mailto:sangitpant12@gmail.com">sangitpant12@gmail.com</a></div>
-            </div>
-            <div class="id-field">
-              <div class="id-key">Phone</div>
-              <div class="id-val">+977 9864729477</div>
-            </div>
-            <div class="id-field">
-              <div class="id-key">Location</div>
-              <div class="id-val">Lalitpur, Nepal</div>
-            </div>
-            <div class="id-field">
-              <div class="id-key">LinkedIn</div>
-              <div class="id-val">
-                <a href="https://linkedin.com/in/sangit-pant" target="_blank" rel="noopener">linkedin.com/in/sangit-pant</a>
-              </div>
-            </div>
-            <div class="fw-tags">
-              <span class="fw-tag">ISO 27001</span>
-              <span class="fw-tag">SOC 2</span>
-              <span class="fw-tag">NIST CSF</span>
-              <span class="fw-tag">CMMC</span>
-              <span class="fw-tag">GDPR</span>
-              <span class="fw-tag">IEC 62443</span>
-              <span class="fw-tag">ISO 42001</span>
-              <span class="fw-tag">ISO 9001</span>
-              <span class="fw-tag">ISO 14001</span>
-              <span class="fw-tag">ISO 20000-1</span>
-              <span class="fw-tag">NRB IT</span>
-              <span class="fw-tag">NRB CRG</span>
-              <span class="fw-tag">Cyber Essentials</span>
-              <span class="fw-tag">Cyber Essentials Plus</span>
-              <span class="fw-tag">Nepal Insurance IT Guidelines</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- About text -->
-      <div class="about-prose">
-        <p class="rv s2">
-          I'm a <strong>GRC and IS Audit professional</strong> with hands-on experience across the compliance spectrum —
-          from <em>ISO 27001</em> and <em>SOC 2</em> to <em>NIST CSF</em>, <em>CMMC</em>, and <em>IEC 62443</em>.
-          My work lives at the intersection of risk, governance, and technology — making the complex legible,
-          and the abstract actionable.
-        </p>
-        <p class="rv s3">
-          I have experience in IT risk assessments, control gap analysis, ISMS documentation, and audit evidence preparation.
-          As a <strong>Virtual Information Security Officer (vISO)</strong>, I've bridged governance requirements
-          with real technical controls for a financial institution — not as a checkbox exercise,
-          but as a durable security posture with ownership.
-        </p>
-        <p class="rv s4">
-          Beyond client delivery, I build. <em>BrahmaGrid</em> and <em>Khatra GRC</em> are my experiments
-          in using technology to make compliance less painful and more continuous.
-        </p>
-
-        <div class="svc-bento">
-          <div class="svc-tile rv s4">
-            <div class="svc-tile-bar"></div>
-            <div class="svc-n">01</div>
-            <div class="svc-title">GRC Programs</div>
-            <div class="svc-desc">Framework implementation, gap analysis, SoA, ISMS documentation, Policies &amp; Procedures.</div>
-          </div>
-          <div class="svc-tile rv s5">
-            <div class="svc-tile-bar"></div>
-            <div class="svc-n">02</div>
-            <div class="svc-title">IS Auditing</div>
-            <div class="svc-desc">Evidence collection, control testing, management-level compliance reporting.</div>
-          </div>
-          <div class="svc-tile rv s6">
-            <div class="svc-tile-bar"></div>
-            <div class="svc-n">03</div>
-            <div class="svc-title">Risk Management</div>
-            <div class="svc-desc">IT risk assessments, STRIDE threat modeling, risk registers, risk treatment plans.</div>
-          </div>
-          <div class="svc-tile rv s7">
-            <div class="svc-tile-bar"></div>
-            <div class="svc-n">04</div>
-            <div class="svc-title">Security Assessments</div>
-            <div class="svc-desc">EDR &amp; AV evaluation, vulnerability assessments, control gap analysis.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ EXPERIENCE ════════════════ -->
-<section id="experience">
-  <div class="w">
-    <div class="s-eye rv">Operations Log</div>
-    <h2 class="s-title rv s1">Mission<br><em>History.</em></h2>
-
-    <div class="timeline-wrap">
-      <!-- SVG timeline line — drawn on scroll -->
-      <svg class="timeline-svg" aria-hidden="true">
-        <line class="timeline-path" id="tlpath" x1="1" y1="0" x2="1" y2="99999"/>
-      </svg>
-
-      <!-- Entry 1 -->
-      <div class="ops-entry rv from-left s2">
-        <div class="ops-node" id="n0"></div>
-        <div class="tip">Vairav Technology Security · Active</div>
-        <div class="ops-meta">
-          <div class="ops-date">Jan 2025<br>— Present</div>
-          <div class="ops-org">Vairav Technology<br>Security Pvt. Ltd.<br>Kathmandu</div>
-          <div class="ops-badge">ACTIVE</div>
-        </div>
-        <div class="ops-content">
-          <div class="ops-role">Associate IS Auditor <em>&amp; GRC Analyst</em></div>
-          <ul class="ops-points">
-            <li>Supported IT risk assessments and IS audits for technology and regulated clients, adapting scope to each client's risk profile.</li>
-            <li>Conducted Internal Audits against ISO 27001, SOC 2, NIST CSF, CMMC, and IEC 62443 — sometimes all in the same quarter.</li>
-            <li>Performed STRIDE threat modeling and identified control gaps across people, process, and technology layers.</li>
-            <li>Developed GRC documentation — policies, risk registers, Statements of Applicability, and control mapping matrices.</li>
-            <li>Prepared audit evidence packages, vulnerability assessment reports, and executive-level compliance dashboards.</li>
-            <li>Served as <strong>vISO</strong> for a financial institution client — providing ongoing governance advisory and regulatory alignment.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Entry 2 -->
-      <div class="ops-entry rv from-left s3">
-        <div class="ops-node" id="n1"></div>
-        <div class="tip">Vairav Technology Security · Internship</div>
-        <div class="ops-meta">
-          <div class="ops-date">Sep 2024<br>— Jan 2025</div>
-          <div class="ops-org">Vairav Technology<br>Security Pvt. Ltd.<br>Kathmandu</div>
-        </div>
-        <div class="ops-content">
-          <div class="ops-role">IS Auditor <em>&amp; GRC Intern</em></div>
-          <ul class="ops-points">
-            <li>Drafted ISMS documentation aligned to ISO/IEC 27001, SOC 2, and adjacent standards — learning that a good policy is also good writing.</li>
-            <li>Supported internal IS audits and compliance assessments: evidence collection, control testing, audit reporting.</li>
-            <li>Contributed to risk identification, control mapping, and structured audit documentation processes.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Entry 3 -->
-      <div class="ops-entry rv from-left s4">
-        <div class="ops-node" id="n2"></div>
-        <div class="tip">Hansikar Technologies · Earlier</div>
-        <div class="ops-meta">
-          <div class="ops-date">Jan 2023<br>— Feb 2024</div>
-          <div class="ops-org">Hansikar<br>Technologies<br>Kathmandu</div>
-        </div>
-        <div class="ops-content">
-          <div class="ops-role">Freelance <em>Content Writer</em></div>
-          <ul class="ops-points">
-            <li>Delivered structured web content with SEO optimization — building the documentation precision and clear communication that now anchors every GRC deliverable.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ CERTIFICATIONS ════════════════ -->
-<section id="arsenal">
-  <div class="w">
-    <div class="s-eye rv">Arsenal</div>
-    <h2 class="s-title rv s1">Clearance<br><em>Credentials.</em></h2>
-
-    <div class="cert-grid">
-      <div class="cert-card rv s2">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">01</span>
-        <div>
-          <div class="cert-issuer">Mastermind Assurance</div>
-          <div class="cert-name">ISO/IEC 42001:2023 Lead Auditor</div>
-          <div class="cert-yr" data-y="2026">2026</div>
-        </div>
-      </div>
-      <div class="cert-card rv s3">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">02</span>
-        <div>
-          <div class="cert-issuer">Mastermind Assurance</div>
-          <div class="cert-name">ISO/IEC 27001:2022 Lead Auditor</div>
-          <div class="cert-yr" data-y="2025">2025</div>
-        </div>
-      </div>
-      <div class="cert-card rv s4">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">03</span>
-        <div>
-          <div class="cert-issuer">ICTTF</div>
-          <div class="cert-name">Certified Ransomware Protection Officer</div>
-          <div class="cert-yr" data-y="2025">2025</div>
-        </div>
-      </div>
-      <div class="cert-card rv s5">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">04</span>
-        <div>
-          <div class="cert-issuer">ICTTF</div>
-          <div class="cert-name">Certified SME Cyber Security Officer</div>
-          <div class="cert-yr" data-y="2025">2025</div>
-        </div>
-      </div>
-      <div class="cert-card rv s6">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">05</span>
-        <div>
-          <div class="cert-issuer">ISC²</div>
-          <div class="cert-name">Certified in Cybersecurity (CC)</div>
-          <div class="cert-yr" data-y="2024">2024</div>
-        </div>
-      </div>
-      <div class="cert-card rv s7">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">06</span>
-        <div>
-          <div class="cert-issuer">SkillFront</div>
-          <div class="cert-name">ISO/IEC 27001 Information Security Associate</div>
-          <div class="cert-yr" data-y="2024">2024</div>
-        </div>
-      </div>
-      <div class="cert-card rv s8">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">07</span>
-        <div>
-          <div class="cert-issuer">Google / Coursera</div>
-          <div class="cert-name">Play It Safe: Manage Security Risks</div>
-          <div class="cert-yr" data-y="2023">2023</div>
-        </div>
-      </div>
-      <div class="cert-card rv s9">
-        <div class="cert-card-bar"></div>
-        <span class="cert-num">08</span>
-        <div>
-          <div class="cert-issuer">Google / Coursera</div>
-          <div class="cert-name">Foundations of Cybersecurity</div>
-          <div class="cert-yr" data-y="2023">2023</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ PROJECTS ════════════════ -->
-<section id="projects">
-  <div class="w">
-    <div class="s-eye rv">Classified Operations</div>
-    <h2 class="s-title rv s1">Active<br><em>Builds.</em></h2>
-
-    <div class="proj-grid">
-      <div class="proj-card rv s2" id="pc1">
-        <div class="proj-corner"></div>
-        <div class="proj-stamp">In Development</div>
-        <div class="proj-idx">PROJECT — 001</div>
-        <div class="proj-title">BrahmaGrid</div>
-        <div class="proj-sub">GRC Automation Platform</div>
-        <p class="proj-desc">
-          A GRC platform designed to streamline compliance workflows, automate evidence collection,
-          and manage audit readiness across multiple frameworks — so audit season stops being a fire drill.
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">GRC</span>
-          <span class="proj-tag">Automation</span>
-          <span class="proj-tag">Multi-framework</span>
-          <span class="proj-tag">SaaS</span>
-        </div>
-        <div class="proj-ghost">BG</div>
-      </div>
-
-      <div class="proj-card rv s3" id="pc2">
-        <div class="proj-corner"></div>
-        <div class="proj-stamp">In Development</div>
-        <div class="proj-idx">PROJECT — 002</div>
-        <div class="proj-title">Khatra GRC</div>
-        <div class="proj-sub">Risk Intelligence Tool</div>
-        <p class="proj-desc">
-          An intelligent risk management tool that maps threats to controls, generates risk registers,
-          and provides continuous compliance posture visibility — because "khatra" (danger) should surface
-          in a dashboard, not in an audit finding.
-        </p>
-        <div class="proj-tags">
-          <span class="proj-tag">Risk Intel</span>
-          <span class="proj-tag">Threat Mapping</span>
-          <span class="proj-tag">Controls</span>
-          <span class="proj-tag">Dashboard</span>
-        </div>
-        <div class="proj-ghost">KG</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ INTEL ════════════════ -->
-<section id="intel">
-  <div class="w">
-    <div class="s-eye rv">Intel Reports</div>
-    <h2 class="s-title rv s1">Field<br><em>Dispatches.</em></h2>
-
-    <a href="https://www.linkedin.com/pulse/soc-2-iso-27001-useless-really-sangit-pant-aazsc/"
-       target="_blank" rel="noopener"
-       class="intel-card rv s2">
-      <div class="intel-left">
-        <div>
-          <div class="intel-issue">Dispatch No. 001 · LinkedIn</div>
-          <div class="intel-title">
-            <em>SOC 2 and ISO 27001</em> are useless. But are they really?
-          </div>
-        </div>
-        <div class="intel-author">By Sangit Pant</div>
-      </div>
-      <div class="intel-right">
-        <div class="intel-tag">GRC Strategy</div>
-        <p class="intel-excerpt">
-          <strong>SOC 2 and ISO 27001 don’t stop attacks</strong>, but the absence of their basic controls makes incidents far more likely. A simple guest-Wi-Fi scan exposed a CCTV admin interface. No exploitation, no advanced tools, just missing security hygiene. This article maps that real scenario to specific control failures and explains where compliance genuinely reduces risk.
-        </p>
-        <span class="intel-cta">Read Full Report ↗</span>
-      </div>
-    </a>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ EDUCATION ════════════════ -->
-<section id="education">
-  <div class="w">
-    <div class="s-eye rv">Training Records</div>
-    <h2 class="s-title rv s1">Academic<br><em>Foundation.</em></h2>
-
-    <div class="edu-card rv s2">
-      <div>
-        <div class="edu-degree">Bachelor of Science In Information Technology (BSIT)</div>
-        <div class="edu-sub gold">Concentration: CyberSecurity</div>
-        <div class="edu-sub patina" id="gpa-el">GPA: 4.0</div>
-        <div class="edu-school">Presidential Graduate School (Westcliff University)</div>
-      </div>
-      <div class="edu-year">2021–2025</div>
-    </div>
-  </div>
-</section>
-
-<div class="seam"><div class="seam-node"></div></div>
-
-<!-- ════════════════ CONTACT ════════════════ -->
-<section id="contact">
-  <div class="w">
-    <div class="s-eye rv">Secure Channel</div>
-    <div class="contact-grid">
-      <div>
-        <h2 class="contact-head rv from-left s1">Let's<br><em>Connect.</em></h2>
-        <p class="contact-sub rv s2">
-          Open to GRC, IS Audit, and compliance roles.
-          Need an Internal Auditor, GRC Analyst, or someone to build your security program from first principles — the channel is open.
-        </p>
-        <div>
-          <a href="mailto:sangitpant12@gmail.com" class="contact-item rv from-left s3">
-            <div class="c-icon">✉</div>
-            <div><div class="c-key">Email</div><div class="c-val">sangitpant12@gmail.com</div></div>
-          </a>
-          <a href="tel:+9779864729477" class="contact-item rv from-left s4">
-            <div class="c-icon">☎</div>
-            <div><div class="c-key">Phone</div><div class="c-val">+977 9864729477</div></div>
-          </a>
-          <a href="https://linkedin.com/in/sangit-pant" target="_blank" rel="noopener" class="contact-item rv from-left s5">
-            <div class="c-icon" style="font-weight:700;font-family:var(--f-word)">in</div>
-            <div><div class="c-key">LinkedIn</div><div class="c-val">linkedin.com/in/sangit-pant</div></div>
-          </a>
-          <div class="contact-item rv from-left s6" style="cursor:default">
-            <div class="c-icon">◉</div>
-            <div><div class="c-key">Location</div><div class="c-val">Lalitpur, Nepal</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rv from-right s3">
-        <form class="form-stack" action="https://formspree.io/f/xvgorkpe" method="POST">
-          <div class="fgroup">
-            <label for="fn">Full Name</label>
-            <input id="fn" type="text" name="name" placeholder="Your name" required/>
-          </div>
-          <div class="fgroup">
-            <label for="fe">Email</label>
-            <input id="fe" type="email" name="email" placeholder="you@company.com" required/>
-          </div>
-          <div class="fgroup">
-            <label for="fm">Message</label>
-            <textarea id="fm" name="message" rows="5" placeholder="Describe the mission..." required></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit" style="width:100%;border:none;justify-content:center">
-            Transmit Message ↗
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Hidden terminal -->
-<div id="hterminal">
-  <span class="t-cmd">sangit@vault</span>:<span style="color:var(--gold)">~$</span> sudo find / -name "*.gap" -delete<br>
-  <span class="t-cmt"># Removing all control gaps...</span><br>
-  <span style="color:var(--patina)">Done. 0 findings. Management astonished. Auditor suspicious.</span>
-  <span class="t-cmt"> # this has never happened in the history of audit</span>
+<!-- ═ SCROLL HINT ═ -->
+<div class="scroll-hint" id="scrollHint">
+  <span>Scroll to turn page</span>
+  <div class="scroll-track"><div class="scroll-thumb"></div></div>
 </div>
 
-<footer>
-  <div class="w">
-    <div class="foot-inner">
-      <span>© 2026 <span class="hl">SANGIT.PANT</span></span>
-      <span style="font-size:0.46rem;color:var(--disabled)">
-        GRC · IS AUDIT · vISO
-        <span class="foot-secret"> — all controls compliant · no findings · signal clear</span>
-      </span>
-      <span>NPL · LAT 27°40′N</span>
+<!-- ═ CLASSIFICATION BANNER ═ -->
+<div class="class-banner">
+  ◆ SANGIT PANT · GRC &amp; IS AUDIT DOSSIER · REF: SP-2026-GRC-001 · CLASSIFICATION: PROFESSIONAL ◆
+</div>
+
+<!-- ═════════════════════════════════
+     NAV SPINE
+     ═════════════════════════════════ -->
+<div id="nav-spine">
+  <div class="spine-logo" id="spineLogo" title="Home"></div>
+  <div class="spine-tabs">
+    <div class="spine-tab active" data-target="cover" title="Cover Sheet">
+      <span class="spine-tab-label">Cover</span>
+    </div>
+    <div class="spine-tab" data-target="about" title="Dossier">
+      <span class="spine-tab-label">Dossier</span>
+    </div>
+    <div class="spine-tab" data-target="experience" title="Ops Log">
+      <span class="spine-tab-label">Ops Log</span>
+    </div>
+    <div class="spine-tab" data-target="arsenal" title="Arsenal">
+      <span class="spine-tab-label">Arsenal</span>
+    </div>
+    <div class="spine-tab" data-target="projects" title="Projects">
+      <span class="spine-tab-label">Projects</span>
+    </div>
+    <div class="spine-tab" data-target="intel" title="Intel">
+      <span class="spine-tab-label">Intel</span>
+    </div>
+    <div class="spine-tab" data-target="education" title="Training">
+      <span class="spine-tab-label">Training</span>
+    </div>
+    <div class="spine-tab" data-target="contact" title="Contact">
+      <span class="spine-tab-label">Contact</span>
     </div>
   </div>
-</footer>
+  <div class="spine-page-counter" id="spineCounter">PG 01 / 08</div>
+</div>
 
-<!-- ════════════════ JAVASCRIPT ENGINE ════════════════ -->
+<!-- ═════════════════════════════════
+     FILE AREA — THE PAGES
+     ═════════════════════════════════ -->
+<div id="file-area">
+
+  <!-- ══════════ PAGE 1: COVER SHEET ══════════ -->
+  <div class="audit-page" id="cover" data-page="1">
+    <div class="page-sheet aged">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div>
+            <div class="page-doc-id">
+              Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Type: <strong>Professional Dossier</strong>
+            </div>
+            <div class="page-doc-id" style="margin-top:3px">Issuer: <strong>Sangit Pant</strong> &nbsp;·&nbsp; Jurisdiction: Nepal &amp; International</div>
+          </div>
+          <div class="page-classification">Verified</div>
+          <div class="page-num">Page 01 of 08</div>
+        </div>
+
+        <div class="cover-content">
+          <div class="cover-top rv s2">
+            <div class="cover-title-block">
+              <div class="cover-agency">Vairav Technology Security Pvt. Ltd. · Kathmandu, Nepal</div>
+              <div class="paper-eyebrow">IS Audit · GRC · vISO</div>
+              <h1 class="paper-h1" id="coverName">
+                Sangit<br><span class="accent">Pant.</span>
+              </h1>
+              <div style="font-family:var(--f-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:oklch(45% 0.006 95);margin-top:10px;margin-bottom:18px">
+                GRC Analyst &nbsp;·&nbsp; IS Auditor &nbsp;·&nbsp; vISO &nbsp;·&nbsp; ISO 27001 Lead Auditor
+              </div>
+              <p class="paper-body" style="max-width:460px">
+                I translate <strong>regulatory complexity</strong> into structured, durable security programs.
+                ISO 27001 to SOC 2. NIST CSF to CMMC. Governance frameworks to
+                <strong>actual controls</strong> — because compliance that only lives on paper protects no one.
+              </p>
+            </div>
+            <div class="cover-ref-block rv s3">
+              <div>Date Filed</div>
+              <div style="color:var(--ink);font-weight:600">2026</div>
+              <div style="margin-top:8px">Status</div>
+              <div style="color:oklch(42% 0.09 78);font-weight:600">OPEN TO OPPTYS.</div>
+              <div style="margin-top:8px">Location</div>
+              <div style="color:var(--ink)">Lalitpur, Nepal</div>
+              <div style="margin-top:8px">Ref. No.</div>
+              <div style="color:var(--ink)">SP-GRC-001</div>
+            </div>
+          </div>
+
+          <div>
+            <!-- Watermark stamp -->
+            <div class="cover-stamp-wrap" id="coverStamp">
+              <div class="cover-stamp">CLEARED<br>&amp;<br>VERIFIED</div>
+            </div>
+
+            <div class="paper-rule-double rv s4"></div>
+
+            <div class="paper-stats rv s5">
+              <div class="paper-stat">
+                <div class="paper-stat-num"><span class="ctr" data-t="8">0</span><span class="paper-stat-sup">+</span></div>
+                <div class="paper-stat-label">Certifications</div>
+              </div>
+              <div class="paper-stat">
+                <div class="paper-stat-num"><span class="ctr" data-t="12">0</span><span class="paper-stat-sup">+</span></div>
+                <div class="paper-stat-label">Frameworks</div>
+              </div>
+              <div class="paper-stat">
+                <div class="paper-stat-num"><span class="ctr" data-t="2">0</span></div>
+                <div class="paper-stat-label">GRC Platforms Built</div>
+              </div>
+              <div class="paper-stat">
+                <div class="paper-stat-num"><span class="ctr" data-t="2">0</span><span class="paper-stat-sup">yr</span></div>
+                <div class="paper-stat-label">Field Experience</div>
+              </div>
+            </div>
+
+            <div class="paper-rule rv s6"></div>
+
+            <div class="cover-bottom rv s6">
+              <div class="cover-field">
+                <div class="cover-field-key">Primary Discipline</div>
+                <div class="cover-field-val">GRC &amp; IS Auditing</div>
+              </div>
+              <div class="cover-field">
+                <div class="cover-field-key">Active Status</div>
+                <div class="cover-field-val">Open to Opportunities</div>
+              </div>
+              <div class="cover-field">
+                <div class="cover-field-key">Scope</div>
+                <div class="cover-field-val">Global / Remote + Nepal</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;margin-top:28px" class="rv s7">
+              <a href="#contact" class="btn-paper btn-paper-primary">Open Channel</a>
+              <a href="#about" class="btn-paper btn-paper-secondary">View Full Dossier</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barcode decoration -->
+        <div class="cover-barcode" id="covBarcode" aria-hidden="true"></div>
+
+        <!-- Seal decoration -->
+        <div class="cover-seal" aria-hidden="true">
+          Sangit<br>Pant<br>GRC<br>LALITPUR<br>NEPAL
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">Classification: Professional · Distribution: Public</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 02 — Personnel Dossier</div>
+  </div>
+
+  <!-- ══════════ PAGE 2: ABOUT / DOSSIER ══════════ -->
+  <div class="audit-page" id="about" data-page="2">
+    <div class="page-sheet">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div>
+            <div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>02 — Personnel Dossier</strong></div>
+          </div>
+          <div class="page-classification">Dossier</div>
+          <div class="page-num">Page 02 of 08</div>
+        </div>
+
+        <div class="paper-eyebrow rv">Personnel Dossier</div>
+        <h2 class="paper-h2 rv s1">Access<br><em>Granted.</em></h2>
+
+        <!-- ID Card style row -->
+        <div style="display:grid;grid-template-columns:130px 1fr;gap:24px;margin-bottom:28px;position:relative" class="rv s2">
+          <div>
+            <div class="photo-id-frame">
+              <img src="assets/new.jpg" alt="Sangit Pant" loading="lazy"/>
+            </div>
+            <div class="photo-id-label">ID / GRC-001</div>
+          </div>
+          <div>
+            <div class="form-row">
+              <div class="form-label">Full Name</div>
+              <div class="form-value" style="font-weight:600">Sangit Pant</div>
+            </div>
+            <div class="form-row">
+              <div class="form-label">Designation</div>
+              <div class="form-value">GRC &amp; IS Audit Professional</div>
+            </div>
+            <div class="form-row">
+              <div class="form-label">Email</div>
+              <div class="form-value"><a href="mailto:sangitpant12@gmail.com">sangitpant12@gmail.com</a></div>
+            </div>
+            <div class="form-row">
+              <div class="form-label">Phone</div>
+              <div class="form-value">+977 9864729477</div>
+            </div>
+            <div class="form-row">
+              <div class="form-label">Location</div>
+              <div class="form-value">Lalitpur, Nepal · LAT 27°40′N</div>
+            </div>
+            <div class="form-row">
+              <div class="form-label">LinkedIn</div>
+              <div class="form-value"><a href="https://linkedin.com/in/sangit-pant" target="_blank" rel="noopener">linkedin.com/in/sangit-pant</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper-rule rv s3"></div>
+
+        <div class="rv s3">
+          <p class="paper-body" style="margin-bottom:14px">
+            I'm a <strong>GRC and IS Audit professional</strong> with hands-on experience across the compliance spectrum —
+            from <span class="hl-yellow">ISO 27001</span> and <span class="hl-yellow">SOC 2</span> to <span class="hl-green">NIST CSF</span>, <span class="hl-green">CMMC</span>, and <span class="hl-green">IEC 62443</span>.
+            My work lives at the intersection of risk, governance, and technology — making the complex legible,
+            and the abstract actionable.
+          </p>
+          <p class="paper-body" style="margin-bottom:14px;position:relative">
+            <span class="margin-bracket" style="top:0;bottom:0"></span>
+            <span class="margin-note">key function: vISO advisory for financial clients</span>
+            I have experience in IT risk assessments, control gap analysis, ISMS documentation, and audit evidence preparation.
+            As a <strong>Virtual Information Security Officer (vISO)</strong>, I've bridged governance requirements
+            with real technical controls for a financial institution — not as a checkbox exercise,
+            but as a durable security posture with ownership.
+          </p>
+          <p class="paper-body">
+            Beyond client delivery, I build. <em>BrahmaGrid</em> and <em>Khatra GRC</em> are my experiments
+            in using technology to make compliance less painful and more continuous.
+          </p>
+        </div>
+
+        <div class="paper-rule rv s4"></div>
+
+        <div class="rv s4">
+          <div class="paper-eyebrow" style="margin-bottom:12px">Framework Coverage</div>
+          <div class="paper-tags" id="fwTagsAbout">
+            <span class="paper-tag" data-fw="ISO 27001">ISO 27001</span>
+            <span class="paper-tag" data-fw="SOC 2">SOC 2</span>
+            <span class="paper-tag" data-fw="NIST CSF">NIST CSF</span>
+            <span class="paper-tag" data-fw="CMMC">CMMC</span>
+            <span class="paper-tag" data-fw="GDPR">GDPR</span>
+            <span class="paper-tag" data-fw="IEC 62443">IEC 62443</span>
+            <span class="paper-tag" data-fw="ISO 42001">ISO 42001</span>
+            <span class="paper-tag" data-fw="ISO 9001">ISO 9001</span>
+            <span class="paper-tag" data-fw="ISO 14001">ISO 14001</span>
+            <span class="paper-tag" data-fw="ISO 20000-1">ISO 20000-1</span>
+            <span class="paper-tag" data-fw="NRB IT">NRB IT</span>
+            <span class="paper-tag" data-fw="NRB CRG">NRB CRG</span>
+            <span class="paper-tag" data-fw="Cyber Essentials">Cyber Essentials</span>
+            <span class="paper-tag" data-fw="Cyber Essentials Plus">Cyber Essentials Plus</span>
+            <span class="paper-tag" data-fw="Nepal Insurance IT Guidelines">Nepal Insurance IT</span>
+          </div>
+        </div>
+
+        <div class="paper-rule rv s5"></div>
+
+        <!-- Service grid (4-up) -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" class="rv s5">
+          <div class="proj-paper-card">
+            <div class="proj-paper-corner"></div>
+            <div style="font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50%,0.006,95);margin-bottom:4px">01</div>
+            <div class="proj-paper-title" style="font-size:1.1rem">GRC Programs</div>
+            <div style="font-size:0.8rem;color:oklch(28% 0.005 95);line-height:1.65;margin-top:6px">Framework implementation, gap analysis, SoA, ISMS documentation, Policies &amp; Procedures.</div>
+          </div>
+          <div class="proj-paper-card">
+            <div class="proj-paper-corner"></div>
+            <div style="font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50%,0.006,95);margin-bottom:4px">02</div>
+            <div class="proj-paper-title" style="font-size:1.1rem">IS Auditing</div>
+            <div style="font-size:0.8rem;color:oklch(28% 0.005 95);line-height:1.65;margin-top:6px">Evidence collection, control testing, management-level compliance reporting.</div>
+          </div>
+          <div class="proj-paper-card">
+            <div class="proj-paper-corner"></div>
+            <div style="font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50%,0.006,95);margin-bottom:4px">03</div>
+            <div class="proj-paper-title" style="font-size:1.1rem">Risk Management</div>
+            <div style="font-size:0.8rem;color:oklch(28% 0.005 95);line-height:1.65;margin-top:6px">IT risk assessments, STRIDE threat modeling, risk registers, risk treatment plans.</div>
+          </div>
+          <div class="proj-paper-card">
+            <div class="proj-paper-corner"></div>
+            <div class="proj-paper-corner"></div>
+            <div style="font-family:var(--f-mono);font-size:0.4rem;letter-spacing:0.16em;text-transform:uppercase;color:oklch(50%,0.006,95);margin-bottom:4px">04</div>
+            <div class="proj-paper-title" style="font-size:1.1rem">Security Assessments</div>
+            <div style="font-size:0.8rem;color:oklch(28% 0.005 95);line-height:1.65;margin-top:6px">EDR &amp; AV evaluation, vulnerability assessments, control gap analysis.</div>
+          </div>
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Section 02 · Personnel Dossier</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 03 — Operations Log</div>
+  </div>
+
+  <!-- ══════════ PAGE 3: EXPERIENCE ══════════ -->
+  <div class="audit-page" id="experience" data-page="3">
+    <div class="page-sheet grid-bg">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>03 — Operations Log</strong></div></div>
+          <div class="page-classification">Mission History</div>
+          <div class="page-num">Page 03 of 08</div>
+        </div>
+
+        <div class="paper-eyebrow rv">Operations Log</div>
+        <h2 class="paper-h2 rv s1">Mission<br><em>History.</em></h2>
+
+        <div style="margin-top:8px">
+          <!-- Entry 1 -->
+          <div class="timeline-entry rv s2" id="expEntry1">
+            <div class="timeline-date">Jan 2025<br>— Present</div>
+            <div class="timeline-dot-col">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+            <div class="timeline-body">
+              <div class="timeline-role">Associate IS Auditor &amp; GRC Analyst</div>
+              <div class="timeline-org">Vairav Technology Security Pvt. Ltd. · Kathmandu &nbsp;<span style="color:oklch(42% 0.09 78);font-size:0.42rem;border:1px solid;padding:1px 5px;border-radius:1px">ACTIVE</span></div>
+              <ul class="timeline-points">
+                <li>Supported IT risk assessments and IS audits for technology and regulated clients, adapting scope to each client's risk profile.</li>
+                <li>Conducted Internal Audits against ISO 27001, SOC 2, NIST CSF, CMMC, and IEC 62443 — sometimes all in the same quarter.</li>
+                <li>Performed STRIDE threat modeling and identified control gaps across people, process, and technology layers.</li>
+                <li>Developed GRC documentation — policies, risk registers, Statements of Applicability, and control mapping matrices.</li>
+                <li>Prepared audit evidence packages, vulnerability assessment reports, and executive-level compliance dashboards.</li>
+                <li>Served as <strong>vISO</strong> for a financial institution client — providing ongoing governance advisory and regulatory alignment.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Entry 2 -->
+          <div class="timeline-entry rv s3" id="expEntry2">
+            <div class="timeline-date">Sep 2024<br>— Jan 2025</div>
+            <div class="timeline-dot-col">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+            <div class="timeline-body">
+              <div class="timeline-role">IS Auditor &amp; GRC Intern</div>
+              <div class="timeline-org">Vairav Technology Security Pvt. Ltd. · Kathmandu</div>
+              <ul class="timeline-points">
+                <li>Drafted ISMS documentation aligned to ISO/IEC 27001, SOC 2, and adjacent standards — learning that a good policy is also good writing.</li>
+                <li>Supported internal IS audits and compliance assessments: evidence collection, control testing, audit reporting.</li>
+                <li>Contributed to risk identification, control mapping, and structured audit documentation processes.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Entry 3 -->
+          <div class="timeline-entry rv s4" id="expEntry3">
+            <div class="timeline-date">Jan 2023<br>— Feb 2024</div>
+            <div class="timeline-dot-col">
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-body">
+              <div class="timeline-role">Freelance Content Writer</div>
+              <div class="timeline-org">Hansikar Technologies · Kathmandu</div>
+              <ul class="timeline-points">
+                <li>Delivered structured web content with SEO optimization — building the documentation precision and clear communication that now anchors every GRC deliverable.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Redacted entry easter egg -->
+        <div class="paper-rule rv s5"></div>
+        <div class="rv s6" style="font-family:var(--f-mono);font-size:0.55rem;color:oklch(45% 0.006 95);margin-top:8px">
+          <span style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.44rem">Additional entry — clearance required:</span><br><br>
+          [REDACTED OPERATION] &nbsp;·&nbsp;
+          <span class="redacted" data-secret="Solved a compliance gap so fast the client thought it was already done" id="redact1">████████████████████████████████████</span>
+          &nbsp;·&nbsp; Duration: <span class="redacted" data-secret="Unreasonably fast">████████</span>
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Section 03 · Operations Log</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 04 — Arsenal / Certifications</div>
+  </div>
+
+  <!-- ══════════ PAGE 4: CERTIFICATIONS ══════════ -->
+  <div class="audit-page" id="arsenal" data-page="4">
+    <div class="page-sheet">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>04 — Clearance Credentials</strong></div></div>
+          <div class="page-classification">Arsenal</div>
+          <div class="page-num">Page 04 of 08</div>
+        </div>
+
+        <div class="paper-eyebrow rv">Arsenal</div>
+        <h2 class="paper-h2 rv s1">Clearance<br><em>Credentials.</em></h2>
+
+        <div class="rv s2">
+          <div class="cert-row">
+            <div class="cert-idx">01</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">Mastermind Assurance</div>
+              <div class="cert-title">ISO/IEC 42001:2023 Lead Auditor</div>
+            </div>
+            <div class="cert-year-badge" data-y="2026">2026</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">02</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">Mastermind Assurance</div>
+              <div class="cert-title">ISO/IEC 27001:2022 Lead Auditor</div>
+            </div>
+            <div class="cert-year-badge" data-y="2025">2025</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">03</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">ICTTF</div>
+              <div class="cert-title">Certified Ransomware Protection Officer</div>
+            </div>
+            <div class="cert-year-badge" data-y="2025">2025</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">04</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">ICTTF</div>
+              <div class="cert-title">Certified SME Cyber Security Officer</div>
+            </div>
+            <div class="cert-year-badge" data-y="2025">2025</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">05</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">ISC²</div>
+              <div class="cert-title">Certified in Cybersecurity (CC)</div>
+            </div>
+            <div class="cert-year-badge" data-y="2024">2024</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">06</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">SkillFront</div>
+              <div class="cert-title">ISO/IEC 27001 Information Security Associate</div>
+            </div>
+            <div class="cert-year-badge" data-y="2024">2024</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">07</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">Google / Coursera</div>
+              <div class="cert-title">Play It Safe: Manage Security Risks</div>
+            </div>
+            <div class="cert-year-badge" data-y="2023">2023</div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-idx">08</div>
+            <div class="cert-name-block">
+              <div class="cert-issuer-label">Google / Coursera</div>
+              <div class="cert-title">Foundations of Cybersecurity</div>
+            </div>
+            <div class="cert-year-badge" data-y="2023">2023</div>
+          </div>
+        </div>
+
+        <!-- Annotation at the bottom -->
+        <div class="paper-rule rv s3"></div>
+        <div class="rv s4" style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(45% 0.006 95);line-height:1.8">
+          <strong style="color:var(--ink)">Auditor's Note:</strong> 8 certifications documented. Credential fatigue: <span class="redacted" data-secret="Real, but worth it">██████████████</span>.
+          Next target: <span class="redacted" data-secret="Something with CISM written on it">█████████████████████████████</span>.
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Section 04 · Clearance Credentials</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 05 — Active Projects</div>
+  </div>
+
+  <!-- ══════════ PAGE 5: PROJECTS ══════════ -->
+  <div class="audit-page" id="projects" data-page="5">
+    <div class="page-sheet aged">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>05 — Classified Operations</strong></div></div>
+          <div class="page-classification">Restricted</div>
+          <div class="page-num">Page 05 of 08</div>
+        </div>
+
+        <div class="paper-eyebrow rv">Classified Operations</div>
+        <h2 class="paper-h2 rv s1">Active<br><em>Builds.</em></h2>
+
+        <div class="rv s2">
+          <div class="proj-paper-card" id="projCard1">
+            <div class="proj-paper-corner"></div>
+            <div class="proj-status">In Development</div>
+            <div style="font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.18em;text-transform:uppercase;color:oklch(50% 0.006 95);margin-bottom:6px">Project — 001</div>
+            <div class="proj-paper-title">BrahmaGrid</div>
+            <div class="proj-paper-sub">GRC Automation Platform</div>
+            <p class="proj-paper-desc">
+              A GRC platform designed to streamline compliance workflows, automate evidence collection,
+              and manage audit readiness across multiple frameworks — so audit season stops being a fire drill.
+            </p>
+            <div class="proj-paper-tags">
+              <span class="proj-paper-tag">GRC</span>
+              <span class="proj-paper-tag">Automation</span>
+              <span class="proj-paper-tag">Multi-framework</span>
+              <span class="proj-paper-tag">SaaS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rv s3" style="margin-top:14px">
+          <div class="proj-paper-card" id="projCard2">
+            <div class="proj-paper-corner"></div>
+            <div class="proj-status">In Development</div>
+            <div style="font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.18em;text-transform:uppercase;color:oklch(50% 0.006 95);margin-bottom:6px">Project — 002</div>
+            <div class="proj-paper-title">Khatra GRC</div>
+            <div class="proj-paper-sub">Risk Intelligence Tool</div>
+            <p class="proj-paper-desc">
+              An intelligent risk management tool that maps threats to controls, generates risk registers,
+              and provides continuous compliance posture visibility — because <em>khatra</em> (danger) should surface
+              in a dashboard, not in an audit finding.
+            </p>
+            <div class="proj-paper-tags">
+              <span class="proj-paper-tag">Risk Intel</span>
+              <span class="proj-paper-tag">Threat Mapping</span>
+              <span class="proj-paper-tag">Controls</span>
+              <span class="proj-paper-tag">Dashboard</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper-rule rv s4"></div>
+        <div class="rv s5" style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(45% 0.006 95)">
+          Status of third project: <span class="redacted" data-secret="Still a napkin sketch. The controls are abstract but the ambition is real.">████████████████████████████████████████████████████</span>
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Section 05 · Classified Operations</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 06 — Intel Reports</div>
+  </div>
+
+  <!-- ══════════ PAGE 6: INTEL ══════════ -->
+  <div class="audit-page" id="intel" data-page="6">
+    <div class="page-sheet">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>06 — Intel Reports</strong></div></div>
+          <div class="page-classification">Field Dispatch</div>
+          <div class="page-num">Page 06 of 08</div>
+        </div>
+
+        <div class="paper-eyebrow rv">Intel Reports</div>
+        <h2 class="paper-h2 rv s1">Field<br><em>Dispatches.</em></h2>
+
+        <div class="rv s2">
+          <a href="https://www.linkedin.com/pulse/soc-2-iso-27001-useless-really-sangit-pant-aazsc/"
+             target="_blank" rel="noopener" class="intel-paper" style="display:block;text-decoration:none;color:inherit">
+            <div class="intel-paper-top">
+              <div class="intel-paper-issue">Dispatch No. 001 · LinkedIn Article · GRC Strategy</div>
+              <div class="intel-paper-title">
+                <em>SOC 2 and ISO 27001</em> are useless. But are they really?
+              </div>
+              <div style="font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.1em;text-transform:uppercase;color:oklch(50% 0.006 95);margin-top:8px">By Sangit Pant</div>
+            </div>
+            <div class="intel-paper-body">
+              <p>
+                <strong>SOC 2 and ISO 27001 don't stop attacks</strong>, but the absence of their basic controls makes incidents far more likely. A simple guest-Wi-Fi scan exposed a CCTV admin interface. No exploitation, no advanced tools, just missing security hygiene.
+              </p>
+              <p>
+                This article maps that real scenario to specific control failures and explains where compliance genuinely reduces risk — and where it doesn't.
+              </p>
+              <div style="margin-top:16px">
+                <span class="intel-paper-cta">Read Full Report ↗</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="paper-rule rv s3"></div>
+
+        <!-- Forthcoming section -->
+        <div class="rv s3" style="margin-top:8px">
+          <div class="paper-eyebrow" style="margin-bottom:10px">Forthcoming Dispatches</div>
+          <div style="font-family:var(--f-mono);font-size:0.52rem;color:oklch(45% 0.006 95);line-height:2.2">
+            <div style="border-bottom:1px solid oklch(70% 0.005 95/0.4);padding:8px 0;display:flex;justify-content:space-between">
+              <span>Dispatch No. 002 · <span class="redacted" data-secret="STRIDE in Practice: How I threat-modeled a payment gateway">████████████████████████████████████████████</span></span>
+              <span style="color:oklch(45% 0.14 35)">Pending</span>
+            </div>
+            <div style="border-bottom:1px solid oklch(70% 0.005 95/0.4);padding:8px 0;display:flex;justify-content:space-between">
+              <span>Dispatch No. 003 · <span class="redacted" data-secret="Why your ISMS SoA is a work of fiction">█████████████████████████████</span></span>
+              <span style="color:oklch(45% 0.14 35)">Pending</span>
+            </div>
+            <div style="padding:8px 0;display:flex;justify-content:space-between">
+              <span>Dispatch No. 004 · <span class="redacted" data-secret="Building a GRC program from a spreadsheet and sheer stubbornness">████████████████████████████████████████████████</span></span>
+              <span style="color:oklch(45% 0.14 35)">Pending</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Section 06 · Intel Reports</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 07 — Training Records</div>
+  </div>
+
+  <!-- ══════════ PAGE 7: EDUCATION ══════════ -->
+  <div class="audit-page" id="education" data-page="7">
+    <div class="page-sheet grid-bg">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>07 — Training Records</strong></div></div>
+          <div class="page-classification">Academic</div>
+          <div class="page-num">Page 07 of 08</div>
+        </div>
+
+        <div class="paper-eyebrow rv">Training Records</div>
+        <h2 class="paper-h2 rv s1">Academic<br><em>Foundation.</em></h2>
+
+        <div class="edu-paper rv s2">
+          <div>
+            <div class="edu-paper-degree">Bachelor of Science In Information Technology (BSIT)</div>
+            <div class="edu-paper-sub gold">Concentration: CyberSecurity</div>
+            <div class="edu-paper-sub patina" id="gpaEl">GPA: 4.0 — <span class="redacted" data-secret="The GPA that cost a social life">████████████████████</span></div>
+            <div class="edu-paper-school">Presidential Graduate School (Westcliff University)</div>
+          </div>
+          <div class="edu-paper-year">2021–2025</div>
+        </div>
+
+        <div class="paper-rule rv s3"></div>
+
+        <!-- Transcript-style annotation -->
+        <div class="rv s3">
+          <div class="form-row">
+            <div class="form-label">Degree Status</div>
+            <div class="form-value" style="font-weight:600">Completed</div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">GPA</div>
+            <div class="form-value" style="font-weight:600;color:oklch(42% 0.09 78)">4.0 / 4.0</div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Institution</div>
+            <div class="form-value">Presidential Graduate School (Westcliff University)</div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Concentration</div>
+            <div class="form-value">CyberSecurity</div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Period</div>
+            <div class="form-value">2021 — 2025</div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Examiner's Note</div>
+            <div class="form-value" style="font-style:italic">
+              <span class="redacted" data-secret="Student asked why the risk register template was wrong. Examiner had no answer.">████████████████████████████████████████████████████████</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="paper-rule rv s4"></div>
+
+        <div class="rv s5" style="font-size:0.82rem;color:oklch(35% 0.005 95);line-height:1.8;font-style:italic;font-family:var(--f-mono);font-size:0.52rem">
+          * Academic performance is officially documented. Any claims of a social life during this period are
+          <span class="redacted" data-secret="unsubstantiated">████████████████</span>.
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Section 07 · Training Records</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-separator">
+    <div class="page-tab">§ 08 — Secure Channel</div>
+  </div>
+
+  <!-- ══════════ PAGE 8: CONTACT ══════════ -->
+  <div class="audit-page" id="contact" data-page="8">
+    <div class="page-sheet aged">
+      <div class="punch-holes">
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div><div class="punch-hole"></div>
+        <div class="punch-hole"></div>
+      </div>
+      <div class="page-content">
+        <div class="page-header rv">
+          <div><div class="page-doc-id">Document: <strong>SP-2026-GRC-001</strong> &nbsp;·&nbsp; Section: <strong>08 — Secure Channel</strong></div></div>
+          <div class="page-classification">Open Channel</div>
+          <div class="page-num">Page 08 of 08</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:44px">
+          <div>
+            <div class="paper-eyebrow rv">Secure Channel</div>
+            <h2 class="paper-h2 rv s1">Let's<br><em>Connect.</em></h2>
+            <p class="paper-body rv s2" style="margin-bottom:24px">
+              Open to GRC, IS Audit, and compliance roles.
+              Need an Internal Auditor, GRC Analyst, or someone to build your security program from first principles — the channel is open.
+            </p>
+
+            <div class="rv s3">
+              <a href="mailto:sangitpant12@gmail.com" class="form-row" style="display:grid;text-decoration:none;color:inherit;transition:background 0.15s;border-top:1px solid oklch(70% 0.005 95/0.5)">
+                <div style="display:contents">
+                  <div class="form-label">Email</div>
+                  <div class="form-value">sangitpant12@gmail.com</div>
+                </div>
+              </a>
+              <a href="tel:+9779864729477" class="form-row" style="display:grid;text-decoration:none;color:inherit">
+                <div style="display:contents">
+                  <div class="form-label">Phone</div>
+                  <div class="form-value">+977 9864729477</div>
+                </div>
+              </a>
+              <a href="https://linkedin.com/in/sangit-pant" target="_blank" rel="noopener" class="form-row" style="display:grid;text-decoration:none;color:inherit">
+                <div style="display:contents">
+                  <div class="form-label">LinkedIn</div>
+                  <div class="form-value"><a href="https://linkedin.com/in/sangit-pant" target="_blank" style="color:oklch(42% 0.09 78)">linkedin.com/in/sangit-pant</a></div>
+                </div>
+              </a>
+              <div class="form-row">
+                <div class="form-label">Location</div>
+                <div class="form-value">Lalitpur, Nepal</div>
+              </div>
+            </div>
+
+            <!-- Final stamp -->
+            <div style="margin-top:28px;display:inline-block;transform:rotate(-4deg)" class="rv s5">
+              <div style="font-family:var(--f-mono);font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 14px;border:3px solid oklch(42% 0.09 78);color:oklch(42% 0.09 78);border-radius:1px;line-height:1.3;text-align:center">
+                OPEN TO<br>OPPORTUNITIES
+              </div>
+            </div>
+          </div>
+
+          <div class="rv s3">
+            <div style="font-family:var(--f-mono);font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:oklch(45% 0.006 95);margin-bottom:16px">Message Form — Ref: SP-2026</div>
+            <form class="paper-form" action="https://formspree.io/f/xvgorkpe" method="POST">
+              <div class="paper-fgroup">
+                <label for="fn">Full Name</label>
+                <input id="fn" type="text" name="name" placeholder="Your name" required/>
+              </div>
+              <div class="paper-fgroup">
+                <label for="fe">Email</label>
+                <input id="fe" type="email" name="email" placeholder="you@company.com" required/>
+              </div>
+              <div class="paper-fgroup">
+                <label for="fm">Message</label>
+                <textarea id="fm" name="message" rows="5" placeholder="Describe the mission..." required></textarea>
+              </div>
+              <button class="btn-paper btn-paper-primary" type="submit" style="width:100%;justify-content:center;border:none">
+                Transmit Message ↗
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- End of file notation -->
+        <div class="paper-rule rv s6" style="margin-top:32px"></div>
+        <div class="paper-rule rv s6" style="margin-top:4px"></div>
+        <div class="rv s7" style="text-align:center;margin-top:12px;font-family:var(--f-mono);font-size:0.44rem;letter-spacing:0.2em;text-transform:uppercase;color:oklch(50% 0.006 95)">
+          ◆ END OF DOCUMENT · SP-2026-GRC-001 · ALL SECTIONS COMPLETE ◆
+        </div>
+        <div class="rv s8" style="text-align:center;margin-top:8px;font-family:var(--f-mono);font-size:0.38rem;letter-spacing:0.14em;color:oklch(60% 0.005 95)">
+          Compiled 2026 · Lalitpur, Nepal · GRC · IS Audit · vISO
+          <span id="footSecret" style="max-width:0;overflow:hidden;display:inline-block;white-space:nowrap;transition:max-width 1.2s var(--ease-out);color:oklch(42% 0.09 78);vertical-align:middle"> · all controls compliant · no findings · signal clear</span>
+        </div>
+
+        <div class="page-footer rv s8">
+          <div class="page-footer-text">SP-2026-GRC-001 · Final Section · Distribution: Public</div>
+          <div class="page-footer-logo">SANGIT.PANT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom padding -->
+  <div style="height:80px"></div>
+
+</div><!-- /file-area -->
+
+<!-- ═════════════════════════════════
+     JAVASCRIPT ENGINE
+     ═════════════════════════════════ -->
 <script>
 (function(){
 'use strict';
 
-/* ─────────────── LOADER ─────────────── */
+/* ─────── LOADER ─────── */
 const loader   = document.getElementById('loader');
 const lbar     = document.getElementById('lbar');
 const llabel   = document.getElementById('llabel');
-const loaderMark = document.querySelector('.loader-mark');
+const loaderFile = document.getElementById('loaderFile');
 
-const loadSteps = [
-  {pct:10,  label:'Parsing compliance frameworks'},
-  {pct:28,  label:'Mapping controls to risks'},
-  {pct:46,  label:'Verifying clearance'},
-  {pct:64,  label:'Staging evidence packages'},
-  {pct:82,  label:'Finalizing ISMS documentation'},
+const steps = [
+  {pct:12,  label:'Opening file...'},
+  {pct:28,  label:'Verifying classification'},
+  {pct:44,  label:'Parsing compliance frameworks'},
+  {pct:60,  label:'Mapping controls to risks'},
+  {pct:78,  label:'Staging evidence packages'},
   {pct:100, label:'Access granted'},
 ];
-
 let lStep = 0;
 function runLoader(){
-  loaderMark.parentElement.classList.add('mark-in');
+  loaderFile.classList.add = loaderFile.classList.add;
+  loaderFile.style.opacity='1'; loaderFile.style.transform='none'; loaderFile.style.transition='opacity 0.5s,transform 0.5s';
   function tick(){
-    if(lStep >= loadSteps.length){
-      setTimeout(()=>{
-        loader.classList.add('out');
-        startHero();
-      }, 340);
-      return;
+    if(lStep>=steps.length){
+      setTimeout(()=>{loader.classList.add('out');startHero()},360);return;
     }
-    const s = loadSteps[lStep++];
-    lbar.style.width = s.pct + '%';
-    llabel.style.opacity = '0';
-    llabel.style.transform = 'translateY(-8px)';
+    const s=steps[lStep++];
+    lbar.style.width=s.pct+'%';
+    llabel.style.opacity='0';llabel.style.transform='translateY(-6px)';
     setTimeout(()=>{
-      llabel.textContent = s.label;
-      llabel.style.transition = 'opacity 0.3s,transform 0.3s';
-      llabel.style.opacity = '1';
-      llabel.style.transform = 'none';
-    }, 160);
-    setTimeout(tick, s.pct === 100 ? 480 : 360 + Math.random()*140);
+      llabel.textContent=s.label;
+      llabel.style.transition='opacity 0.3s,transform 0.3s';
+      llabel.style.opacity='1';llabel.style.transform='none';
+    },140);
+    setTimeout(tick, s.pct===100 ? 450 : 340+Math.random()*160);
   }
-  setTimeout(tick, 350);
+  setTimeout(tick,300);
 }
-runLoader();
+setTimeout(runLoader,100);
 
-/* ─────────────── HERO ENTRANCE ─────────────── */
+/* ─────── HERO START ─────── */
 function startHero(){
-  // Name: clip-path line reveal
-  const w1 = document.getElementById('w1');
-  const w2 = document.getElementById('w2');
-  if(w1){ w1.style.transform = 'none'; w1.style.transition = 'transform 1.1s cubic-bezier(0.23,1,0.32,1)' }
-  if(w2){ w2.style.transform = 'none'; w2.style.transition = 'transform 1.1s cubic-bezier(0.23,1,0.32,1) 0.12s' }
-  // Tag line
+  // Reveal all rv elements in viewport
+  observeAll();
+  // Show cover stamp after short delay
   setTimeout(()=>{
-    ['htag','hroles','hdesc','hctas','hscroll'].forEach((id,i)=>{
-      const el = document.getElementById(id);
-      if(el){ el.classList.add('in'); el.style.transitionDelay = (i*0.15)+'s' }
-    });
-  }, 300);
-  // Trigger rv elements already in viewport
-  setTimeout(observeAll, 600);
+    const stamp=document.getElementById('coverStamp');
+    if(stamp) stamp.classList.add('visible');
+  },800);
+  // Generate barcode
+  generateBarcode();
 }
 
-/* ─────────────── CURSOR ─────────────── */
-const curEl   = document.getElementById('cur');
-const curRing = document.getElementById('cur-ring');
-const curDot  = document.getElementById('cur-dot');
-let mx=0, my=0, rx=0, ry=0;
+/* ─────── BARCODE GENERATOR ─────── */
+function generateBarcode(){
+  const bc=document.getElementById('covBarcode');
+  if(!bc)return;
+  const widths=[2,3,2,4,2,3,3,2,4,3,2,2,3,4,2,3,2,3,4,2,3,2,4,3,2,3,2];
+  const heights=[30,36,30,36,28,36,30,36,36,28,30,36,28,36,30,28,36,30,36,28,36,30,36,28,36,30,36];
+  widths.forEach((w,i)=>{
+    const bar=document.createElement('span');
+    bar.style.cssText=`width:${w}px;height:${heights[i]}px;background:oklch(12% 0.006 95)`;
+    bc.appendChild(bar);
+  });
+}
 
-if(curEl){
-  document.addEventListener('mousemove', e=>{
-    mx = e.clientX; my = e.clientY;
-    curDot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+/* ─────── CURSOR ─────── */
+const curEl=document.getElementById('cur');
+const curRing=document.getElementById('cur-ring');
+const curDot=document.getElementById('cur-dot');
+let mx=0,my=0,rx=0,ry=0;
+if(curEl && window.matchMedia('(hover:hover)').matches){
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    curDot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;
   });
   (function animCur(){
-    rx += (mx-rx)*0.13; ry += (my-ry)*0.13;
-    curRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;
+    curRing.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
     requestAnimationFrame(animCur);
   })();
-
-  document.querySelectorAll('a,button,.fw-tag,.cert-card,.proj-card,.stat-cell,.contact-item,.svc-tile,.ctx-item,.seam-node').forEach(el=>{
+  document.querySelectorAll('a,button,.paper-tag,.cert-row,.proj-paper-card,.spine-tab,.ctx-item,.paper-stat').forEach(el=>{
     el.addEventListener('mouseenter',()=>document.body.classList.add('c-hover'));
     el.addEventListener('mouseleave',()=>document.body.classList.remove('c-hover'));
   });
@@ -1906,85 +1958,78 @@ if(curEl){
   document.addEventListener('mouseup',()=>document.body.classList.remove('c-click'));
 }
 
-/* ─────────────── SCROLL: progress + nav + parallax ─────────────── */
-const prog    = document.getElementById('prog');
-const nav     = document.getElementById('nav');
-const hgrid   = document.getElementById('hgrid');
-const hgrid2  = document.getElementById('hgrid2');
-const harcs   = document.getElementById('harcs');
-const htermEl = document.getElementById('hterminal');
-const navLinks = document.querySelectorAll('.nav-links a[data-s]');
+/* ─────── SCROLL ENGINE ─────── */
+const prog=document.getElementById('prog');
+const spineTabs=document.querySelectorAll('.spine-tab');
+const spineCounter=document.getElementById('spineCounter');
+const scrollHint=document.getElementById('scrollHint');
+const footSecret=document.getElementById('footSecret');
+const pages=['cover','about','experience','arsenal','projects','intel','education','contact']
+  .map(id=>({id,el:document.getElementById(id)})).filter(s=>s.el);
 
-const sections = ['about','experience','arsenal','projects','intel','education','contact']
-  .map(id=>({id, el:document.getElementById(id)})).filter(s=>s.el);
-
-let ticking = false;
+let ticking=false;
 function onScroll(){
-  if(!ticking){requestAnimationFrame(doScroll);ticking=true}
+  if(!ticking){requestAnimationFrame(doScroll);ticking=false}
+  ticking=true; requestAnimationFrame(doScroll);
 }
 function doScroll(){
   ticking=false;
-  const st  = window.scrollY;
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = max>0 ? st/max : 0;
+  const st=window.scrollY;
+  const maxSt=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=maxSt>0?st/maxSt:0;
+  if(prog) prog.style.width=(pct*100)+'%';
 
-  if(prog) prog.style.width = (pct*100)+'%';
-  if(nav)  nav.classList.toggle('solid', st>60);
+  // Hide scroll hint
+  if(scrollHint) scrollHint.classList.toggle('hidden',st>200);
 
-  // Parallax — only transform (Emil rule)
-  const p = st*0.22;
-  if(hgrid)  hgrid.style.transform  = `translateY(${p}px)`;
-  if(hgrid2) hgrid2.style.transform = `translateY(${p*0.55}px)`;
-  if(harcs)  harcs.style.transform  = `translateY(${p*0.35}px)`;
-
-  // Timeline SVG draw
-  const tl = document.querySelector('.timeline-path');
-  if(tl){
-    const rect = document.querySelector('.timeline-wrap')?.getBoundingClientRect();
-    if(rect){
-      const prog2 = Math.max(0, Math.min(1, (-rect.top+window.innerHeight*0.3)/(rect.height*0.9)));
-      tl.style.strokeDashoffset = 1000*(1-prog2);
-    }
-  }
-
-  // Active nav link
-  let cur = null;
-  for(const s of sections){
-    const t = s.el.getBoundingClientRect().top;
-    if(t <= window.innerHeight*0.4) cur = s.id;
-  }
-  navLinks.forEach(a=>{
-    a.classList.toggle('active', a.dataset.s === cur);
+  // Active page
+  let curPage=0;
+  pages.forEach((p,i)=>{
+    const rect=p.el.getBoundingClientRect();
+    if(rect.top <= window.innerHeight*0.4) curPage=i;
   });
+  spineTabs.forEach((t,i)=>{
+    t.classList.toggle('active',i===curPage);
+  });
+  if(spineCounter) spineCounter.textContent=`PG ${String(curPage+1).padStart(2,'0')} / 08`;
 
-  // Hidden terminal
-  if(htermEl){
-    const atBottom = (window.innerHeight + st) >= document.documentElement.scrollHeight-4;
-    htermEl.classList.toggle('show', atBottom);
-  }
+  // Footer hover reveal
+  if(footSecret && pct>0.97) footSecret.style.maxWidth='400px';
+
+  // Page-in trigger — sheet appears on scroll
+  pages.forEach(p=>{
+    const rect=p.el.getBoundingClientRect();
+    if(rect.top < window.innerHeight*0.85 && !p.el.classList.contains('page-in')){
+      p.el.classList.add('page-in');
+    }
+  });
 }
-window.addEventListener('scroll', onScroll, {passive:true});
+window.addEventListener('scroll',onScroll,{passive:true});
+// Trigger once
+setTimeout(doScroll,50);
 
-/* ─────────────── REVEAL ON SCROLL ─────────────── */
+/* ─────── REVEAL SYSTEM ─────── */
 function observeAll(){
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting) e.target.classList.add('visible');
-    });
-  },{threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
+  // Pages
+  const po=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('page-in')});
+  },{threshold:0.1});
+  document.querySelectorAll('.audit-page').forEach(p=>po.observe(p));
+
   // Counters
-  const co = new IntersectionObserver(entries=>{
+  const co=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
       if(e.isIntersecting && !e.target.dataset.done){
         e.target.dataset.done='1';
         const target=parseInt(e.target.dataset.t);
-        let v=0;
-        const step=Math.max(1,Math.ceil(target/45));
+        let v=0;const step=Math.max(1,Math.ceil(target/45));
         const t=setInterval(()=>{
-          v=Math.min(v+step,target);
-          e.target.textContent=v;
+          v=Math.min(v+step,target);e.target.textContent=v;
           if(v>=target)clearInterval(t);
         },32);
       }
@@ -1993,14 +2038,24 @@ function observeAll(){
   document.querySelectorAll('.ctr').forEach(el=>co.observe(el));
 }
 
-/* ─────────────── MAGNETIC BUTTONS ─────────────── */
-/* Emil: spring-like micro-translate on hover — only transform */
-document.querySelectorAll('.btn').forEach(btn=>{
-  btn.addEventListener('mousemove', e=>{
-    const r = btn.getBoundingClientRect();
-    const cx = r.left+r.width/2, cy = r.top+r.height/2;
-    const dx = (e.clientX-cx)*0.22, dy = (e.clientY-cy)*0.22;
-    btn.style.transform = `translate(${dx}px,${dy}px)`;
+/* ─────── SPINE NAV ─────── */
+spineTabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const target=document.getElementById(tab.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+document.getElementById('spineLogo')?.addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ─────── MAGNETIC BUTTONS ─────── */
+document.querySelectorAll('.btn-paper').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const dx=(e.clientX-r.left-r.width/2)*0.2;
+    const dy=(e.clientY-r.top-r.height/2)*0.2;
+    btn.style.transform=`translate(${dx}px,${dy}px)`;
   });
   btn.addEventListener('mouseleave',()=>{
     btn.style.transition='transform 0.4s cubic-bezier(0.23,1,0.32,1)';
@@ -2009,45 +2064,9 @@ document.querySelectorAll('.btn').forEach(btn=>{
   });
 });
 
-/* ─────────────── CARD TILT (project cards) ─────────────── */
-document.querySelectorAll('.proj-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const cx=r.left+r.width/2, cy=r.top+r.height/2;
-    const dx=(e.clientX-cx)/r.width, dy=(e.clientY-cy)/r.height;
-    card.style.transform=`perspective(900px) rotateY(${dx*3}deg) rotateX(${-dy*2}deg)`;
-  });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transition='transform 0.5s cubic-bezier(0.23,1,0.32,1),border-color 0.35s,background 0.35s';
-    card.style.transform='';
-    setTimeout(()=>card.style.transition='',520);
-  });
-  card.addEventListener('mouseenter',()=>{
-    card.style.transition='transform 0.1s,border-color 0.35s,background 0.35s';
-  });
-});
-
-/* ─────────────── CERT CARD MAGNETIC ─────────────── */
-document.querySelectorAll('.cert-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const dx=(e.clientX-r.left-r.width/2)*0.04;
-    const dy=(e.clientY-r.top-r.height/2)*0.04;
-    card.style.transform=`translateY(-2px) translate(${dx}px,${dy}px)`;
-  });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transition='transform 0.4s cubic-bezier(0.23,1,0.32,1),border-color 0.25s,box-shadow 0.25s';
-    card.style.transform='translateY(0)';
-    setTimeout(()=>card.style.transition='',440);
-  });
-  card.addEventListener('mouseenter',()=>{
-    card.style.transition='transform 0.12s,border-color 0.25s,box-shadow 0.25s';
-  });
-});
-
-/* ─────────────── TOAST ─────────────── */
+/* ─────── TOAST ─────── */
 let toastTimer=null;
-function toast(msg, type='', dur=3500){
+function toast(msg,type='',dur=3800){
   const el=document.getElementById('t0');
   if(!el)return;
   el.textContent=msg;
@@ -2056,164 +2075,30 @@ function toast(msg, type='', dur=3500){
   toastTimer=setTimeout(()=>el.classList.remove('show'),dur);
 }
 
-/* ═══════════════ EASTER EGGS ═══════════════ */
-
-/* 1. KONAMI → clears all "findings" with a dramatic rewrite */
-let ks=[];
-const KC=[38,38,40,40,37,39,37,39,66,65];
-document.addEventListener('keydown',e=>{
-  ks.push(e.keyCode); ks=ks.slice(-10);
-  if(ks.join(',')===KC.join(',')){
-    ks=[];
-    toast('CLEARANCE: UNRESTRICTED — all audit findings expunged from the record.');
-    // Briefly light the nav mark
-    const g=document.getElementById('nglyph');
-    if(g){
-      g.style.background='oklch(95% 0.22 80)';
-      g.style.transition='background 0.3s';
-      setTimeout(()=>{g.style.background='';},1800);
-    }
-  }
-});
-
-/* 2. TRIPLE CLICK LOGO → fake breach with recovery playbook */
-let lc=0,lt=null;
-const nl=document.getElementById('nlogo');
-if(nl){
-  nl.addEventListener('click',e=>{
-    e.preventDefault(); lc++;
-    clearTimeout(lt);lt=setTimeout(()=>lc=0,520);
-    if(lc>=3){
-      lc=0;
-      const br=document.getElementById('breach');
-      if(br){br.classList.add('flash');setTimeout(()=>br.classList.remove('flash'),3400)}
-      toast('INCIDENT DETECTED — Initiating Annex A.16 response procedure...','alert',2000);
-      setTimeout(()=>toast('Incident contained. RTO: 4 minutes. Auditors will never know.','patina',3200),2400);
-    }
-  });
-}
-
-/* 3. TYPE "audit" → field-specific dry GRC humor */
-let abuf='';
-const auditQuips=[
-  'Scope creep detected. Adding 47 new controls to Statement of Applicability.',
-  'Evidence request sent. ETA: 3 business weeks. Or never.',
-  'Risk register updated. New entry: "auditor arrived early." Severity: HIGH.',
-  'Management review meeting scheduled. Attendance: mandatory. Actual decisions: zero.',
-  '"Just a few questions" — the 6 most expensive words in GRC.',
-];
-let aqIdx=0;
-document.addEventListener('keypress',e=>{
-  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
-  abuf+=e.key.toLowerCase();abuf=abuf.slice(-5);
-  if(abuf==='audit'){
-    toast(auditQuips[aqIdx++ % auditQuips.length],'',3800);
-    abuf='';
-  }
-});
-
-/* 4. TYPE "iso" → version wars */
-let ibuf='';
-const isoLines=[
-  'ISO 27001:2013 deprecated. Please update your ISMS. Again.',
-  'Clause 4.1 context of organization — did you really include "global pandemics" in scope?',
-  'ISO 42001: the AI management standard. Yes, we audit the AI now.',
-  'Statement of Applicability: 114 controls. Applicable: most. Documented: some. Implemented: we\'re getting there.',
-];
-let iIdx=0;
-document.addEventListener('keypress',e=>{
-  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
-  ibuf+=e.key.toLowerCase();ibuf=ibuf.slice(-3);
-  if(ibuf==='iso'){
-    toast(isoLines[iIdx++ % isoLines.length],'',3800);
-    ibuf='';
-  }
-});
-
-/* 5. HOVER PHOTO 3s → classified scan */
-let phTimer=null;
-const pw=document.getElementById('photowrap');
-if(pw){
-  pw.addEventListener('mouseenter',()=>{
-    phTimer=setTimeout(()=>{
-      toast('BIOMETRIC VERIFICATION COMPLETE — Subject: Sangit Pant. Clearance: confirmed. Coffee intake: concerning.','patina',3200);
-    },3000);
-  });
-  pw.addEventListener('mouseleave',()=>clearTimeout(phTimer));
-}
-
-/* 6. CLICK CERT YEAR → year-specific dry humor */
-const yearLines={
-  '2026':'ISO 42001:2023 — auditing the AI that will eventually audit us.',
-  '2025':'Peak credential year. The risk register now has a category called "certification fatigue."',
-  '2024':'The year the CC exam asked about governance and I said "finally, a home turf."',
-  '2023':'Google cert. The one that started it all.',
-};
-document.querySelectorAll('.cert-yr').forEach(el=>{
+/* ─────── REDACTION EASTER EGGS ─────── */
+document.querySelectorAll('.redacted').forEach(el=>{
   el.addEventListener('click',()=>{
-    const y=el.dataset.y;
-    toast(yearLines[y]||'Another cert added. The spreadsheet grows.',''  ,3500);
+    if(el.classList.contains('revealed')){
+      el.classList.remove('revealed');
+    } else {
+      el.classList.add('revealed');
+      el.textContent=el.dataset.secret;
+      toast('Classified information accessed. This will be noted in the audit log.','paper',3200);
+    }
   });
 });
 
-/* 7. CLICK GPA */
-const gpa=document.getElementById('gpa-el');
-if(gpa){
-  gpa.addEventListener('click',()=>{
-    toast('4.0 GPA. My social life sends its regards: 0.0.','patina',3200);
-  });
-}
-
-/* 8. SEAM DIVIDER CLICK → GRC aphorisms */
-const seamLines=[
-  'The gap between a policy and a control is where incidents live.',
-  'The seam holds. So does the ISMS, as long as management actually reads it.',
-  'Every divider is a scope boundary. What\'s in? What\'s out? Document it.',
-  '"This section is not in scope." — the most powerful phrase in audit.',
-];
-let seamIdx=0;
-document.querySelectorAll('.seam').forEach(s=>{
-  s.style.cursor='pointer';
-  s.addEventListener('click',()=>toast(seamLines[seamIdx++ % seamLines.length],'',3500));
-});
-
-/* 9. FRAMEWORK TAG CLICK → framework facts */
-const fwFacts={
-  'ISO 27001': 'ISO 27001: 93 controls in Annex A. You will map them all. Multiple times.',
-  'SOC 2':     'SOC 2: Trust Services Criteria. Not a certification, a report. Auditors will correct you on this.',
-  'NIST CSF':  'NIST CSF: Identify, Protect, Detect, Respond, Recover. Also: document, document, document.',
-  'CMMC':      'CMMC: 110 practices. Now also has "Level 0" which means "please try harder."',
-  'GDPR':      'GDPR: 99 articles. Article 83 is the one everyone actually reads first.',
-  'IEC 62443': 'IEC 62443: OT security. Where GRC meets industrial control systems meets "please don\'t take down the grid."',
-  'ISO 42001': 'ISO 42001: AI management. The standard that lets you audit ChatGPT. Theoretically.',
-  'ISO 9001':  'ISO 9001: Quality management. The one that asks "are you sure you documented that process?"',
-  'ISO 14001': 'ISO 14001: Environmental management. Compliance goes green.',
-  'ISO 20000-1':'ISO 20000-1: IT service management. ITIL in a suit.',
-  'NRB IT':    'NRB IT Guidelines: Because Nepali financial institutions need security too. vISO knows.',
-  'NRB Cyber': 'NRB Cyber Security Guidelines: Where Nepal\'s banking sector gets its baseline.',
-  'Cyber Essentials': 'Cyber Essentials: The UK\'s baseline. Patch your systems. Use MFA. Not revolutionary, but necessary.',
-};
-document.querySelectorAll('.fw-tag').forEach(tag=>{
-  tag.addEventListener('click',()=>{
-    const fact=fwFacts[tag.textContent.trim()];
-    if(fact) toast(fact,'',4000);
-  });
-});
-
-/* 10. RIGHT-CLICK → custom context menu */
+/* ─────── CONTEXT MENU ─────── */
 const ctxEl=document.getElementById('ctxmenu');
 document.addEventListener('contextmenu',e=>{
   e.preventDefault();
   if(!ctxEl)return;
   ctxEl.style.display='block';
-  const x=Math.min(e.clientX, window.innerWidth-225);
-  const y=Math.min(e.clientY, window.innerHeight-280);
-  ctxEl.style.left=x+'px'; ctxEl.style.top=y+'px';
+  const x=Math.min(e.clientX,window.innerWidth-210);
+  const y=Math.min(e.clientY,window.innerHeight-260);
+  ctxEl.style.left=x+'px';ctxEl.style.top=y+'px';
   const close=ev=>{
-    if(!ctxEl.contains(ev.target)){
-      ctxEl.style.display='none';
-      document.removeEventListener('click',close);
-    }
+    if(!ctxEl.contains(ev.target)){ctxEl.style.display='none';document.removeEventListener('click',close)}
   };
   setTimeout(()=>document.addEventListener('click',close),10);
 });
@@ -2221,49 +2106,208 @@ document.querySelectorAll('.ctx-item').forEach(item=>{
   item.addEventListener('click',()=>{
     ctxEl.style.display='none';
     const a=item.dataset.a;
-    const smap={about:'#about',experience:'#experience',arsenal:'#arsenal',projects:'#projects',contact:'#contact'};
-    if(smap[a]) document.querySelector(smap[a])?.scrollIntoView({behavior:'smooth'});
+    const smap={cover:'cover',about:'about',experience:'experience',arsenal:'arsenal',projects:'projects',contact:'contact'};
+    if(smap[a]) document.getElementById(smap[a])?.scrollIntoView({behavior:'smooth'});
     else if(a==='source') window.open('https://github.com/SangitPant777','_blank');
     else if(a==='reload') location.reload();
   });
 });
 
-/* 11. IDLE 45s → dry self-aware quip */
+/* ═══════════════ EASTER EGGS ═══════════════ */
+
+/* 1. KONAMI */
+let ks=[];
+const KC=[38,38,40,40,37,39,37,39,66,65];
+document.addEventListener('keydown',e=>{
+  ks.push(e.keyCode);ks=ks.slice(-10);
+  if(ks.join(',')===KC.join(',')){
+    ks=[];
+    toast('CLEARANCE: UNRESTRICTED — all audit findings expunged from the record.','',4000);
+    document.querySelectorAll('.page-classification').forEach(el=>{
+      const orig=el.textContent;
+      el.textContent='TOP SECRET';
+      el.style.borderColor='var(--gold)';el.style.color='oklch(42% 0.09 78)';
+      setTimeout(()=>{el.textContent=orig;el.style.borderColor='';el.style.color=''},3000);
+    });
+  }
+});
+
+/* 2. TYPE "audit" */
+let abuf='';
+const auditQuips=[
+  'Scope creep detected. Adding 47 new controls to Statement of Applicability.',
+  'Evidence request sent. ETA: 3 business weeks. Or never.',
+  'Risk register updated. New entry: "auditor arrived early." Severity: HIGH.',
+  '"Just a few questions" — the 6 most expensive words in GRC.',
+  'Management review meeting scheduled. Attendance: mandatory. Actual decisions: zero.',
+];
+let aqIdx=0;
+document.addEventListener('keypress',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  abuf+=e.key.toLowerCase();abuf=abuf.slice(-5);
+  if(abuf==='audit'){toast(auditQuips[aqIdx++%auditQuips.length],'paper',3800);abuf=''}
+});
+
+/* 3. TYPE "iso" */
+let ibuf='';
+const isoLines=[
+  'ISO 27001:2013 deprecated. Please update your ISMS. Again.',
+  'Clause 4.1 context of organization — did you really include "global pandemics" in scope?',
+  'ISO 42001: the AI management standard. Yes, we audit the AI now.',
+  'Statement of Applicability: 114 controls. Applicable: most. Documented: some. Implemented: working on it.',
+];
+let iIdx=0;
+document.addEventListener('keypress',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  ibuf+=e.key.toLowerCase();ibuf=ibuf.slice(-3);
+  if(ibuf==='iso'){toast(isoLines[iIdx++%isoLines.length],'paper',3800);ibuf=''}
+});
+
+/* 4. TYPE "risk" */
+let rbuf='';
+const riskLines=[
+  'Risk identified: "reading the entire dossier." Likelihood: HIGH. Impact: Impressive.',
+  'STRIDE analysis complete. Threat: Scope creep. Mitigation: documented but likely insufficient.',
+  'Risk treatment: Accept. Because sometimes you just have to ship the ISMS.',
+  'Risk register entry #404: control not found.',
+];
+let rIdx=0;
+document.addEventListener('keypress',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  rbuf+=e.key.toLowerCase();rbuf=rbuf.slice(-4);
+  if(rbuf==='risk'){toast(riskLines[rIdx++%riskLines.length],'paper',3800);rbuf=''}
+});
+
+/* 5. TYPE "grc" */
+let gbuf='';
+document.addEventListener('keypress',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  gbuf+=e.key.toLowerCase();gbuf=gbuf.slice(-3);
+  if(gbuf==='grc'){
+    toast('Governance. Risk. Compliance. In that order. Not just Compliance, Risk, then wonder where Governance went.','paper',4000);
+    gbuf='';
+  }
+});
+
+/* 6. CERT YEAR CLICK */
+const yearLines={
+  '2026':'ISO 42001:2023 — auditing the AI that will eventually audit us.',
+  '2025':'Peak credential year. The risk register now has a category called "certification fatigue."',
+  '2024':'The year the CC exam asked about governance and I said "finally, a home turf."',
+  '2023':'Google cert. The one that started it all.',
+};
+document.querySelectorAll('.cert-year-badge').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const y=el.dataset.y;
+    toast(yearLines[y]||'Another cert. The spreadsheet grows.','paper',3500);
+  });
+});
+
+/* 7. FRAMEWORK TAG CLICK */
+const fwFacts={
+  'ISO 27001':'ISO 27001: 93 controls in Annex A. You will map them all. Multiple times.',
+  'SOC 2':'SOC 2: Trust Services Criteria. Not a certification, a report. Auditors will correct you on this.',
+  'NIST CSF':'NIST CSF: Identify, Protect, Detect, Respond, Recover. Also: document, document, document.',
+  'CMMC':'CMMC: 110 practices. Now with added bureaucracy. Great.',
+  'GDPR':'GDPR: 99 articles. Article 83 is the one everyone actually reads first.',
+  'IEC 62443':'IEC 62443: OT security. Where GRC meets industrial controls meets "please don\'t take down the grid."',
+  'ISO 42001':'ISO 42001: AI management. The standard that lets you audit ChatGPT. Theoretically.',
+  'ISO 9001':'ISO 9001: Quality management. "Are you sure you documented that process?"',
+  'ISO 14001':'ISO 14001: Environmental management. Compliance goes green.',
+  'ISO 20000-1':'ISO 20000-1: IT service management. ITIL in a suit.',
+  'NRB IT':'NRB IT Guidelines: Because Nepali financial institutions need security too.',
+  'NRB CRG':'NRB Cyber Security Guidelines: Nepal banking sector baseline. vISO knows.',
+  'Cyber Essentials':'Cyber Essentials: Patch your systems. Use MFA. Not revolutionary, but necessary.',
+  'Cyber Essentials Plus':'Cyber Essentials Plus: Same thing but someone actually checked.',
+  'Nepal Insurance IT':'Nepal Insurance IT Guidelines: The one that really tests your local regulatory knowledge.',
+};
+document.querySelectorAll('.paper-tag[data-fw]').forEach(tag=>{
+  tag.addEventListener('click',()=>{
+    const fact=fwFacts[tag.dataset.fw];
+    if(fact) toast(fact,'paper',4000);
+  });
+});
+
+/* 8. TRIPLE CLICK ON SPINE LOGO → incident simulation */
+let lc=0,lt=null;
+document.getElementById('spineLogo')?.addEventListener('click',e=>{
+  lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,520);
+  if(lc>=3){
+    lc=0;
+    const br=document.getElementById('breach');
+    if(br){br.classList.add('flash');setTimeout(()=>br.classList.remove('flash'),3400)}
+    toast('INCIDENT DETECTED — Initiating Annex A.16 response procedure...','alert',2000);
+    setTimeout(()=>toast('Incident contained. RTO: 4 minutes. Auditors will never know.','patina',3200),2400);
+  }
+});
+
+/* 9. IDLE 45s */
 let idleT=null;
 const idleLines=[
-  'Still here? This is more structured than most risk registers.',
-  'Idle time detected. Logging this as a finding: "staff not engaged."',
-  'You\'ve been on this page longer than most CAPs stay open.',
+  'Still here? This dossier has better retention than most CAPs.',
+  'Idle detected. Logging finding: "reviewer not engaged." Severity: Medium.',
+  'You have reviewed more pages than most management review meetings cover.',
 ];
 let idleIdx=0;
 function resetIdle(){
   clearTimeout(idleT);
-  idleT=setTimeout(()=>toast(idleLines[idleIdx++ % idleLines.length],'',4000),45000);
+  idleT=setTimeout(()=>toast(idleLines[idleIdx++%idleLines.length],'paper',4000),45000);
 }
 ['mousemove','keypress','scroll','click'].forEach(ev=>document.addEventListener(ev,resetIdle,{passive:true}));
 resetIdle();
 
-/* 12. STAT CELL HOVER UNLOCK → click for fun stat */
+/* 10. STAT CLICK */
 const statFacts=[
-  '8 certs, 0 found unnecessary. Though the coffee intake cert was informal.',
-  '12 frameworks is 12 different ways of saying "have you documented your risk treatment?"',
-  '2 platforms built. 0 compliance tools actually fun to use. Fixing that.',
-  '2 years in the field. Equivalent to 47 years in Excel spreadsheets.',
+  '8 certs, 0 found redundant. Though the certification budget respectfully disagrees.',
+  '12 frameworks is 12 ways of saying "have you documented your risk treatment?"',
+  '2 platforms built. 0 GRC tools have ever been described as "fun." Fixing that.',
+  '2 years in the field. Equivalent to approximately 400 years in Excel pivot tables.',
 ];
-document.querySelectorAll('.stat-cell').forEach((cell,i)=>{
-  cell.addEventListener('click',()=>toast(statFacts[i]||'',''  ,3500));
+document.querySelectorAll('.paper-stat').forEach((s,i)=>{
+  s.addEventListener('click',()=>toast(statFacts[i]||'','paper',3500));
 });
 
-/* 13. SCROLL PAST FOOTER → terminal (handled in onScroll) + one toast */
-let termToastShown=false;
+/* 11. PHOTO HOVER 3s */
+let phTimer=null;
+document.querySelector('.photo-id-frame')?.addEventListener('mouseenter',()=>{
+  phTimer=setTimeout(()=>{
+    toast('BIOMETRIC SCAN — Subject: Sangit Pant. Clearance: confirmed. Coffee intake: flagged as risk.','paper',3500);
+  },3000);
+});
+document.querySelector('.photo-id-frame')?.addEventListener('mouseleave',()=>clearTimeout(phTimer));
+
+/* 12. SCROLL TO BOTTOM */
+let endToastShown=false;
 window.addEventListener('scroll',()=>{
-  if(!termToastShown && (window.innerHeight+window.scrollY)>=document.documentElement.scrollHeight-4){
-    termToastShown=true;
-    setTimeout(()=>toast('You found the terminal. The best auditors always check what\'s at the bottom.','patina',4000),600);
+  if(!endToastShown && (window.innerHeight+window.scrollY)>=document.documentElement.scrollHeight-8){
+    endToastShown=true;
+    setTimeout(()=>toast('End of file. All sections reviewed. This is more than most auditors read.','paper',4500),400);
   }
 },{passive:true});
 
-/* ─────────────── CLEAN UP LOADER TRANSITION ─────────────── */
+/* 13. PAGE CLICK COUNT (click a page 5 times → annotate it) */
+const pageTaps={};
+document.querySelectorAll('.page-sheet').forEach((sheet,i)=>{
+  sheet.addEventListener('click',()=>{
+    const page=pages[i]?.id||'unknown';
+    pageTaps[page]=(pageTaps[page]||0)+1;
+    if(pageTaps[page]===5){
+      toast(`Annotation: Page ${i+1} reviewed 5 times. Either very thorough or very confused.`,'paper',4000);
+    }
+  });
+});
+
+/* 14. GPA click */
+document.getElementById('gpaEl')?.addEventListener('click',()=>{
+  toast('4.0 GPA. The opportunity cost: everything that isn\'t studying GRC frameworks.','paper',3200);
+});
+
+/* 15. Cover stamp hover */
+document.querySelector('.cover-stamp')?.addEventListener('mouseenter',()=>{
+  toast('Clearance verified. This stamp is more official-looking than 60% of actual compliance dashboards.','paper',3000);
+});
+
+/* LOADER cleanup */
 loader.addEventListener('transitionend',()=>{
   if(loader.classList.contains('out')) loader.style.display='none';
 },{once:true});
