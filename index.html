@@ -2105,27 +2105,39 @@ document.addEventListener('keydown',e=>{
 
 // ── Mouse wheel navigation ───────────────────────────────────
 
+// ── Mouse wheel navigation ───────────────────────────────────
 let wheelDebounce = null;
 let wheelAccum = 0;
-const WHEEL_THRESHOLD = 80;
+const WHEEL_THRESHOLD = 120;
+let lastWheelTime = 0;
+
 document.addEventListener('wheel',(e)=>{
-  const sheet = e.target.closest('.page-sheet');
-
-  // If the event did NOT come from inside a page-sheet
-  // (e.g. the black gutters), ignore it entirely — don't navigate.
-  if(!sheet) return;
-
-  // If the sheet can still scroll in the requested direction, let it scroll normally.
-  const canScrollDown = sheet.scrollTop < (sheet.scrollHeight - sheet.clientHeight - 2);
-  const canScrollUp   = sheet.scrollTop > 2;
-  if((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) return;
-
-
   e.preventDefault();
-  wheelAccum += e.deltaY;
 
+  // Always target the active page's sheet, regardless of where cursor is
+  const activeSheet = pages[currentPage]?.querySelector('.page-sheet');
+  if(!activeSheet) return;
+
+  const canScrollDown = activeSheet.scrollTop < (activeSheet.scrollHeight - activeSheet.clientHeight - 2);
+  const canScrollUp   = activeSheet.scrollTop > 2;
+
+  // If the sheet can scroll in this direction, scroll it smoothly and reset accumulator
+  if((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)){
+    activeSheet.scrollBy({ top: e.deltaY * 1.2, behavior: 'auto' });
+    wheelAccum = 0;
+    clearTimeout(wheelDebounce);
+    return;
+  }
+
+  // Sheet is at its limit — accumulate for page turn
+  const now = Date.now();
+  // Ignore rapid repeated firings (trackpad inertia)
+  if(now - lastWheelTime < 16){ return; }
+  lastWheelTime = now;
+
+  wheelAccum += e.deltaY;
   clearTimeout(wheelDebounce);
-  wheelDebounce = setTimeout(()=>{ wheelAccum = 0; }, 300);
+  wheelDebounce = setTimeout(()=>{ wheelAccum = 0; }, 400);
 
   if(Math.abs(wheelAccum) >= WHEEL_THRESHOLD){
     const dir = wheelAccum > 0 ? 1 : -1;
@@ -2133,23 +2145,6 @@ document.addEventListener('wheel',(e)=>{
     navigateTo(currentPage + dir, dir);
   }
 },{passive:false});
-
-// ── Touch swipe navigation ───────────────────────────────────
-let touchStartX=0, touchStartY=0;
-document.addEventListener('touchstart',e=>{
-  touchStartX=e.touches[0].clientX;
-  touchStartY=e.touches[0].clientY;
-},{passive:true});
-document.addEventListener('touchend',e=>{
-  const dx=e.changedTouches[0].clientX - touchStartX;
-  const dy=e.changedTouches[0].clientY - touchStartY;
-  if(Math.abs(dx)<40 && Math.abs(dy)<40) return;
-  // Horizontal swipe preferred
-  if(Math.abs(dx)>=Math.abs(dy)*0.8){
-    if(dx < -40) navigateTo(currentPage+1,  1);
-    if(dx >  40) navigateTo(currentPage-1, -1);
-  }
-},{passive:true});
 
 // Init nav state
 updateNav(0);
