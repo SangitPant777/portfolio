@@ -2104,26 +2104,31 @@ document.addEventListener('keydown',e=>{
 });
 
 // ── Mouse wheel navigation ───────────────────────────────────
+
 let wheelDebounce = null;
 let wheelAccum = 0;
 const WHEEL_THRESHOLD = 80;
 document.addEventListener('wheel',(e)=>{
-  // If user is scrolling inside a page sheet, let that scroll happen
   const sheet = e.target.closest('.page-sheet');
-  if(sheet){
-    const canScrollDown = sheet.scrollTop < (sheet.scrollHeight - sheet.clientHeight - 2);
-    const canScrollUp   = sheet.scrollTop > 2;
-    if((e.deltaY>0 && canScrollDown)||(e.deltaY<0 && canScrollUp)) return;
-  }
+
+  // If the event did NOT come from inside a page-sheet
+  // (e.g. the black gutters), ignore it entirely — don't navigate.
+  if(!sheet) return;
+
+  // If the sheet can still scroll in the requested direction, let it scroll normally.
+  const canScrollDown = sheet.scrollTop < (sheet.scrollHeight - sheet.clientHeight - 2);
+  const canScrollUp   = sheet.scrollTop > 2;
+  if((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) return;
+
 
   e.preventDefault();
   wheelAccum += e.deltaY;
 
   clearTimeout(wheelDebounce);
-  wheelDebounce = setTimeout(()=>{ wheelAccum=0; },300);
+  wheelDebounce = setTimeout(()=>{ wheelAccum = 0; }, 300);
 
   if(Math.abs(wheelAccum) >= WHEEL_THRESHOLD){
-    const dir = wheelAccum>0 ? 1 : -1;
+    const dir = wheelAccum > 0 ? 1 : -1;
     wheelAccum = 0;
     navigateTo(currentPage + dir, dir);
   }
