@@ -2144,7 +2144,33 @@ document.addEventListener('wheel',(e)=>{
     navigateTo(currentPage + dir, dir);
   }
 },{passive:false});
+// ── Touch swipe navigation ───────────────────────────────────
+let touchStartX=0, touchStartY=0;
+document.addEventListener('touchstart',e=>{
+  touchStartX=e.touches[0].clientX;
+  touchStartY=e.touches[0].clientY;
+},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX - touchStartX;
+  const dy=e.changedTouches[0].clientY - touchStartY;
+  const absDx=Math.abs(dx), absDy=Math.abs(dy);
+  if(absDx<30 && absDy<30) return;
 
+  // Horizontal swipe → always page-turn, no conditions
+  if(absDx >= absDy * 0.6){
+    if(dx < -30) navigateTo(currentPage+1,  1);
+    if(dx >  30) navigateTo(currentPage-1, -1);
+    return;
+  }
+
+  // Vertical swipe → only page-turn if sheet is at its boundary
+  const activeSheet=pages[currentPage]?.querySelector('.page-sheet');
+  if(!activeSheet) return;
+  const atBottom=activeSheet.scrollTop>=(activeSheet.scrollHeight-activeSheet.clientHeight-8);
+  const atTop=activeSheet.scrollTop<=2;
+  if(dy < -60 && atBottom) navigateTo(currentPage+1,  1);
+  if(dy >  60 && atTop)    navigateTo(currentPage-1, -1);
+},{passive:true});
 // Init nav state
 updateNav(0);
 
