@@ -144,7 +144,7 @@ footer{padding:6px 0 50px;font:400 .78rem var(--fm);color:var(--soft)}
 <section class="sheet" id="world"><h2>Compliance map</h2>
 <div class="mapw"><canvas id="cv" tabindex="0" aria-label="Interactive world map of cyber security and privacy rules. Drag to move, use plus and minus to zoom, or choose a region below."></canvas>
 <div class="mctl"><button class="g" id="zi" aria-label="Zoom in">+</button><button class="g" id="zo" aria-label="Zoom out">&minus;</button><button class="g" id="zr">Reset</button></div>
-<div class="mlg"><span><i style="background:var(--ink)"></i>Home</span><span><i class="a"></i>Used in my audits</span><span><i></i>Studied</span><span>Drag to move. Click the map, then scroll to zoom.</span></div></div>
+<div class="mlg"><span><i style="background:var(--ink)"></i>Home</span><span><i class="a"></i>Worked with</span><span><i></i>Studied</span><span>Drag to move. Click the map, then scroll to zoom.</span></div></div>
 <div class="chips" id="rg" style="margin-top:16px"></div><div id="rp"></div></section>
 
 <section class="sheet" id="contact"><h2>Need someone who tests the control, not just the document?</h2><p style="margin-bottom:18px">Open to GRC, internal audit and compliance roles, remote or in Nepal.</p>
@@ -256,7 +256,7 @@ function pinAt(x,y){var b=-1,m=15;REG.forEach(function(q,i){var e=Math.hypot(lx(
 function timeLine(){var d=new Date(),q=REG[sel],df=off(q[3],d)-off(REG[0][3],d),ad=Math.abs(df),p=pt(q[3],d),t=('0'+p.hour).slice(-2)+':'+('0'+p.minute).slice(-2);
 $('#rt').textContent=sel==0?'Home base. Local time '+t+', UTC+5:45.':'Local time '+t+(ad?', '+Math.floor(ad/60)+'h'+(ad%60?' '+ad%60+'m':'')+(df>0?' ahead of':' behind')+' Kathmandu.':', same as Kathmandu.')}
 function panel(){var q=REG[sel],h=$('#rp');h.innerHTML='<h3></h3><div class="rt" id="rt"></div><div class="rl"></div>';h.firstChild.textContent=q[0];timeLine();
-q[5].forEach(function(t){var d=document.createElement('div');d.className='ri';d.innerHTML='<b></b><p></p>';d.children[0].textContent=t[0];d.children[1].textContent=t[1];if(t[2]){var e=document.createElement('em');e.textContent='Used in my audits';d.appendChild(e)}h.lastChild.appendChild(d)});
+q[5].forEach(function(t){var d=document.createElement('div');d.className='ri';d.innerHTML='<b></b><p></p>';d.children[0].textContent=t[0];d.children[1].textContent=t[1];if(t[2]){var e=document.createElement('em');e.textContent='Worked with';d.appendChild(e)}h.lastChild.appendChild(d)});
 A('#rg .chip').forEach(function(b,i){b.setAttribute('aria-pressed',i==sel)})}
 function pick(i,f){sel=i;panel();var q=REG[i];fly(q[1],q[2],minP*q[4]);if(f&&i==0)note('Nepal runs on UTC+5:45, one of very few 45-minute offsets. Every meeting invite is a small negotiation.',6500)}
 REG.forEach(function(q,i){var b=document.createElement('button');b.className='chip';b.textContent=q[0];b.setAttribute('aria-pressed',i==0);b.onclick=function(){pick(i,1)};$('#rg').appendChild(b)});
