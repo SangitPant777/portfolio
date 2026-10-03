@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -196,16 +197,15 @@ var AT=[['ISO/IEC 27001','Security','The international standard for an informati
 ['All','Security','Privacy and AI','Quality','Nepal'].forEach(function(g,i){var b=document.createElement('button');b.className='chip';b.textContent=g;b.setAttribute('aria-pressed',i==0);b.onclick=function(){A('#flt .chip').forEach(function(x){x.setAttribute('aria-pressed',x==b)});A('.tg').forEach(function(t){t.classList.toggle('dim',g!='All'&&t.dataset.g!=g)})};$('#flt').appendChild(b)});
 function atx(a){var b=$('#atx');b.innerHTML='<b></b><span></span>';b.firstChild.textContent=a[0];b.lastChild.textContent=a[2]}
 AT.forEach(function(a,i){var b=document.createElement('button');b.className='tg';b.textContent=a[0];b.dataset.g=a[1];b.setAttribute('aria-pressed',i==0);b.onclick=function(){A('.tg').forEach(function(x){x.setAttribute('aria-pressed',x==b)});atx(a)};at.appendChild(b)});atx(AT[0]);
-var tb=$('#xw');tb.querySelectorAll('th button').forEach(function(b){b.onclick=function(){var n=+b.dataset.c,o=b.dataset.on!='1';tb.querySelectorAll('th button').forEach(function(x){x.dataset.on='0'});tb.querySelectorAll('.hl').forEach(function(x){x.classList.remove('hl')});if(o){b.dataset.on='1';tb.querySelectorAll('tr').forEach(function(t){if(t.children[n])t.children[n].classList.add('hl')})}}});
+var tb=$('#xw');tb.querySelectorAll('th button').forEach(function(b){b.onclick=function(){var n=+b.dataset.c,o=b.dataset.on!='1';tb.querySelectorAll('th button').forEach(function(x){x.dataset.on='0'});tb.querySelectorAll('.hl').forEach(function(x){x.classList.remove('hl')});if(o){b.dataset.on='1';tb.querySelectorAll('tr').forEach(function(t){if(t.children[n])t.children[n].classList.add('hl')})}});
 /* time zones */
 var Z=[['Kathmandu','Asia/Kathmandu'],['London','Europe/London'],['Dubai','Asia/Dubai'],['Nairobi','Africa/Nairobi'],['Singapore','Asia/Singapore'],['Tokyo','Asia/Tokyo'],['Sydney','Australia/Sydney'],['New York','America/New_York'],['San Francisco','America/Los_Angeles'],['Sao Paulo','America/Sao_Paulo']];
 function pt(tz,d){var o={};new Intl.DateTimeFormat('en-GB',{timeZone:tz,year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(d).forEach(function(x){o[x.type]=+x.value});o.hour%=24;return o}
 function off(tz,d){var p=pt(tz,d);return(Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute)-Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),d.getUTCHours(),d.getUTCMinutes()))/60000}
 function tzr(){var d=new Date(),k=off(Z[0][1],d),tb=$('#tzt tbody');tb.innerHTML='';
-Z.forEach(function(z,i){var df=off(z[1],d)-k,ad=Math.abs(df),p=pt(z[1],d),sh=0,tr=document.createElement('tr');
-for(var h=0;h<24;h++){var u=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),h)),x=pt(z[1],u).hour,y=pt(Z[0][1],u).hour;if(x>=9&&x<17&&y>=9&&y<17)sh++}
+Z.forEach(function(z,i){var df=off(z[1],d)-k,ad=Math.abs(df),p=pt(z[1],d),tr=document.createElement('tr');
 var diff=i==0?'I am here':Math.floor(ad/60)+'h'+(ad%60?' '+ad%60+'m':'')+(df>0?' ahead':' behind');
-tr.innerHTML='<td></td><td></td><td></td><td></td>';tr.children[0].textContent=z[0];tr.children[1].textContent=('0'+p.hour).slice(-2)+':'+('0'+p.minute).slice(-2);tr.children[2].textContent=diff;tr.children[3].textContent=i==0?'':(sh?sh+' h':'none');
+tr.innerHTML='<td></td><td></td><td></td>';tr.children[0].textContent=z[0];tr.children[1].textContent=('0'+p.hour).slice(-2)+':'+('0'+p.minute).slice(-2);tr.children[2].textContent=diff;
 if(i==0){tr.className='me';tr.onclick=function(){note('Nepal is UTC+5:45, one of very few places with a 45-minute offset. Every meeting invite is a small negotiation.',6500)}}
 tb.appendChild(tr)})}
 tzr();setInterval(tzr,30000);
@@ -231,3 +231,4 @@ if(e.key=='?'){note(E.help,5500);return}
 for(var k in E)if(buf.slice(-k.length)==k){note(E[k],7000);buf='';break}});
 })();
 </script></body></html>
+```
